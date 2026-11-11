@@ -1,0 +1,561 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GYAMAX | Carrinho</title>
+
+    <meta
+        name="description"
+        content="GYAMAX — Seu carrinho de compras."
+    >
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="container nav">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="/index.html"
+            class="logo"
+        >
+
+            <img
+                id="gyamaxLogo"
+                src="/img/GYAMAX.png"
+                alt="GYAMAX"
+            >
+
+        </a>
+
+
+        <!-- MENU -->
+
+        <nav class="menu">
+
+            <a
+                href="/index.html#inicio"
+                data-i18n="nav.home"
+            >
+                Início
+            </a>
+
+
+            <a
+                href="/index.html#servicos"
+                data-i18n="nav.services"
+            >
+                Serviços
+            </a>
+
+
+            <a
+                href="/index.html#processo"
+                data-i18n="nav.process"
+            >
+                Como funciona
+            </a>
+
+
+            <a
+                href="/projetos.html"
+                data-i18n="nav.projects"
+            >
+                Projetos
+            </a>
+
+
+            <a
+                href="/loja.html"
+                data-i18n="nav.store"
+            >
+                Loja
+            </a>
+
+
+            <a
+                href="/index.html#sobre"
+                data-i18n="nav.about"
+            >
+                Sobre
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             CONTA
+        ================================================== -->
+
+        <div id="accountArea">
+
+            <a
+                href="/login.html"
+                class="btn btn-small"
+                data-i18n="login.enter"
+            >
+                Entrar
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             CARRINHO
+             BOLINHA LARANJA + CESTINHA CSS BRANCA
+        ================================================== -->
+
+        <a
+            href="/carrinho.html"
+            class="gyamax-cart-avatar cart-header-active"
+            data-i18n-title="store.cart"
+            data-i18n-aria-label="store.cart"
+            title="Carrinho"
+            aria-label="Carrinho"
+        >
+
+            <span
+                class="gyamax-cart-icon"
+                aria-hidden="true"
+            >
+
+                <span class="cart-basket-handle"></span>
+
+                <span class="cart-basket-body"></span>
+
+                <span
+                    class="cart-basket-wheel cart-basket-wheel-1"
+                ></span>
+
+                <span
+                    class="cart-basket-wheel cart-basket-wheel-2"
+                ></span>
+
+            </span>
+
+
+            <span
+                class="store-cart-count"
+                id="cartCount"
+                aria-label="0 Carrinho"
+            >
+                0
+            </span>
+
+        </a>
+
+
+        <!-- MENU MOBILE -->
+
+        <button
+            class="menu-mobile"
+            id="menuMobile"
+            type="button"
+            aria-label="Menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     CONTEÚDO DO CARRINHO
+===================================================== -->
+
+<main class="cart-page">
+
+    <div class="container">
+
+
+        <!-- CABEÇALHO -->
+
+        <div class="cart-header">
+
+            <span
+                class="tag"
+                data-i18n="cart.tag"
+            >
+                SEU CARRINHO
+            </span>
+
+
+            <h1 data-i18n="cart.title">
+                Carrinho de compras
+            </h1>
+
+
+            <p data-i18n="cart.description">
+                Revise seus produtos antes de finalizar a compra.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             MENSAGEM
+        ================================================== -->
+
+        <div
+            id="cartMessage"
+            class="cart-message"
+            role="status"
+            aria-live="polite"
+            style="display: none;"
+        ></div>
+
+
+        <!-- =================================================
+             CARRINHO VAZIO
+        ================================================== -->
+
+        <section
+            class="cart-empty"
+            id="cartEmpty"
+            style="display: none;"
+        >
+
+            <div
+                class="cart-empty-icon"
+                aria-hidden="true"
+            >
+
+                <span
+                    class="cart-empty-cart-icon"
+                    aria-hidden="true"
+                >
+
+                    <span class="cart-basket-handle"></span>
+
+                    <span class="cart-basket-body"></span>
+
+                    <span
+                        class="cart-basket-wheel cart-basket-wheel-1"
+                    ></span>
+
+                    <span
+                        class="cart-basket-wheel cart-basket-wheel-2"
+                    ></span>
+
+                </span>
+
+            </div>
+
+
+            <h2 data-i18n="cart.emptyTitle">
+                Seu carrinho está vazio.
+            </h2>
+
+
+            <p data-i18n="cart.emptyDescription">
+                Adicione algum produto da loja para começar.
+            </p>
+
+
+            <a
+                href="/loja.html"
+                class="btn"
+                data-i18n="cart.goStore"
+            >
+                Ir para a loja
+            </a>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CARRINHO COM PRODUTOS
+        ================================================== -->
+
+        <section
+            class="cart-layout"
+            id="cartLayout"
+            style="display: none;"
+        >
+
+
+            <!-- LISTA DE PRODUTOS -->
+
+            <div class="cart-items-card">
+
+                <div
+                    id="cartItems"
+                    class="cart-items"
+                >
+                </div>
+
+            </div>
+
+
+
+            <!-- RESUMO -->
+
+            <aside class="cart-summary">
+
+                <h2 data-i18n="cart.summary">
+                    Resumo do pedido
+                </h2>
+
+
+                <!-- SUBTOTAL -->
+
+                <div class="cart-summary-line">
+
+                    <span data-i18n="cart.subtotal">
+                        Subtotal
+                    </span>
+
+
+                    <strong id="cartSubtotal">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+
+                <!-- FRETE -->
+
+                <div class="cart-summary-line">
+
+                    <span data-i18n="cart.shipping">
+                        Frete
+                    </span>
+
+
+                    <strong data-i18n="cart.shippingSoon">
+                        A calcular
+                    </strong>
+
+                </div>
+
+
+
+                <!-- TOTAL -->
+
+                <div class="cart-summary-total">
+
+                    <span data-i18n="cart.total">
+                        Total
+                    </span>
+
+
+                    <strong id="cartTotal">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+
+                <!-- FINALIZAR -->
+
+                <button
+                    type="button"
+                    class="btn cart-checkout-button"
+                    id="cartCheckoutButton"
+                    data-i18n="cart.checkout"
+                >
+                    Finalizar compra
+                </button>
+
+
+
+                <!-- CONTINUAR -->
+
+                <a
+                    href="/loja.html"
+                    class="cart-continue"
+                    data-i18n="cart.continueShopping"
+                >
+                    Continuar comprando
+                </a>
+
+
+
+                <!-- LIMPAR -->
+
+                <button
+                    type="button"
+                    class="cart-clear-button"
+                    id="cartClearButton"
+                    data-i18n="cart.clear"
+                >
+                    Limpar carrinho
+                </button>
+
+            </aside>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container footer-content">
+
+
+        <div>
+
+            <div class="footer-logo">
+                GYAMAX
+            </div>
+
+
+            <p data-i18n="footer.description">
+                Impressão 3D & Fabricação
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-links">
+
+            <a
+                href="/index.html#inicio"
+                data-i18n="nav.home"
+            >
+                Início
+            </a>
+
+
+            <a
+                href="/index.html#servicos"
+                data-i18n="nav.services"
+            >
+                Serviços
+            </a>
+
+
+            <a
+                href="/loja.html"
+                data-i18n="nav.store"
+            >
+                Loja
+            </a>
+
+
+            <a
+                href="/index.html#sobre"
+                data-i18n="nav.about"
+            >
+                Sobre
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="container copyright">
+
+        © 2026 GYAMAX.
+
+        <span data-i18n="footer.rights">
+            Todos os direitos reservados.
+        </span>
+
+    </div>
+
+</footer>
+
+
+
+<script src="/script.js"></script>
+
+
+<!-- =====================================================
+     CORREÇÃO — LIMPAR CARRINHO
+===================================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const botao =
+            document.getElementById(
+                "cartClearButton"
+            );
+
+
+        if (!botao) {
+            return;
+        }
+
+
+        botao.addEventListener(
+            "click",
+            function (evento) {
+
+                evento.preventDefault();
+
+
+                if (
+                    typeof limparCarrinho ===
+                    "function"
+                ) {
+
+                    limparCarrinho();
+
+                } else {
+
+                    console.error(
+                        "GYAMAX: função limparCarrinho não encontrada."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

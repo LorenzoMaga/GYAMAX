@@ -1,0 +1,3659 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GYAMAX | Acompanhar Pedido</title>
+
+    <meta
+        name="description"
+        content="Acompanhe seus pedidos da GYAMAX e consulte o andamento da produção."
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        [hidden] {
+            display: none !important;
+        }
+
+        .order-modal-overlay[hidden] {
+            display: none !important;
+        }
+
+
+        /* =====================================================
+           ABAS / FILTROS DE PEDIDOS
+        ===================================================== */
+
+        .orders-filters {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 28px;
+            padding: 8px;
+            overflow-x: auto;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 12px 30px var(--shadow);
+            scrollbar-width: thin;
+        }
+
+
+        .orders-filter {
+            appearance: none;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            min-height: 42px;
+            padding: 9px 14px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--muted);
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition:
+                background .2s ease,
+                border-color .2s ease,
+                color .2s ease,
+                transform .2s ease;
+        }
+
+
+        .orders-filter:hover {
+            color: var(--text);
+            border-color: var(--border);
+            transform: translateY(-1px);
+        }
+
+
+        .orders-filter.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #ffffff;
+            box-shadow:
+                0 7px 20px
+                rgba(255, 106, 0, .18);
+        }
+
+
+        .orders-filter.active:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+            color: #ffffff;
+        }
+
+
+        .orders-filter-count {
+            min-width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            border-radius: 999px;
+            background: rgba(255,255,255,.08);
+            color: inherit;
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+
+        .orders-filter.active
+        .orders-filter-count {
+            background: rgba(255,255,255,.18);
+        }
+
+
+        html[data-theme="claro"]
+        .orders-filter:hover {
+            color: #111111;
+        }
+
+
+        html[data-theme="claro"]
+        .orders-filter.active:hover {
+            color: #ffffff;
+        }
+
+
+        /* =====================================================
+           ESTADO DO FILTRO
+        ===================================================== */
+
+        .orders-filter-result {
+            margin: -8px 0 18px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+
+        html[data-theme="claro"]
+        .orders-filter-result {
+            color: #45494e;
+        }
+
+
+        .orders-filter-result strong {
+            color: var(--text);
+        }
+
+
+        /* =====================================================
+           NENHUM PEDIDO NO FILTRO
+        ===================================================== */
+
+        .orders-filter-empty {
+            padding: 55px 25px;
+            text-align: center;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 18px 45px var(--shadow);
+        }
+
+
+        .orders-filter-empty-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: rgba(255,106,0,.08);
+            border: 1px solid rgba(255,106,0,.20);
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+
+        .orders-filter-empty h3 {
+            margin: 0 0 8px;
+            font-size: 20px;
+        }
+
+
+        .orders-filter-empty p {
+            max-width: 500px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+
+        html[data-theme="claro"]
+        .orders-filter-empty p {
+            color: #45494e;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .orders-filters {
+                margin-bottom: 22px;
+                padding: 7px;
+                border-radius: 10px;
+            }
+
+
+            .orders-filter {
+                min-height: 40px;
+                padding: 8px 12px;
+                font-size: 11px;
+            }
+
+
+            .orders-filter-count {
+                min-width: 18px;
+                height: 18px;
+                font-size: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a
+            href="index.html"
+            class="logo"
+            aria-label="GYAMAX — Início"
+        >
+
+            <img
+                id="gyamaxLogo"
+                src="img/GYAMAX.png"
+                alt="GYAMAX"
+            >
+
+        </a>
+
+
+        <nav
+            class="menu"
+            id="mainMenu"
+        >
+
+            <a
+                href="index.html#inicio"
+                data-i18n="nav.home"
+            >
+                Início
+            </a>
+
+            <a
+                href="index.html#servicos"
+                data-i18n="nav.services"
+            >
+                Serviços
+            </a>
+
+            <a
+                href="index.html#processo"
+                data-i18n="nav.process"
+            >
+                Como funciona
+            </a>
+
+            <a
+                href="projetos.html"
+                data-i18n="nav.projects"
+            >
+                Projetos
+            </a>
+
+            <a
+                href="/loja.html"
+                data-i18n="nav.store"
+            >
+                Loja
+            </a>
+
+            <a
+                href="index.html#sobre"
+                data-i18n="nav.about"
+            >
+                Sobre
+            </a>
+
+            <a
+                href="avaliacao.html"
+                data-i18n="nav.review"
+            >
+                Avaliação
+            </a>
+
+            <a
+                href="acompanhar-pedido.html"
+                class="menu-active"
+                aria-current="page"
+            >
+                Acompanhar pedido
+            </a>
+
+        </nav>
+
+
+        <div id="accountArea">
+
+            <a
+                href="login.html"
+                class="btn btn-small"
+            >
+                Entrar
+            </a>
+
+        </div>
+
+
+        <button
+            class="menu-mobile"
+            id="menuMobile"
+            type="button"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main class="orders-page">
+
+    <div class="container">
+
+
+        <header class="orders-header">
+
+            <a
+                href="index.html"
+                class="orders-back"
+            >
+                ← Voltar para o início
+            </a>
+
+
+            <div class="orders-heading-row">
+
+                <div>
+
+                    <h1>
+                        Acompanhe seus pedidos.
+                    </h1>
+
+                    <p>
+                        Veja o andamento da produção, pagamento e entrega dos seus pedidos na GYAMAX.
+                    </p>
+
+                </div>
+
+
+                <div class="orders-security-badge">
+
+                    <div class="orders-security-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Pedido vinculado à conta
+                        </strong>
+
+                        <small>
+                            Somente seus pedidos são exibidos.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div
+            id="ordersMessage"
+            class="orders-message"
+            role="status"
+            aria-live="polite"
+            hidden
+        ></div>
+
+
+        <section
+            id="ordersLoading"
+            class="orders-loading"
+            aria-live="polite"
+        >
+
+            <div class="orders-spinner"></div>
+
+            <p>
+                Carregando seus pedidos...
+            </p>
+
+        </section>
+
+
+        <section
+            id="ordersLogin"
+            class="orders-empty"
+            hidden
+        >
+
+            <div class="orders-empty-icon">
+                →
+            </div>
+
+            <span class="orders-empty-tag">
+                CONTA NECESSÁRIA
+            </span>
+
+            <h2>
+                Entre para acompanhar seus pedidos.
+            </h2>
+
+            <p>
+                Faça login na sua conta GYAMAX para visualizar seus pedidos e o status de cada compra.
+            </p>
+
+            <a
+                href="login.html?redirect=acompanhar-pedido.html"
+                class="btn"
+            >
+                Entrar na minha conta
+            </a>
+
+        </section>
+
+
+        <section
+            id="ordersEmpty"
+            class="orders-empty"
+            hidden
+        >
+
+            <div class="orders-empty-icon">
+                0
+            </div>
+
+            <span class="orders-empty-tag">
+                SEUS PEDIDOS
+            </span>
+
+            <h2>
+                Você ainda não tem pedidos.
+            </h2>
+
+            <p>
+                Quando você realizar uma compra na loja GYAMAX, ela aparecerá automaticamente nesta página.
+            </p>
+
+            <a
+                href="/loja.html"
+                class="btn"
+            >
+                Ir para a loja
+            </a>
+
+        </section>
+
+
+        <section
+            id="ordersContent"
+            class="orders-content"
+            aria-label="Lista de pedidos"
+            hidden
+        >
+
+            <div class="orders-summary">
+
+                <div>
+
+                    <span class="orders-summary-label">
+                        SEUS PEDIDOS
+                    </span>
+
+                    <h2 id="ordersCount">
+                        0 pedidos
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn btn-outline orders-refresh"
+                    id="ordersRefresh"
+                >
+                    Atualizar
+                </button>
+
+            </div>
+
+
+            <div
+                class="orders-filters"
+                id="ordersFilters"
+                role="tablist"
+                aria-label="Filtrar pedidos"
+            >
+
+                <button
+                    type="button"
+                    class="orders-filter active"
+                    data-filter="todos"
+                    role="tab"
+                    aria-selected="true"
+                >
+                    Todos
+
+                    <span
+                        class="orders-filter-count"
+                        data-filter-count="todos"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="orders-filter"
+                    data-filter="pendente"
+                    role="tab"
+                    aria-selected="false"
+                >
+                    Aguardando pagamento
+
+                    <span
+                        class="orders-filter-count"
+                        data-filter-count="pendente"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="orders-filter"
+                    data-filter="pago"
+                    role="tab"
+                    aria-selected="false"
+                >
+                    Pagos
+
+                    <span
+                        class="orders-filter-count"
+                        data-filter-count="pago"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="orders-filter"
+                    data-filter="producao"
+                    role="tab"
+                    aria-selected="false"
+                >
+                    Em produção
+
+                    <span
+                        class="orders-filter-count"
+                        data-filter-count="producao"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="orders-filter"
+                    data-filter="enviado"
+                    role="tab"
+                    aria-selected="false"
+                >
+                    Enviados
+
+                    <span
+                        class="orders-filter-count"
+                        data-filter-count="enviado"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="orders-filter"
+                    data-filter="entregue"
+                    role="tab"
+                    aria-selected="false"
+                >
+                    Entregues
+
+                    <span
+                        class="orders-filter-count"
+                        data-filter-count="entregue"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="orders-filter"
+                    data-filter="cancelado"
+                    role="tab"
+                    aria-selected="false"
+                >
+                    Cancelados
+
+                    <span
+                        class="orders-filter-count"
+                        data-filter-count="cancelado"
+                    >
+                        0
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="ordersFilterResult"
+                class="orders-filter-result"
+                aria-live="polite"
+            ></div>
+
+
+            <div
+                id="ordersList"
+                class="orders-list"
+            ></div>
+
+
+            <div
+                id="ordersFilterEmpty"
+                class="orders-filter-empty"
+                hidden
+            >
+
+                <div class="orders-filter-empty-icon">
+                    0
+                </div>
+
+                <h3>
+                    Nenhum pedido nesta categoria.
+                </h3>
+
+                <p>
+                    Quando houver pedidos nesta categoria, eles aparecerão aqui automaticamente.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+    id="orderModal"
+    class="order-modal-overlay"
+    hidden
+    aria-hidden="true"
+>
+
+    <div
+        class="order-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="orderModalTitle"
+    >
+
+        <div class="order-modal-header">
+
+            <div>
+
+                <span class="orders-summary-label">
+                    DETALHES DO PEDIDO
+                </span>
+
+                <h2 id="orderModalTitle">
+                    Pedido
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="order-modal-close"
+                id="orderModalClose"
+                aria-label="Fechar"
+                title="Fechar"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            id="orderModalBody"
+            class="order-modal-body"
+        >
+
+            <div class="orders-loading orders-loading-modal">
+
+                <div class="orders-spinner"></div>
+
+                <p>
+                    Carregando pedido...
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container footer-content">
+
+        <div>
+
+            <div class="footer-logo">
+                GYAMAX
+            </div>
+
+            <p>
+                Impressão 3D & Fabricação
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="index.html#inicio">
+                Início
+            </a>
+
+            <a href="index.html#servicos">
+                Serviços
+            </a>
+
+            <a href="/loja.html">
+                Loja
+            </a>
+
+            <a href="projetos.html">
+                Projetos
+            </a>
+
+            <a href="index.html#sobre">
+                Sobre
+            </a>
+
+            <a href="avaliacao.html">
+                Avaliação
+            </a>
+
+            <a
+                href="acompanhar-pedido.html"
+                class="menu-active"
+            >
+                Acompanhar pedido
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container copyright">
+
+        © 2026 GYAMAX.
+
+        <span>
+            Todos os direitos reservados.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   ELEMENTOS
+========================================================= */
+
+const ordersLoading =
+    document.getElementById("ordersLoading");
+
+const ordersLogin =
+    document.getElementById("ordersLogin");
+
+const ordersEmpty =
+    document.getElementById("ordersEmpty");
+
+const ordersContent =
+    document.getElementById("ordersContent");
+
+const ordersList =
+    document.getElementById("ordersList");
+
+const ordersCount =
+    document.getElementById("ordersCount");
+
+const ordersMessage =
+    document.getElementById("ordersMessage");
+
+const ordersRefresh =
+    document.getElementById("ordersRefresh");
+
+const ordersFilters =
+    document.getElementById("ordersFilters");
+
+const ordersFilterButtons =
+    Array.from(
+        document.querySelectorAll(".orders-filter")
+    );
+
+const ordersFilterResult =
+    document.getElementById("ordersFilterResult");
+
+const ordersFilterEmpty =
+    document.getElementById("ordersFilterEmpty");
+
+const orderModal =
+    document.getElementById("orderModal");
+
+const orderModalClose =
+    document.getElementById("orderModalClose");
+
+const orderModalTitle =
+    document.getElementById("orderModalTitle");
+
+const orderModalBody =
+    document.getElementById("orderModalBody");
+
+const accountArea =
+    document.getElementById("accountArea");
+
+const menuMobile =
+    document.getElementById("menuMobile");
+
+const mainMenu =
+    document.getElementById("mainMenu");
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+let pedidosAtuais = [];
+
+let intervaloAtualizacao = null;
+
+let filtroAtual = "todos";
+
+
+/* =========================================================
+   FETCH COM TIMEOUT
+========================================================= */
+
+async function fetchComTimeout(
+    url,
+    opcoes = {},
+    tempo = 10000
+) {
+
+    const controller =
+        new AbortController();
+
+
+    const temporizador =
+        setTimeout(
+            () => {
+                controller.abort();
+            },
+            tempo
+        );
+
+
+    try {
+
+        return await fetch(
+            url,
+            {
+                ...opcoes,
+                signal:
+                    controller.signal
+            }
+        );
+
+    } catch (erro) {
+
+        if (
+            erro?.name === "AbortError"
+        ) {
+
+            throw new Error(
+                "O servidor demorou mais de 10 segundos para responder."
+            );
+
+        }
+
+
+        throw erro;
+
+    } finally {
+
+        clearTimeout(temporizador);
+
+    }
+
+}
+
+
+/* =========================================================
+   UTILITÁRIOS
+========================================================= */
+
+function escaparHTML(valor) {
+
+    return String(
+        valor ?? ""
+    )
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+function formatarMoeda(valor) {
+
+    const numero =
+        Number(valor);
+
+
+    if (
+        !Number.isFinite(numero)
+    ) {
+
+        return "R$ 0,00";
+
+    }
+
+
+    return numero.toLocaleString(
+        "pt-BR",
+        {
+            style: "currency",
+            currency: "BRL"
+        }
+    );
+
+}
+
+
+function formatarData(valor) {
+
+    if (!valor) {
+
+        return "Data não disponível";
+
+    }
+
+
+    const texto =
+        String(valor);
+
+
+    let dataTexto =
+        texto;
+
+
+    if (
+        !texto.includes("T")
+    ) {
+
+        dataTexto =
+            texto.replace(
+                " ",
+                "T"
+            );
+
+    }
+
+
+    if (
+        !dataTexto.endsWith("Z")
+    ) {
+
+        dataTexto += "Z";
+
+    }
+
+
+    const data =
+        new Date(dataTexto);
+
+
+    if (
+        Number.isNaN(
+            data.getTime()
+        )
+    ) {
+
+        return texto;
+
+    }
+
+
+    return data.toLocaleString(
+        "pt-BR",
+        {
+            dateStyle: "short",
+            timeStyle: "short"
+        }
+    );
+
+}
+
+
+function normalizarStatus(status) {
+
+    return String(
+        status || "pending"
+    )
+        .trim()
+        .toLowerCase();
+
+}
+
+
+function normalizarStatusProducao(pedido) {
+
+    const status =
+        String(
+            pedido?.statusProducao ||
+            pedido?.status_producao ||
+            ""
+        )
+            .trim()
+            .toLowerCase();
+
+
+    if (
+        [
+            "aguardando_producao",
+            "aguardando"
+        ].includes(status)
+    ) {
+
+        return "aguardando_producao";
+
+    }
+
+
+    if (
+        [
+            "em_producao",
+            "producao",
+            "processing",
+            "production"
+        ].includes(status)
+    ) {
+
+        return "em_producao";
+
+    }
+
+
+    if (
+        [
+            "pronto"
+        ].includes(status)
+    ) {
+
+        return "pronto";
+
+    }
+
+
+    if (
+        [
+            "enviado",
+            "shipped"
+        ].includes(status)
+    ) {
+
+        return "enviado";
+
+    }
+
+
+    if (
+        [
+            "concluido",
+            "delivered"
+        ].includes(status)
+    ) {
+
+        return "concluido";
+
+    }
+
+
+    return "aguardando_producao";
+
+}
+
+
+function pagamentoAprovado(status) {
+
+    return [
+        "approved",
+        "paid",
+        "completed",
+        "delivered"
+    ].includes(
+        normalizarStatus(status)
+    );
+
+}
+
+
+function escaparAtributo(valor) {
+
+    return escaparHTML(valor);
+
+}
+
+
+/* =========================================================
+   CLASSIFICAÇÃO DOS PEDIDOS
+========================================================= */
+
+function pedidoPertenceAoFiltro(
+    pedido,
+    filtro
+) {
+
+    const pagamento =
+        normalizarStatus(
+            pedido?.status
+        );
+
+
+    const producao =
+        normalizarStatusProducao(
+            pedido
+        );
+
+
+    const aprovado =
+        pagamentoAprovado(
+            pagamento
+        );
+
+
+    switch (filtro) {
+
+        case "pendente":
+
+            return (
+                pagamento === "pending"
+            );
+
+
+        case "pago":
+
+            return (
+                aprovado &&
+                producao ===
+                    "aguardando_producao"
+            );
+
+
+        case "producao":
+
+            return (
+                aprovado &&
+                producao === "em_producao"
+            );
+
+
+        case "enviado":
+
+            return (
+                aprovado &&
+                producao === "enviado"
+            );
+
+
+        case "entregue":
+
+            return (
+                aprovado &&
+                producao === "concluido"
+            );
+
+
+        case "cancelado":
+
+            return [
+                "failed",
+                "rejected",
+                "cancelled"
+            ].includes(
+                pagamento
+            );
+
+
+        case "todos":
+
+        default:
+
+            return true;
+
+    }
+
+}
+
+
+function obterNomeFiltro(filtro) {
+
+    const nomes = {
+
+        todos:
+            "Todos",
+
+        pendente:
+            "Aguardando pagamento",
+
+        pago:
+            "Pagos",
+
+        producao:
+            "Em produção",
+
+        enviado:
+            "Enviados",
+
+        entregue:
+            "Entregues",
+
+        cancelado:
+            "Cancelados"
+
+    };
+
+
+    return (
+        nomes[filtro] ||
+        "Todos"
+    );
+
+}
+
+
+/* =========================================================
+   STATUS VISUAL DO PEDIDO
+========================================================= */
+
+function obterStatusInfo(
+    status,
+    pedido = null
+) {
+
+    const pagamento =
+        normalizarStatus(
+            pedido?.status ??
+            status
+        );
+
+
+    const producao =
+        normalizarStatusProducao(
+            pedido
+        );
+
+
+    /*
+     * O pagamento ainda não foi aprovado.
+     */
+
+    if (
+        !pagamentoAprovado(
+            pagamento
+        )
+    ) {
+
+        const mapaPagamento = {
+
+            pending: {
+
+                titulo:
+                    "Aguardando pagamento",
+
+                descricao:
+                    "Estamos aguardando a confirmação do pagamento.",
+
+                classe:
+                    "status-pending",
+
+                etapa:
+                    1
+
+            },
+
+
+            failed: {
+
+                titulo:
+                    "Pagamento não concluído",
+
+                descricao:
+                    "Não foi possível concluir o pagamento deste pedido.",
+
+                classe:
+                    "status-failed",
+
+                etapa:
+                    1
+
+            },
+
+
+            rejected: {
+
+                titulo:
+                    "Pagamento recusado",
+
+                descricao:
+                    "O pagamento foi recusado.",
+
+                classe:
+                    "status-failed",
+
+                etapa:
+                    1
+
+            },
+
+
+            cancelled: {
+
+                titulo:
+                    "Pedido cancelado",
+
+                descricao:
+                    "Este pedido foi cancelado.",
+
+                classe:
+                    "status-failed",
+
+                etapa:
+                    1
+
+            }
+
+        };
+
+
+        return (
+            mapaPagamento[
+                pagamento
+            ] || {
+
+                titulo:
+                    "Pedido recebido",
+
+                descricao:
+                    "Seu pedido foi registrado e está aguardando atualização do pagamento.",
+
+                classe:
+                    "status-pending",
+
+                etapa:
+                    1
+
+            }
+        );
+
+    }
+
+
+    /*
+     * Pagamento aprovado:
+     * agora quem manda no andamento é a produção.
+     */
+
+    switch (producao) {
+
+        case "aguardando_producao":
+
+            return {
+
+                titulo:
+                    "Pagamento aprovado",
+
+                descricao:
+                    "Seu pagamento foi aprovado e o pedido está aguardando produção.",
+
+                classe:
+                    "status-approved",
+
+                etapa:
+                    2
+
+            };
+
+
+        case "em_producao":
+
+            return {
+
+                titulo:
+                    "Em produção",
+
+                descricao:
+                    "Seu pedido está sendo produzido.",
+
+                classe:
+                    "status-processing",
+
+                etapa:
+                    3
+
+            };
+
+
+        case "pronto":
+
+            return {
+
+                titulo:
+                    "Pronto",
+
+                descricao:
+                    "Seu pedido foi produzido e está pronto.",
+
+                classe:
+                    "status-completed",
+
+                etapa:
+                    4
+
+            };
+
+
+        case "enviado":
+
+            return {
+
+                titulo:
+                    "Enviado",
+
+                descricao:
+                    "Seu pedido foi enviado.",
+
+                classe:
+                    "status-shipped",
+
+                etapa:
+                    5
+
+            };
+
+
+        case "concluido":
+
+            return {
+
+                titulo:
+                    "Entregue",
+
+                descricao:
+                    "Seu pedido foi concluído/entregue.",
+
+                classe:
+                    "status-delivered",
+
+                etapa:
+                    6
+
+            };
+
+
+        default:
+
+            return {
+
+                titulo:
+                    "Pagamento aprovado",
+
+                descricao:
+                    "Seu pagamento foi aprovado e o pedido está aguardando produção.",
+
+                classe:
+                    "status-approved",
+
+                etapa:
+                    2
+
+            };
+
+    }
+
+}
+
+
+/* =========================================================
+   ETAPA
+========================================================= */
+
+function obterEtapaStatus(
+    status,
+    pedido = null
+) {
+
+    const info =
+        obterStatusInfo(
+            status,
+            pedido
+        );
+
+
+    return Math.max(
+        1,
+        Math.min(
+            6,
+            Number(
+                info.etapa
+            ) || 1
+        )
+    );
+
+}
+
+
+/* =========================================================
+   BADGE DE PAGAMENTO
+========================================================= */
+
+function obterBadgePagamento(
+    status
+) {
+
+    const normalizado =
+        normalizarStatus(
+            status
+        );
+
+
+    if (
+        [
+            "approved",
+            "paid",
+            "completed",
+            "delivered",
+            "processing",
+            "production",
+            "shipped"
+        ].includes(
+            normalizado
+        )
+    ) {
+
+        return {
+
+            texto:
+                "Pagamento aprovado",
+
+            classe:
+                "order-payment-approved"
+
+        };
+
+    }
+
+
+    if (
+        [
+            "failed",
+            "rejected",
+            "cancelled"
+        ].includes(
+            normalizado
+        )
+    ) {
+
+        return {
+
+            texto:
+                "Pagamento não concluído",
+
+            classe:
+                "order-payment-failed"
+
+        };
+
+    }
+
+
+    return {
+
+        texto:
+            "Pagamento pendente",
+
+        classe:
+            "order-payment-pending"
+
+    };
+
+}
+
+
+/* =========================================================
+   INTERFACE
+========================================================= */
+
+function esconderTudo() {
+
+    ordersLoading.hidden =
+        true;
+
+    ordersLogin.hidden =
+        true;
+
+    ordersEmpty.hidden =
+        true;
+
+    ordersContent.hidden =
+        true;
+
+}
+
+
+function mostrarMensagem(
+    texto,
+    tipo = "info"
+) {
+
+    ordersMessage.textContent =
+        String(
+            texto || ""
+        );
+
+
+    ordersMessage.className =
+        "orders-message";
+
+
+    if (
+        tipo === "erro"
+    ) {
+
+        ordersMessage.classList.add(
+            "erro"
+        );
+
+    }
+
+
+    if (
+        tipo === "sucesso"
+    ) {
+
+        ordersMessage.classList.add(
+            "sucesso"
+        );
+
+    }
+
+
+    ordersMessage.hidden =
+        !texto;
+
+}
+
+
+function limparMensagem() {
+
+    ordersMessage.textContent =
+        "";
+
+    ordersMessage.className =
+        "orders-message";
+
+    ordersMessage.hidden =
+        true;
+
+}
+
+
+/* =========================================================
+   CONTA
+========================================================= */
+
+function renderizarConta(
+    usuario
+) {
+
+    if (
+        !accountArea
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !usuario
+    ) {
+
+        accountArea.innerHTML = `
+
+            <a
+                href="login.html"
+                class="btn btn-small"
+            >
+                Entrar
+            </a>
+
+        `;
+
+        return;
+
+    }
+
+
+    const nome =
+        String(
+            usuario.nome ||
+            "Usuário"
+        ).trim();
+
+
+    const inicial =
+        nome
+            .charAt(0)
+            .toUpperCase() ||
+            "U";
+
+
+    accountArea.innerHTML = `
+
+        <a
+            href="configuracoes.html"
+            class="gyamax-header-avatar"
+            aria-label="Minha conta"
+            title="Minha conta"
+        >
+
+            <span
+                class="profile-avatar-letter"
+            >
+                ${escaparHTML(
+                    inicial
+                )}
+            </span>
+
+        </a>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SESSÃO
+========================================================= */
+
+async function obterSessao() {
+
+    const resposta =
+        await fetchComTimeout(
+            "/api/status-login",
+            {
+                method: "GET",
+                credentials: "include",
+                cache: "no-store",
+                headers: {
+                    "Accept":
+                        "application/json"
+                }
+            },
+            10000
+        );
+
+
+    let dados = {};
+
+
+    try {
+
+        dados =
+            await resposta.json();
+
+    } catch {
+
+        dados = {};
+
+    }
+
+
+    if (
+        !resposta.ok
+    ) {
+
+        throw new Error(
+            dados?.mensagem ||
+            `Erro HTTP ${resposta.status}`
+        );
+
+    }
+
+
+    return dados;
+
+}
+
+
+/* =========================================================
+   ETAPAS
+========================================================= */
+
+function renderizarEtapas(
+    status,
+    pedido = null
+) {
+
+    const etapaAtual =
+        obterEtapaStatus(
+            status,
+            pedido
+        );
+
+
+    const etapas = [
+
+        {
+            numero: 1,
+            titulo: "Pedido realizado"
+        },
+
+        {
+            numero: 2,
+            titulo: "Pagamento"
+        },
+
+        {
+            numero: 3,
+            titulo: "Produção"
+        },
+
+        {
+            numero: 4,
+            titulo: "Preparação"
+        },
+
+        {
+            numero: 5,
+            titulo: "Enviado"
+        },
+
+        {
+            numero: 6,
+            titulo: "Entregue"
+        }
+
+    ];
+
+
+    const percentual =
+        (
+            (
+                etapaAtual - 1
+            ) /
+            (
+                etapas.length - 1
+            )
+        ) * 100;
+
+
+    return `
+
+        <div class="order-progress">
+
+            <div class="order-progress-line">
+
+                <div
+                    class="order-progress-line-fill"
+                    style="width: ${percentual}%;"
+                ></div>
+
+            </div>
+
+
+            <div class="order-progress-steps">
+
+                ${
+                    etapas.map(
+                        etapa => {
+
+                            const concluida =
+                                etapa.numero <
+                                etapaAtual;
+
+
+                            const atual =
+                                etapa.numero ===
+                                etapaAtual;
+
+
+                            return `
+
+                                <div
+                                    class="
+                                        order-progress-step
+                                        ${concluida
+                                            ? "is-complete"
+                                            : ""}
+                                        ${atual
+                                            ? "is-current"
+                                            : ""}
+                                    "
+                                >
+
+                                    <div class="order-progress-dot">
+
+                                        ${
+                                            concluida
+                                                ? "✓"
+                                                : escaparHTML(
+                                                    etapa.numero
+                                                )
+                                        }
+
+                                    </div>
+
+
+                                    <span>
+                                        ${escaparHTML(
+                                            etapa.titulo
+                                        )}
+                                    </span>
+
+                                </div>
+
+                            `;
+
+                        }
+                    ).join("")
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   CARD DO PEDIDO
+========================================================= */
+
+function renderizarPedidoCard(
+    pedido
+) {
+
+    const id =
+        Number(
+            pedido?.id
+        );
+
+
+    const statusInfo =
+        obterStatusInfo(
+            pedido?.status,
+            pedido
+        );
+
+
+    const pagamento =
+        obterBadgePagamento(
+            pedido?.status
+        );
+
+
+    const referencia =
+        pedido?.externalReference ||
+        `Pedido #${id}`;
+
+
+    return `
+
+        <article
+            class="order-card"
+            data-order-id="${escaparAtributo(
+                id
+            )}"
+        >
+
+            <div class="order-card-top">
+
+                <div>
+
+                    <span class="order-eyebrow">
+                        PEDIDO #${escaparHTML(
+                            id
+                        )}
+                    </span>
+
+
+                    <h3>
+                        ${escaparHTML(
+                            referencia
+                        )}
+                    </h3>
+
+
+                    <p>
+                        Criado em
+                        ${escaparHTML(
+                            formatarData(
+                                pedido?.criadoEm
+                            )
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div class="order-price">
+
+                    <span>
+                        Total
+                    </span>
+
+
+                    <strong>
+                        ${escaparHTML(
+                            formatarMoeda(
+                                pedido?.total
+                            )
+                        )}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="order-status-summary">
+
+                <div>
+
+                    <span
+                        class="
+                            order-status-badge
+                            ${statusInfo.classe}
+                        "
+                    >
+                        ${escaparHTML(
+                            statusInfo.titulo
+                        )}
+                    </span>
+
+
+                    <p>
+                        ${escaparHTML(
+                            statusInfo.descricao
+                        )}
+                    </p>
+
+                </div>
+
+
+                <span
+                    class="
+                        order-payment-badge
+                        ${pagamento.classe}
+                    "
+                >
+                    ${escaparHTML(
+                        pagamento.texto
+                    )}
+                </span>
+
+            </div>
+
+
+            ${renderizarEtapas(
+                pedido?.status,
+                pedido
+            )}
+
+
+            <div class="order-card-footer">
+
+                <span class="order-reference">
+
+                    Referência:
+
+                    <strong>
+                        ${escaparHTML(
+                            referencia
+                        )}
+                    </strong>
+
+                </span>
+
+
+                <button
+                    type="button"
+                    class="btn order-view-button"
+                    data-view-order="${escaparAtributo(
+                        id
+                    )}"
+                >
+
+                    Ver pedido
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   CONTADORES
+========================================================= */
+
+function atualizarContadoresFiltros() {
+
+    const filtros = [
+        "todos",
+        "pendente",
+        "pago",
+        "producao",
+        "enviado",
+        "entregue",
+        "cancelado"
+    ];
+
+
+    for (
+        const filtro
+        of filtros
+    ) {
+
+        let quantidade = 0;
+
+
+        if (
+            filtro === "todos"
+        ) {
+
+            quantidade =
+                pedidosAtuais.length;
+
+        } else {
+
+            quantidade =
+                pedidosAtuais.filter(
+                    pedido =>
+                        pedidoPertenceAoFiltro(
+                            pedido,
+                            filtro
+                        )
+                ).length;
+
+        }
+
+
+        const contador =
+            document.querySelector(
+                `[data-filter-count="${filtro}"]`
+            );
+
+
+        if (
+            contador
+        ) {
+
+            contador.textContent =
+                quantidade;
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   PEDIDOS FILTRADOS
+========================================================= */
+
+function renderizarPedidosFiltrados() {
+
+    if (
+        !ordersList
+    ) {
+
+        return;
+
+    }
+
+
+    const filtrados =
+        pedidosAtuais.filter(
+            pedido =>
+                pedidoPertenceAoFiltro(
+                    pedido,
+                    filtroAtual
+                )
+        );
+
+
+    ordersList.innerHTML =
+        filtrados
+            .map(
+                renderizarPedidoCard
+            )
+            .join("");
+
+
+    ordersFilterEmpty.hidden =
+        filtrados.length !== 0;
+
+
+    const total =
+        filtrados.length;
+
+
+    ordersFilterResult.innerHTML = `
+
+        Mostrando
+
+        <strong>
+            ${total}
+        </strong>
+
+        ${
+            total === 1
+                ? "pedido"
+                : "pedidos"
+        }
+
+        em
+
+        <strong>
+            ${escaparHTML(
+                obterNomeFiltro(
+                    filtroAtual
+                )
+            )}
+        .
+
+    `;
+
+}
+
+
+/* =========================================================
+   RENDERIZAR PEDIDOS
+========================================================= */
+
+function renderizarPedidos(
+    pedidos
+) {
+
+    pedidosAtuais =
+        Array.isArray(
+            pedidos
+        )
+            ? pedidos
+            : [];
+
+
+    atualizarContadoresFiltros();
+
+
+    const total =
+        pedidosAtuais.length;
+
+
+    ordersCount.textContent =
+        total === 1
+            ? "1 pedido"
+            : `${total} pedidos`;
+
+
+    ordersContent.hidden =
+        false;
+
+
+    renderizarPedidosFiltrados();
+
+}
+
+
+/* =========================================================
+   FILTRO
+========================================================= */
+
+function selecionarFiltro(
+    filtro
+) {
+
+    const filtrosValidos = [
+        "todos",
+        "pendente",
+        "pago",
+        "producao",
+        "enviado",
+        "entregue",
+        "cancelado"
+    ];
+
+
+    if (
+        !filtrosValidos.includes(
+            filtro
+        )
+    ) {
+
+        filtro =
+            "todos";
+
+    }
+
+
+    filtroAtual =
+        filtro;
+
+
+    ordersFilterButtons.forEach(
+        botao => {
+
+            const ativo =
+                botao.dataset.filter ===
+                filtroAtual;
+
+
+            botao.classList.toggle(
+                "active",
+                ativo
+            );
+
+
+            botao.setAttribute(
+                "aria-selected",
+                ativo
+                    ? "true"
+                    : "false"
+            );
+
+        }
+    );
+
+
+    renderizarPedidosFiltrados();
+
+}
+
+
+ordersFilterButtons.forEach(
+    botao => {
+
+        botao.addEventListener(
+            "click",
+            () => {
+
+                selecionarFiltro(
+                    botao.dataset.filter
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   CARREGAR PEDIDOS
+========================================================= */
+
+async function carregarPedidos() {
+
+    limparMensagem();
+
+    esconderTudo();
+
+    ordersLoading.hidden =
+        false;
+
+
+    try {
+
+        const resposta =
+            await fetchComTimeout(
+                "/api/pedidos",
+                {
+                    method: "GET",
+                    credentials: "include",
+                    cache: "no-store",
+                    headers: {
+                        "Accept":
+                            "application/json"
+                    }
+                },
+                10000
+            );
+
+
+        let dados = {};
+
+
+        try {
+
+            dados =
+                await resposta.json();
+
+        } catch {
+
+            dados = {};
+
+        }
+
+
+        if (
+            resposta.status === 401 ||
+            dados?.erro === "notLogged"
+        ) {
+
+            ordersLoading.hidden =
+                true;
+
+            ordersLogin.hidden =
+                false;
+
+            renderizarConta(
+                null
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !resposta.ok ||
+            !dados?.sucesso
+        ) {
+
+            throw new Error(
+                dados?.mensagem ||
+                dados?.erro ||
+                `Erro HTTP ${resposta.status}`
+            );
+
+        }
+
+
+        const pedidos =
+            Array.isArray(
+                dados?.pedidos
+            )
+                ? dados.pedidos
+                : [];
+
+
+        ordersLoading.hidden =
+            true;
+
+
+        if (
+            !pedidos.length
+        ) {
+
+            ordersEmpty.hidden =
+                false;
+
+            return;
+
+        }
+
+
+        renderizarPedidos(
+            pedidos
+        );
+
+
+        iniciarAtualizacaoAutomatica();
+
+
+    } catch (erro) {
+
+        console.error(
+            "ERRO AO CARREGAR PEDIDOS:",
+            erro
+        );
+
+
+        ordersLoading.hidden =
+            true;
+
+
+        mostrarMensagem(
+            erro?.message ||
+            "Não foi possível carregar seus pedidos.",
+            "erro"
+        );
+
+
+        ordersEmpty.hidden =
+            false;
+
+
+        ordersEmpty.innerHTML = `
+
+            <div class="orders-empty-icon">
+                !
+            </div>
+
+
+            <span class="orders-empty-tag">
+                ERRO
+            </span>
+
+
+            <h2>
+                Não foi possível carregar seus pedidos.
+            </h2>
+
+
+            <p>
+                ${escaparHTML(
+                    erro?.message ||
+                    "Verifique se o servidor GYAMAX está funcionando."
+                )}
+            </p>
+
+
+            <button
+                type="button"
+                class="btn"
+                id="ordersRetryButton"
+            >
+                Tentar novamente
+            </button>
+
+        `;
+
+
+        const retry =
+            document.getElementById(
+                "ordersRetryButton"
+            );
+
+
+        if (
+            retry
+        ) {
+
+            retry.addEventListener(
+                "click",
+                carregarPedidos
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   DETALHES DO PEDIDO
+========================================================= */
+
+async function abrirPedido(
+    pedidoId
+) {
+
+    const id =
+        Number(
+            pedidoId
+        );
+
+
+    if (
+        !Number.isInteger(id) ||
+        id <= 0
+    ) {
+
+        return;
+
+    }
+
+
+    orderModal.hidden =
+        false;
+
+
+    orderModal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.classList.add(
+        "order-modal-open"
+    );
+
+
+    orderModalBody.innerHTML = `
+
+        <div class="orders-loading orders-loading-modal">
+
+            <div class="orders-spinner"></div>
+
+            <p>
+                Carregando pedido...
+            </p>
+
+        </div>
+
+    `;
+
+
+    const pedidoAtual =
+        pedidosAtuais.find(
+            item =>
+                Number(
+                    item?.id
+                ) === id
+        );
+
+
+    orderModalTitle.textContent =
+        pedidoAtual
+            ? `Pedido #${id}`
+            : "Pedido";
+
+
+    try {
+
+        const resposta =
+            await fetchComTimeout(
+                `/api/pedidos/${encodeURIComponent(id)}`,
+                {
+                    method: "GET",
+                    credentials: "include",
+                    cache: "no-store",
+                    headers: {
+                        "Accept":
+                            "application/json"
+                    }
+                },
+                10000
+            );
+
+
+        let dados = {};
+
+
+        try {
+
+            dados =
+                await resposta.json();
+
+        } catch {
+
+            dados = {};
+
+        }
+
+
+        if (
+            resposta.status === 401 ||
+            dados?.erro === "notLogged"
+        ) {
+
+            fecharPedido();
+
+            window.location.href =
+                "login.html?redirect=acompanhar-pedido.html";
+
+            return;
+
+        }
+
+
+        if (
+            !resposta.ok ||
+            !dados?.sucesso
+        ) {
+
+            throw new Error(
+                dados?.mensagem ||
+                dados?.erro ||
+                `Erro HTTP ${resposta.status}`
+            );
+
+        }
+
+
+        renderizarDetalhesPedido(
+            dados
+        );
+
+    } catch (erro) {
+
+        console.error(
+            "ERRO AO CARREGAR PEDIDO:",
+            erro
+        );
+
+
+        orderModalBody.innerHTML = `
+
+            <div class="order-detail-error">
+
+                <span>
+                    !
+                </span>
+
+
+                <h3>
+                    Não foi possível carregar o pedido.
+                </h3>
+
+
+                <p>
+                    ${escaparHTML(
+                        erro?.message ||
+                        "Tente novamente."
+                    )}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   DETALHES
+========================================================= */
+
+function renderizarDetalhesPedido(
+    dados
+) {
+
+    const pedido =
+        dados?.pedido ||
+        {};
+
+
+    const itens =
+        Array.isArray(
+            dados?.itens
+        )
+            ? dados.itens
+            : [];
+
+
+    const statusInfo =
+        obterStatusInfo(
+            pedido.status,
+            pedido
+        );
+
+
+    const pagamento =
+        obterBadgePagamento(
+            pedido.status
+        );
+
+
+    orderModalTitle.textContent =
+        `Pedido #${pedido.id}`;
+
+
+    orderModalBody.innerHTML = `
+
+        <div class="order-detail-status">
+
+            <div>
+
+                <span
+                    class="
+                        order-status-badge
+                        ${statusInfo.classe}
+                    "
+                >
+                    ${escaparHTML(
+                        statusInfo.titulo
+                    )}
+                </span>
+
+
+                <p>
+                    ${escaparHTML(
+                        statusInfo.descricao
+                    )}
+                </p>
+
+            </div>
+
+
+            <span
+                class="
+                    order-payment-badge
+                    ${pagamento.classe}
+                "
+            >
+                ${escaparHTML(
+                    pagamento.texto
+                )}
+            </span>
+
+        </div>
+
+
+        <div class="order-detail-progress">
+
+            ${renderizarEtapas(
+                pedido.status,
+                pedido
+            )}
+
+        </div>
+
+
+        <div class="order-detail-grid">
+
+            <div class="order-detail-box">
+
+                <span>
+                    REFERÊNCIA
+                </span>
+
+
+                <strong>
+                    ${escaparHTML(
+                        pedido.externalReference ||
+                        "—"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="order-detail-box">
+
+                <span>
+                    CRIADO EM
+                </span>
+
+
+                <strong>
+                    ${escaparHTML(
+                        formatarData(
+                            pedido.criadoEm
+                        )
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="order-detail-box">
+
+                <span>
+                    PAGAMENTO
+                </span>
+
+
+                <strong>
+                    ${escaparHTML(
+                        String(
+                            pedido.metodoPagamento ||
+                            "—"
+                        ).toUpperCase()
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="order-detail-box">
+
+                <span>
+                    TOTAL
+                </span>
+
+
+                <strong class="order-detail-total">
+                    ${escaparHTML(
+                        formatarMoeda(
+                            pedido.total
+                        )
+                    )}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="order-items-section">
+
+            <div class="order-items-title">
+
+                <div>
+
+                    <span class="orders-summary-label">
+                        ITENS DO PEDIDO
+                    </span>
+
+
+                    <h3>
+                        Produtos
+                    </h3>
+
+                </div>
+
+
+                <span class="order-items-count">
+
+                    ${itens.length}
+
+                    ${
+                        itens.length === 1
+                            ? "item"
+                            : "itens"
+                    }
+
+                </span>
+
+            </div>
+
+
+            ${
+                itens.length
+                    ? `
+
+                        <div class="order-items-list">
+
+                            ${
+                                itens.map(
+                                    item => `
+
+                                        <div class="order-item">
+
+                                            <div class="order-item-icon">
+                                                ${escaparHTML(
+                                                    item.quantidade
+                                                )}×
+                                            </div>
+
+
+                                            <div class="order-item-info">
+
+                                                <strong>
+                                                    ${escaparHTML(
+                                                        item.nome
+                                                    )}
+                                                </strong>
+
+
+                                                <span>
+                                                    ${escaparHTML(
+                                                        item.quantidade
+                                                    )}
+                                                    ×
+                                                    ${escaparHTML(
+                                                        formatarMoeda(
+                                                            item.preco
+                                                        )
+                                                    )}
+                                                </span>
+
+                                            </div>
+
+
+                                            <strong class="order-item-total">
+
+                                                ${escaparHTML(
+                                                    formatarMoeda(
+                                                        item.subtotal
+                                                    )
+                                                )}
+
+                                            </strong>
+
+                                        </div>
+
+                                    `
+                                ).join("")
+                            }
+
+                        </div>
+
+                    `
+                    : `
+
+                        <div class="order-items-empty">
+                            Nenhum item encontrado neste pedido.
+                        </div>
+
+                    `
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   FECHAR MODAL
+========================================================= */
+
+function fecharPedido() {
+
+    if (
+        !orderModal
+    ) {
+
+        return;
+
+    }
+
+
+    orderModal.hidden =
+        true;
+
+
+    orderModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body.classList.remove(
+        "order-modal-open"
+    );
+
+}
+
+
+/* =========================================================
+   EVENTOS DO MODAL
+========================================================= */
+
+if (
+    orderModalClose
+) {
+
+    orderModalClose.addEventListener(
+        "click",
+        fecharPedido
+    );
+
+}
+
+
+if (
+    orderModal
+) {
+
+    orderModal.addEventListener(
+        "click",
+        evento => {
+
+            if (
+                evento.target ===
+                orderModal
+            ) {
+
+                fecharPedido();
+
+            }
+
+        }
+    );
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    evento => {
+
+        if (
+            evento.key === "Escape" &&
+            orderModal &&
+            !orderModal.hidden
+        ) {
+
+            fecharPedido();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   VER PEDIDO
+========================================================= */
+
+if (
+    ordersList
+) {
+
+    ordersList.addEventListener(
+        "click",
+        evento => {
+
+            const botao =
+                evento.target.closest(
+                    "[data-view-order]"
+                );
+
+
+            if (
+                !botao
+            ) {
+
+                return;
+
+            }
+
+
+            abrirPedido(
+                botao.dataset.viewOrder
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ATUALIZAÇÃO AUTOMÁTICA
+========================================================= */
+
+function iniciarAtualizacaoAutomatica() {
+
+    if (
+        intervaloAtualizacao
+    ) {
+
+        return;
+
+    }
+
+
+    intervaloAtualizacao =
+        window.setInterval(
+            async () => {
+
+                try {
+
+                    const resposta =
+                        await fetchComTimeout(
+                            "/api/pedidos",
+                            {
+                                method: "GET",
+                                credentials: "include",
+                                cache: "no-store",
+                                headers: {
+                                    "Accept":
+                                        "application/json"
+                                }
+                            },
+                            10000
+                        );
+
+
+                    let dados = {};
+
+
+                    try {
+
+                        dados =
+                            await resposta.json();
+
+                    } catch {
+
+                        dados = {};
+
+                    }
+
+
+                    if (
+                        resposta.status === 401 ||
+                        dados?.erro ===
+                            "notLogged"
+                    ) {
+
+                        clearInterval(
+                            intervaloAtualizacao
+                        );
+
+                        intervaloAtualizacao =
+                            null;
+
+                        esconderTudo();
+
+                        ordersLogin.hidden =
+                            false;
+
+                        renderizarConta(
+                            null
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !resposta.ok ||
+                        !dados?.sucesso ||
+                        !Array.isArray(
+                            dados?.pedidos
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * Se o administrativo alterou a produção,
+                     * a nova informação entra aqui automaticamente.
+                     */
+
+                    renderizarPedidos(
+                        dados.pedidos
+                    );
+
+                } catch (erro) {
+
+                    console.warn(
+                        "Atualização automática falhou:",
+                        erro
+                    );
+
+                }
+
+            },
+            30000
+        );
+
+}
+
+
+/* =========================================================
+   ATUALIZAR MANUALMENTE
+========================================================= */
+
+if (
+    ordersRefresh
+) {
+
+    ordersRefresh.addEventListener(
+        "click",
+        async () => {
+
+            ordersRefresh.disabled =
+                true;
+
+            ordersRefresh.textContent =
+                "Atualizando...";
+
+
+            try {
+
+                await carregarPedidos();
+
+            } finally {
+
+                ordersRefresh.disabled =
+                    false;
+
+                ordersRefresh.textContent =
+                    "Atualizar";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MENU MOBILE
+========================================================= */
+
+if (
+    menuMobile &&
+    mainMenu
+) {
+
+    menuMobile.addEventListener(
+        "click",
+        () => {
+
+            const aberto =
+                mainMenu.classList.toggle(
+                    "menu-aberto"
+                );
+
+
+            menuMobile.setAttribute(
+                "aria-expanded",
+                aberto
+                    ? "true"
+                    : "false"
+            );
+
+        }
+    );
+
+
+    mainMenu.addEventListener(
+        "click",
+        evento => {
+
+            const link =
+                evento.target.closest(
+                    "a"
+                );
+
+
+            if (
+                !link
+            ) {
+
+                return;
+
+            }
+
+
+            mainMenu.classList.remove(
+                "menu-aberto"
+            );
+
+
+            menuMobile.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   TEMA
+========================================================= */
+
+function aplicarTema(
+    aparencia
+) {
+
+    const valor =
+        String(
+            aparencia || ""
+        )
+            .trim()
+            .toLowerCase();
+
+
+    if (
+        valor === "claro"
+    ) {
+
+        document.documentElement.dataset.theme =
+            "claro";
+
+        return;
+
+    }
+
+
+    if (
+        valor === "automatico"
+    ) {
+
+        document.documentElement.dataset.theme =
+            "automatico";
+
+        return;
+
+    }
+
+
+    document.documentElement.dataset.theme =
+        "escuro";
+
+}
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+(async function iniciarPagina() {
+
+    esconderTudo();
+
+    ordersLoading.hidden =
+        false;
+
+    aplicarTema("escuro");
+
+
+    try {
+
+        const sessao =
+            await obterSessao();
+
+
+        renderizarConta(
+            sessao?.usuario ||
+            null
+        );
+
+
+        if (
+            !sessao?.logado
+        ) {
+
+            esconderTudo();
+
+            ordersLogin.hidden =
+                false;
+
+            return;
+
+        }
+
+
+        aplicarTema(
+            sessao?.usuario?.aparencia ||
+            "escuro"
+        );
+
+
+        await carregarPedidos();
+
+    } catch (erro) {
+
+        console.error(
+            "ERRO AO INICIAR ACOMPANHAMENTO:",
+            erro
+        );
+
+
+        esconderTudo();
+
+
+        mostrarMensagem(
+            erro?.message ||
+            "Não foi possível carregar a página.",
+            "erro"
+        );
+
+
+        ordersEmpty.hidden =
+            false;
+
+
+        ordersEmpty.innerHTML = `
+
+            <div class="orders-empty-icon">
+                !
+            </div>
+
+
+            <span class="orders-empty-tag">
+                ERRO
+            </span>
+
+
+            <h2>
+                Não foi possível carregar seus pedidos.
+            </h2>
+
+
+            <p>
+                ${escaparHTML(
+                    erro?.message ||
+                    "Verifique se o servidor GYAMAX está funcionando."
+                )}
+            </p>
+
+
+            <button
+                type="button"
+                class="btn"
+                id="ordersRetryButton"
+            >
+                Tentar novamente
+            </button>
+
+        `;
+
+
+        const retry =
+            document.getElementById(
+                "ordersRetryButton"
+            );
+
+
+        if (
+            retry
+        ) {
+
+            retry.addEventListener(
+                "click",
+                () => {
+                    window.location.reload();
+                }
+            );
+
+        }
+
+    }
+
+})();
+
+</script>
+
+
+</body>
+
+</html>

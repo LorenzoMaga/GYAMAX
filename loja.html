@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>GYAMAX | Loja</title>
+
+<meta
+    name="description"
+    content="GYAMAX — Loja de modelos e produtos prontos."
+>
+
+<link
+    rel="stylesheet"
+    href="/style.css"
+>
+
+<style>
+
+    /* =====================================================
+       TOPO DA PÁGINA
+    ===================================================== */
+
+    .store-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 20px;
+
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+
+    .store-top-row .tag {
+        margin: 0;
+    }
+
+
+    /* =====================================================
+       BOTÃO VOLTAR AO INÍCIO
+    ===================================================== */
+
+    .back-home-page {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 8px;
+
+        padding: 10px 16px;
+
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+
+        background: rgba(20, 20, 20, 0.85);
+
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+
+        color: inherit;
+        text-decoration: none;
+
+        font-size: 14px;
+        font-weight: 600;
+
+        white-space: nowrap;
+
+        transition:
+            transform 0.2s ease,
+            background 0.2s ease,
+            border-color 0.2s ease;
+    }
+
+
+    .back-home-page:hover {
+        transform: translateY(-2px);
+
+        background: rgba(255, 255, 255, 0.08);
+
+        border-color: rgba(255, 255, 255, 0.22);
+    }
+
+
+    @media (max-width: 700px) {
+
+        .store-top-row {
+            gap: 12px;
+        }
+
+        .back-home-page {
+            padding: 9px 14px;
+            font-size: 13px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+
+<div class="container nav">
+
+
+    <!-- LOGO -->
+
+    <a
+        href="/index.html"
+        class="logo"
+    >
+
+        <img
+            id="gyamaxLogo"
+            src="/img/GYAMAX.png"
+            alt="GYAMAX"
+        >
+
+    </a>
+
+
+    <!-- MENU -->
+
+    <nav class="menu">
+
+        <a
+            href="/index.html#inicio"
+            data-i18n="nav.home"
+        >
+            Início
+        </a>
+
+
+        <a
+            href="/index.html#servicos"
+            data-i18n="nav.services"
+        >
+            Serviços
+        </a>
+
+
+        <a
+            href="/index.html#processo"
+            data-i18n="nav.process"
+        >
+            Como funciona
+        </a>
+
+
+        <a
+            href="/projetos.html"
+            data-i18n="nav.projects"
+        >
+            Projetos
+        </a>
+
+
+        <a
+            href="/loja.html"
+            class="menu-active"
+            data-i18n="nav.store"
+        >
+            Loja
+        </a>
+
+
+        <a
+            href="/index.html#sobre"
+            data-i18n="nav.about"
+        >
+            Sobre
+        </a>
+
+    </nav>
+
+
+    <!-- =================================================
+         CONTA
+    ================================================== -->
+
+    <div id="accountArea">
+
+        <a
+            href="/login.html"
+            class="btn btn-small"
+            data-i18n="login.enter"
+        >
+            Entrar
+        </a>
+
+    </div>
+
+
+    <!-- =================================================
+         CARRINHO
+    ================================================== -->
+
+    <a
+        href="/carrinho.html"
+        class="gyamax-cart-avatar"
+        data-i18n-title="store.cart"
+        data-i18n-aria-label="store.cart"
+        title="Carrinho"
+        aria-label="Carrinho"
+    >
+
+        <span
+            class="gyamax-cart-icon"
+            aria-hidden="true"
+        >
+
+            <span class="cart-basket-handle"></span>
+
+            <span class="cart-basket-body"></span>
+
+            <span class="cart-basket-wheel cart-basket-wheel-1"></span>
+
+            <span class="cart-basket-wheel cart-basket-wheel-2"></span>
+
+        </span>
+
+
+        <span
+            class="store-cart-count"
+            id="cartCount"
+            aria-label="0 Carrinho"
+        >
+            0
+        </span>
+
+    </a>
+
+
+    <!-- =================================================
+         ORÇAMENTO
+    ================================================== -->
+
+    <a
+        href="/index.html#orcamento"
+        class="btn btn-small quote-header-button"
+        data-i18n="quote.request"
+    >
+        Solicitar orçamento
+    </a>
+
+
+    <!-- MENU MOBILE -->
+
+    <button
+        class="menu-mobile"
+        id="menuMobile"
+        type="button"
+        aria-label="Menu"
+        aria-expanded="false"
+    >
+        ☰
+    </button>
+
+</div>
+
+
+</header>
+
+<!-- =====================================================
+     CONTEÚDO DA LOJA
+===================================================== -->
+
+<main class="store-page">
+
+
+<!-- =================================================
+     CABEÇALHO DA LOJA
+================================================== -->
+
+<section class="store-hero">
+
+    <div class="container">
+
+
+        <div class="store-top-row">
+
+
+            <span
+                class="tag"
+                data-i18n="store.tag"
+            >
+                LOJA GYAMAX
+            </span>
+
+
+            <a
+                href="/index.html#inicio"
+                class="back-home-page"
+            >
+                ← Voltar ao início
+            </a>
+
+
+        </div>
+
+
+        <h1 data-i18n="store.title">
+            Modelos prontos para ganhar forma.
+        </h1>
+
+
+        <p
+            class="store-hero-description"
+            data-i18n="store.description"
+        >
+            Encontre modelos e produtos prontos da GYAMAX com preço fixo.
+        </p>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================================
+     PRODUTOS
+================================================== -->
+
+<section class="store-products-section">
+
+    <div class="container">
+
+
+        <div class="store-products-header">
+
+            <h2 data-i18n="store.productsTitle">
+                Produtos
+            </h2>
+
+
+            <p data-i18n="store.productsDescription">
+                Escolha o produto que deseja comprar.
+            </p>
+
+        </div>
+
+
+
+        <div
+            class="store-products-grid"
+            id="storeProductsGrid"
+        >
+
+
+            <!-- =====================================
+                 PRODUTO 01
+            ====================================== -->
+
+            <article
+                class="store-product-card"
+                data-product-id="1"
+            >
+
+                <div class="store-product-image">
+
+                    <div class="store-product-placeholder">
+
+                        <span>
+                            GYAMAX
+                        </span>
+
+
+                        <small
+                            data-i18n="store.preview"
+                        >
+                            Prévia do produto
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="store-product-content">
+
+
+                    <span
+                        class="store-product-category"
+                        data-i18n="store.categoryModel"
+                    >
+                        MODELO
+                    </span>
+
+
+                    <h3 data-i18n="product.1.name">
+                        Modelo GYAMAX 01
+                    </h3>
+
+
+                    <p
+                        class="store-product-description"
+                        data-i18n="product.1.description"
+                    >
+                        Modelo pronto para impressão desenvolvido pela GYAMAX.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+
+                        <strong class="store-product-price">
+                            R$ 19,90
+                        </strong>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-small store-add-button"
+                            data-product-id="1"
+                            data-i18n="store.addToCart"
+                        >
+                            Adicionar
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 PRODUTO 02
+            ====================================== -->
+
+            <article
+                class="store-product-card"
+                data-product-id="2"
+            >
+
+                <div class="store-product-image">
+
+                    <div class="store-product-placeholder">
+
+                        <span>
+                            GYAMAX
+                        </span>
+
+
+                        <small
+                            data-i18n="store.preview"
+                        >
+                            Prévia do produto
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="store-product-content">
+
+
+                    <span
+                        class="store-product-category"
+                        data-i18n="store.categoryModel"
+                    >
+                        MODELO
+                    </span>
+
+
+                    <h3 data-i18n="product.2.name">
+                        Modelo GYAMAX 02
+                    </h3>
+
+
+                    <p
+                        class="store-product-description"
+                        data-i18n="product.2.description"
+                    >
+                        Modelo pronto para impressão com acabamento detalhado.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+
+                        <strong class="store-product-price">
+                            R$ 29,90
+                        </strong>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-small store-add-button"
+                            data-product-id="2"
+                            data-i18n="store.addToCart"
+                        >
+                            Adicionar
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =====================================
+                 PRODUTO 03
+            ====================================== -->
+
+            <article
+                class="store-product-card"
+                data-product-id="3"
+            >
+
+                <div class="store-product-image">
+
+                    <div class="store-product-placeholder">
+
+                        <span>
+                            GYAMAX
+                        </span>
+
+
+                        <small
+                            data-i18n="store.preview"
+                        >
+                            Prévia do produto
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="store-product-content">
+
+
+                    <span
+                        class="store-product-category"
+                        data-i18n="store.categoryModel"
+                    >
+                        MODELO
+                    </span>
+
+
+                    <h3 data-i18n="product.3.name">
+                        Modelo GYAMAX 03
+                    </h3>
+
+
+                    <p
+                        class="store-product-description"
+                        data-i18n="product.3.description"
+                    >
+                        Modelo pronto para produção e impressão.
+                    </p>
+
+
+                    <div class="store-product-bottom">
+
+
+                        <strong class="store-product-price">
+                            R$ 39,90
+                        </strong>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-small store-add-button"
+                            data-product-id="3"
+                            data-i18n="store.addToCart"
+                        >
+                            Adicionar
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =================================================
+     CTA
+================================================== -->
+
+<section class="store-cta">
+
+    <div class="container">
+
+
+        <div class="store-cta-inner">
+
+
+            <div>
+
+                <span
+                    class="tag"
+                    data-i18n="store.ctaTag"
+                >
+                    NÃO ENCONTROU?
+                </span>
+
+
+                <h2 data-i18n="store.ctaTitle">
+                    Precisa de algo personalizado?
+                </h2>
+
+
+                <p data-i18n="store.ctaDescription">
+                    A GYAMAX também cria peças e projetos sob medida.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/index.html#orcamento"
+                class="btn btn-light"
+                data-i18n="store.ctaButton"
+            >
+                Solicitar orçamento
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+
+<div class="container footer-content">
+
+
+    <div>
+
+        <div class="footer-logo">
+            GYAMAX
+        </div>
+
+
+        <p data-i18n="footer.description">
+            Impressão 3D & Fabricação
+        </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+
+        <a
+            href="/index.html#inicio"
+            data-i18n="nav.home"
+        >
+            Início
+        </a>
+
+
+        <a
+            href="/index.html#servicos"
+            data-i18n="nav.services"
+        >
+            Serviços
+        </a>
+
+
+        <a
+            href="/loja.html"
+            data-i18n="nav.store"
+        >
+            Loja
+        </a>
+
+
+        <a
+            href="/index.html#sobre"
+            data-i18n="nav.about"
+        >
+            Sobre
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<div class="container copyright">
+
+    © 2026 GYAMAX.
+
+    <span data-i18n="footer.rights">
+        Todos os direitos reservados.
+    </span>
+
+</div>
+
+
+</footer>
+
+<script src="/script.js"></script>
+
+</body>
+
+</html>

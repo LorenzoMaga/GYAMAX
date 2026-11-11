@@ -1,0 +1,6959 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Painel administrativo GYAMAX."
+    >
+
+    <title>
+        GYAMAX | Painel Administrativo
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <style>
+/* =====================================================
+   SELECTS ADMIN — GYAMAX
+===================================================== */
+
+.admin-form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    width: 100%;
+    min-height: 44px;
+
+    padding: 0 42px 0 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+
+    background-color: #111111;
+    color: #ffffff;
+
+    font: inherit;
+    cursor: pointer;
+
+    outline: none;
+
+    /* seta personalizada */
+    background-image:
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            #ff6a00 50%
+        ),
+        linear-gradient(
+            135deg,
+            #ff6a00 50%,
+            transparent 50%
+        );
+
+    background-position:
+        calc(100% - 18px) 19px,
+        calc(100% - 12px) 19px;
+
+    background-size:
+        6px 6px,
+        6px 6px;
+
+    background-repeat:
+        no-repeat;
+
+    transition:
+        border-color .2s ease,
+        background-color .2s ease;
+}
+
+
+/* quando o select estiver selecionado */
+.admin-form-group select:focus {
+    border-color: #ff6a00;
+    background-color: #111111;
+}
+
+
+/* opções */
+.admin-form-group select option {
+    background: #111111;
+    color: #ffffff;
+}
+
+
+/* opção atualmente selecionada */
+.admin-form-group select option:checked {
+    background: #ff6a00;
+    color: #ffffff;
+}
+
+
+/* hover/foco da opção */
+.admin-form-group select option:hover {
+    background: #ff6a00;
+    color: #ffffff;
+}
+        /* =====================================================
+           PAINEL ADMIN
+        ===================================================== */
+
+        .admin-page {
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .admin-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .admin-header-info {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .admin-header-info .tag {
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .admin-header-info h1 {
+            margin: 0 0 8px;
+        }
+
+        .admin-header-info p {
+            margin: 0;
+            opacity: .7;
+        }
+
+        .admin-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 250px minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .admin-sidebar {
+            position: sticky;
+            top: 20px;
+            padding: 14px;
+            border-radius: 18px;
+            border: 1px solid rgba(127, 127, 127, .18);
+            background: rgba(127, 127, 127, .06);
+            backdrop-filter: blur(12px);
+            z-index: 10;
+        }
+
+        .admin-sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            opacity: .55;
+            padding: 10px 12px 14px;
+        }
+
+        .admin-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .admin-nav-button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border: 0;
+            border-radius: 12px;
+            background: transparent;
+            color: inherit;
+            text-align: left;
+            cursor: pointer;
+            font: inherit;
+            box-sizing: border-box;
+            transition:
+                background .2s ease,
+                transform .2s ease;
+            position: relative;
+            z-index: 20;
+        }
+
+        .admin-nav-button:hover {
+            background: rgba(127, 127, 127, .10);
+        }
+
+        .admin-nav-button.active {
+            background: rgba(127, 127, 127, .16);
+            font-weight: 700;
+        }
+
+        .admin-nav-icon {
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 9px;
+            background: rgba(127, 127, 127, .10);
+        }
+
+        .admin-chat-badge {
+            display: none;
+            margin-left: auto;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 999px;
+            background: #ff6a00;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            box-sizing: border-box;
+        }
+
+        .admin-content {
+            min-width: 0;
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .admin-section-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .admin-section-header h2 {
+            margin: 0 0 6px;
+        }
+
+        .admin-section-header p {
+            margin: 0;
+            opacity: .68;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(
+                        210px,
+                        1fr
+                    )
+                );
+            gap: 16px;
+        }
+
+        .admin-card {
+            border-radius: 18px;
+            padding: 22px;
+            border: 1px solid rgba(127, 127, 127, .18);
+            background: rgba(127, 127, 127, .06);
+            box-sizing: border-box;
+        }
+
+        .admin-stat {
+            min-height: 130px;
+        }
+
+        .admin-stat-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 13px;
+            opacity: .65;
+        }
+
+        .admin-stat-value {
+            display: block;
+            font-size: 34px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .admin-stat-description {
+            display: block;
+            margin-top: 12px;
+            font-size: 13px;
+            opacity: .58;
+        }
+
+        .admin-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 18px;
+            border: 1px solid rgba(127, 127, 127, .18);
+        }
+
+        .admin-table {
+            width: 100%;
+            min-width: 720px;
+            border-collapse: collapse;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 15px 16px;
+            border-bottom: 1px solid rgba(127, 127, 127, .14);
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .admin-table th {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            opacity: .58;
+        }
+
+        .admin-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .admin-status {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(127, 127, 127, .12);
+        }
+
+        .admin-empty {
+            padding: 40px 20px;
+            text-align: center;
+            opacity: .65;
+        }
+
+        .admin-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .admin-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 0 15px;
+            border: 0;
+            border-radius: 11px;
+            background: rgba(127, 127, 127, .12);
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .admin-button:hover {
+            background: rgba(127, 127, 127, .20);
+        }
+
+        .admin-button-primary {
+            background: #ff6a00;
+            color: #ffffff;
+        }
+
+        .admin-button-primary:hover {
+            background: #e85f00;
+        }
+
+        .admin-button-danger {
+            background: rgba(220, 60, 60, .12);
+        }
+
+        .admin-button-danger:hover {
+            background: rgba(220, 60, 60, .20);
+        }
+
+        .admin-form-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0, 1fr)
+                );
+            gap: 16px;
+        }
+
+        .admin-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .admin-form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .admin-form-group label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .admin-form-group input,
+        .admin-form-group select,
+        .admin-form-group textarea {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(127, 127, 127, .22);
+            background: transparent;
+            color: inherit;
+            box-sizing: border-box;
+            font: inherit;
+        }
+
+        .admin-form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .admin-form-group input[type="file"] {
+            width: 100%;
+            min-height: auto;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .admin-form-group input[type="file"]::file-selector-button {
+            min-height: 44px;
+            margin-right: 12px;
+            padding: 0 16px;
+            border: 1px solid rgba(127, 127, 127, .20);
+            border-radius: 11px;
+            background: rgba(127, 127, 127, .10);
+            color: inherit;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 600;
+        }
+
+        .admin-info-box {
+            margin-bottom: 20px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: rgba(127, 127, 127, .08);
+            border: 1px solid rgba(127, 127, 127, .14);
+        }
+
+        .admin-info-box strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-user-avatar {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: #ff6a00;
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .admin-user-info {
+            min-width: 0;
+        }
+
+        .admin-user-name {
+            font-weight: 700;
+        }
+
+        .admin-review-stars {
+            letter-spacing: 2px;
+        }
+
+        .admin-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(127, 127, 127, .14);
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+            opacity: .7;
+            font-size: 13px;
+        }
+
+        .admin-loading {
+            padding: 30px 10px;
+            text-align: center;
+            opacity: .6;
+        }
+
+        .admin-product-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 14px;
+            overflow: hidden;
+            background: rgba(127, 127, 127, .08);
+            margin-bottom: 16px;
+        }
+
+        .admin-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .admin-product-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            opacity: .5;
+        }
+
+        .admin-editor {
+            display: none;
+            margin-top: 24px;
+        }
+
+        .admin-preview-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-top: 10px;
+            background: rgba(127, 127, 127, .08);
+        }
+
+        .admin-preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+
+        /* =====================================================
+           CHAT
+        ===================================================== */
+
+        .admin-chat-layout {
+            display: grid;
+            grid-template-columns: 300px minmax(0, 1fr);
+            gap: 16px;
+            min-height: 600px;
+        }
+
+        .admin-chat-list {
+            border-radius: 18px;
+            border: 1px solid rgba(127, 127, 127, .18);
+            background: rgba(127, 127, 127, .06);
+            overflow: hidden;
+        }
+
+        .admin-chat-list-header {
+            padding: 18px;
+            border-bottom: 1px solid rgba(127, 127, 127, .14);
+        }
+
+        .admin-chat-list-items {
+            max-height: 530px;
+            overflow-y: auto;
+        }
+
+        .admin-chat-conversa {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border: 0;
+            border-bottom: 1px solid rgba(127, 127, 127, .10);
+            background: transparent;
+            color: inherit;
+            text-align: left;
+            cursor: pointer;
+            font: inherit;
+            box-sizing: border-box;
+        }
+
+        .admin-chat-conversa:hover {
+            background: rgba(127, 127, 127, .08);
+        }
+
+        .admin-chat-conversa.active {
+            background: rgba(255, 106, 0, .10);
+        }
+
+        .admin-chat-conversa-avatar {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            border-radius: 50%;
+            background: #ff6a00;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .admin-chat-conversa-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .admin-chat-conversa-name {
+            display: block;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .admin-chat-conversa-last {
+            display: block;
+            margin-top: 3px;
+            font-size: 12px;
+            opacity: .58;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .admin-chat-conversa-badge {
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 999px;
+            background: #ff6a00;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-chat-box {
+            min-width: 0;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 18px;
+            border: 1px solid rgba(127, 127, 127, .18);
+            background: rgba(127, 127, 127, .06);
+            overflow: hidden;
+        }
+
+        .admin-chat-box-header {
+            padding: 18px;
+            border-bottom: 1px solid rgba(127, 127, 127, .14);
+        }
+
+        .admin-chat-box-title {
+            font-weight: 800;
+        }
+
+        .admin-chat-box-subtitle {
+            margin-top: 4px;
+            font-size: 12px;
+            opacity: .58;
+        }
+
+        .admin-chat-messages {
+            flex: 1;
+            min-height: 0;
+            padding: 18px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .admin-chat-message {
+            max-width: 78%;
+            padding: 10px 13px;
+            border-radius: 14px;
+            font-size: 14px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .admin-chat-message.cliente {
+            align-self: flex-start;
+            background: rgba(127, 127, 127, .13);
+            border-bottom-left-radius: 5px;
+        }
+
+        .admin-chat-message.admin {
+            align-self: flex-end;
+            background: #ff6a00;
+            color: #ffffff;
+            border-bottom-right-radius: 5px;
+        }
+
+        .admin-chat-message-time {
+            display: block;
+            margin-top: 4px;
+            font-size: 10px;
+            opacity: .55;
+        }
+
+        .admin-chat-form {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            border-top: 1px solid rgba(127, 127, 127, .14);
+        }
+
+        .admin-chat-form input {
+            flex: 1;
+            min-width: 0;
+            height: 44px;
+            padding: 0 12px;
+            border-radius: 11px;
+            border: 1px solid rgba(127, 127, 127, .20);
+            background: rgba(127, 127, 127, .08);
+            color: inherit;
+            font: inherit;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .admin-chat-form button {
+            height: 44px;
+            padding: 0 16px;
+            border: 0;
+            border-radius: 11px;
+            background: #ff6a00;
+            color: #ffffff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .admin-chat-form button:disabled {
+            opacity: .6;
+            cursor: default;
+        }
+
+        .admin-chat-placeholder {
+            margin: auto;
+            padding: 30px;
+            text-align: center;
+            opacity: .55;
+        }
+
+
+        /* =====================================================
+           PRODUÇÃO
+        ===================================================== */
+
+        .admin-production-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(
+                        0,
+                        1fr
+                    )
+                );
+            gap: 16px;
+        }
+
+        .admin-production-column {
+            min-width: 0;
+            border-radius: 18px;
+            border: 1px solid rgba(127, 127, 127, .18);
+            background: rgba(127, 127, 127, .06);
+            overflow: hidden;
+        }
+
+        .admin-production-column-header {
+            padding: 16px;
+            border-bottom: 1px solid rgba(127, 127, 127, .14);
+        }
+
+        .admin-production-column-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-weight: 800;
+        }
+
+        .admin-production-column-count {
+            min-width: 24px;
+            height: 24px;
+            padding: 0 7px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(127, 127, 127, .12);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .admin-production-items {
+            min-height: 150px;
+            padding: 12px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .admin-production-card {
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(127, 127, 127, .14);
+            background: rgba(127, 127, 127, .07);
+        }
+
+        .admin-production-card-id {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 11px;
+            font-weight: 800;
+            opacity: .55;
+            letter-spacing: .06em;
+        }
+
+        .admin-production-card-name {
+            font-weight: 800;
+        }
+
+        .admin-production-card-info {
+            margin-top: 5px;
+            font-size: 12px;
+            opacity: .62;
+        }
+
+        .admin-production-card-total {
+            display: block;
+            margin-top: 10px;
+            font-weight: 800;
+        }
+
+        .admin-production-status {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 9px;
+            padding: 5px 8px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            background: rgba(255, 106, 0, .10);
+            color: #ff6a00;
+        }
+
+        .admin-production-actions {
+            display: flex;
+            gap: 7px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .admin-production-actions .admin-button {
+            width: 100%;
+        }
+
+        .admin-production-empty {
+            padding: 30px 15px;
+            text-align: center;
+            opacity: .48;
+            font-size: 13px;
+        }
+
+
+        @media (max-width: 1200px) {
+
+            .admin-production-grid {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(
+                            0,
+                            1fr
+                        )
+                    );
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-sidebar {
+                position: static;
+            }
+
+            .admin-nav {
+                display: grid;
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(
+                            0,
+                            1fr
+                        )
+                    );
+            }
+
+            .admin-chat-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-chat-list-items {
+                max-height: 300px;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .admin-page {
+                padding: 24px 14px;
+            }
+
+            .admin-nav {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-form-group.full {
+                grid-column: auto;
+            }
+
+            .admin-header-actions,
+            .admin-header-actions .admin-button {
+                width: 100%;
+            }
+
+            .admin-chat-form {
+                flex-direction: column;
+            }
+
+            .admin-chat-form button {
+                width: 100%;
+            }
+
+            .admin-production-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="admin-page">
+
+        <div class="admin-container">
+
+            <header class="admin-header">
+
+                <div class="admin-header-info">
+
+                    <span class="tag">
+                        GYAMAX ADMIN
+                    </span>
+
+                    <h1>
+                        Painel da GYAMAX
+                    </h1>
+
+                    <p>
+                        Gerencie clientes, pedidos, produtos,
+                        cupons, avaliações e produção.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-header-actions">
+
+                    <button
+                        type="button"
+                        class="admin-button admin-button-danger"
+                        id="adminLogoutButton"
+                    >
+                        Sair
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <div class="admin-layout">
+
+                <aside class="admin-sidebar">
+
+                    <div class="admin-sidebar-title">
+                        Gerenciamento
+                    </div>
+
+                    <nav class="admin-nav">
+
+                        <button
+                            type="button"
+                            class="admin-nav-button active"
+                            data-admin-section="dashboard"
+                        >
+                            <span class="admin-nav-icon">◈</span>
+                            <span>Visão geral</span>
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-nav-button"
+                            data-admin-section="pedidos"
+                        >
+                            <span class="admin-nav-icon">🛒</span>
+                            <span>Pedidos</span>
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-nav-button"
+                            data-admin-section="producao"
+                        >
+                            <span class="admin-nav-icon">🛠️</span>
+                            <span>Produção</span>
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-nav-button"
+                            data-admin-section="clientes"
+                        >
+                            <span class="admin-nav-icon">👤</span>
+                            <span>Clientes</span>
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-nav-button"
+                            data-admin-section="produtos"
+                        >
+                            <span class="admin-nav-icon">📦</span>
+                            <span>Produtos</span>
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-nav-button"
+                            data-admin-section="cupons"
+                        >
+                            <span class="admin-nav-icon">🏷</span>
+                            <span>Cupons</span>
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-nav-button"
+                            data-admin-section="avaliacoes"
+                        >
+                            <span class="admin-nav-icon">★</span>
+                            <span>Avaliações</span>
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="admin-nav-button"
+                            data-admin-section="chat"
+                        >
+                            <span class="admin-nav-icon">💬</span>
+                            <span>Chat</span>
+
+                            <span
+                                id="adminChatBadge"
+                                class="admin-chat-badge"
+                            >
+                                0
+                            </span>
+                        </button>
+
+                    </nav>
+
+                </aside>
+
+
+                <section class="admin-content">
+
+
+                    <!-- =================================================
+                         DASHBOARD
+                    ================================================== -->
+
+                    <section
+                        class="admin-section active"
+                        data-admin-content="dashboard"
+                    >
+
+                        <div class="admin-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Visão geral
+                                </h2>
+
+                                <p>
+                                    Resumo do sistema GYAMAX.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="admin-info-box">
+
+                            <strong>
+                                Acesso autorizado ✓
+                            </strong>
+
+                            <span id="adminWelcome">
+                                Verificando administrador...
+                            </span>
+
+                        </div>
+
+
+                        <div class="admin-grid">
+
+                            <article class="admin-card admin-stat">
+
+                                <span class="admin-stat-label">
+                                    Clientes
+                                </span>
+
+                                <strong
+                                    class="admin-stat-value"
+                                    id="statClientes"
+                                >
+                                    —
+                                </strong>
+
+                                <span class="admin-stat-description">
+                                    Contas cadastradas
+                                </span>
+
+                            </article>
+
+
+                            <article class="admin-card admin-stat">
+
+                                <span class="admin-stat-label">
+                                    Pedidos
+                                </span>
+
+                                <strong
+                                    class="admin-stat-value"
+                                    id="statPedidos"
+                                >
+                                    —
+                                </strong>
+
+                                <span class="admin-stat-description">
+                                    Pedidos registrados
+                                </span>
+
+                            </article>
+
+
+                            <article class="admin-card admin-stat">
+
+                                <span class="admin-stat-label">
+                                    Pendentes
+                                </span>
+
+                                <strong
+                                    class="admin-stat-value"
+                                    id="statPendentes"
+                                >
+                                    —
+                                </strong>
+
+                                <span class="admin-stat-description">
+                                    Aguardando pagamento
+                                </span>
+
+                            </article>
+
+
+                            <article class="admin-card admin-stat">
+
+                                <span class="admin-stat-label">
+                                    Avaliações
+                                </span>
+
+                                <strong
+                                    class="admin-stat-value"
+                                    id="statAvaliacoes"
+                                >
+                                    —
+                                </strong>
+
+                                <span class="admin-stat-description">
+                                    Avaliações recebidas
+                                </span>
+
+                            </article>
+
+                        </div>
+
+
+                        <div
+                            class="admin-card"
+                            style="margin-top: 20px;"
+                        >
+
+                            <h3>
+                                Últimos pedidos
+                            </h3>
+
+                            <p
+                                style="
+                                    opacity: .6;
+                                    margin-bottom: 18px;
+                                "
+                            >
+                                Os pedidos mais recentes aparecerão aqui.
+                            </p>
+
+
+                            <div
+                                id="dashboardPedidos"
+                                class="admin-table-wrapper"
+                            >
+
+                                <div class="admin-loading">
+                                    Carregando pedidos...
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         PEDIDOS
+                    ================================================== -->
+
+                    <section
+                        class="admin-section"
+                        data-admin-content="pedidos"
+                    >
+
+                        <div class="admin-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Pedidos
+                                </h2>
+
+                                <p>
+                                    Consulte os pedidos realizados pelos clientes.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="admin-button"
+                                id="refreshPedidos"
+                            >
+                                ↻ Atualizar
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="pedidosContent"
+                            class="admin-card"
+                        >
+
+                            <div class="admin-loading">
+                                Carregando pedidos...
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         PRODUÇÃO
+                    ================================================== -->
+
+                    <section
+                        class="admin-section"
+                        data-admin-content="producao"
+                    >
+
+                        <div class="admin-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Produção
+                                </h2>
+
+                                <p>
+                                    Acompanhe os pedidos pagos e avance cada etapa.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="admin-button"
+                                id="refreshProducao"
+                            >
+                                ↻ Atualizar
+                            </button>
+
+                        </div>
+
+
+                        <div class="admin-info-box">
+
+                            <strong>
+                                Fluxo de produção
+                            </strong>
+
+                            <span>
+                                Pedidos pagos aparecem em Aguardando produção.
+                            </span>
+
+                        </div>
+
+
+                        <div class="admin-production-grid">
+
+
+                            <div class="admin-production-column">
+
+                                <div class="admin-production-column-header">
+
+                                    <div class="admin-production-column-title">
+
+                                        <span>
+                                            Aguardando
+                                        </span>
+
+                                        <span
+                                            class="admin-production-column-count"
+                                            id="productionCountAguardando"
+                                        >
+                                            0
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="admin-production-items"
+                                    id="productionAguardando"
+                                >
+
+                                    <div class="admin-production-empty">
+                                        Carregando...
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="admin-production-column">
+
+                                <div class="admin-production-column-header">
+
+                                    <div class="admin-production-column-title">
+
+                                        <span>
+                                            Em produção
+                                        </span>
+
+                                        <span
+                                            class="admin-production-column-count"
+                                            id="productionCountProducao"
+                                        >
+                                            0
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="admin-production-items"
+                                    id="productionProducao"
+                                >
+
+                                    <div class="admin-production-empty">
+                                        Carregando...
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="admin-production-column">
+
+                                <div class="admin-production-column-header">
+
+                                    <div class="admin-production-column-title">
+
+                                        <span>
+                                            Pronto
+                                        </span>
+
+                                        <span
+                                            class="admin-production-column-count"
+                                            id="productionCountPronto"
+                                        >
+                                            0
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="admin-production-items"
+                                    id="productionPronto"
+                                >
+
+                                    <div class="admin-production-empty">
+                                        Carregando...
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="admin-production-column">
+
+                                <div class="admin-production-column-header">
+
+                                    <div class="admin-production-column-title">
+
+                                        <span>
+                                            Enviado
+                                        </span>
+
+                                        <span
+                                            class="admin-production-column-count"
+                                            id="productionCountEnviado"
+                                        >
+                                            0
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="admin-production-items"
+                                    id="productionEnviado"
+                                >
+
+                                    <div class="admin-production-empty">
+                                        Carregando...
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         CLIENTES
+                    ================================================== -->
+
+                    <section
+                        class="admin-section"
+                        data-admin-content="clientes"
+                    >
+
+                        <div class="admin-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Clientes
+                                </h2>
+
+                                <p>
+                                    Contas cadastradas no sistema.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="admin-button"
+                                id="refreshClientes"
+                            >
+                                ↻ Atualizar
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="clientesContent"
+                            class="admin-card"
+                        >
+
+                            <div class="admin-loading">
+                                Carregando clientes...
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         PRODUTOS
+                    ================================================== -->
+
+                    <section
+                        class="admin-section"
+                        data-admin-content="produtos"
+                    >
+
+                        <div class="admin-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Produtos
+                                </h2>
+
+                                <p>
+                                    Gerencie os produtos da loja GYAMAX.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="admin-button admin-button-primary"
+                                id="adminNewProductButton"
+                            >
+                                + Novo produto
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="produtosContent"
+                            class="admin-grid"
+                        >
+
+                            <div class="admin-loading">
+                                Carregando produtos...
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="produtoEditor"
+                            class="admin-card admin-editor"
+                        >
+
+                            <h3 id="produtoEditorTitulo">
+                                Novo produto
+                            </h3>
+
+
+                            <form
+                                id="produtoForm"
+                                style="margin-top: 20px;"
+                            >
+
+                                <input
+                                    type="hidden"
+                                    id="produtoId"
+                                >
+
+
+                                <div class="admin-form-grid">
+
+
+                                    <div class="admin-form-group">
+
+                                        <label for="produtoNome">
+                                            Nome do produto
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="produtoNome"
+                                            maxlength="150"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="admin-form-group">
+
+                                        <label for="produtoPreco">
+                                            Preço
+                                        </label>
+
+                                        <input
+                                            type="number"
+                                            id="produtoPreco"
+                                            min="0.01"
+                                            step="0.01"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="admin-form-group full">
+
+                                        <label for="produtoDescricao">
+                                            Descrição
+                                        </label>
+
+                                        <textarea
+                                            id="produtoDescricao"
+                                            maxlength="2000"
+                                        ></textarea>
+
+                                    </div>
+
+
+                                    <div class="admin-form-group full">
+
+                                        <label for="produtoFoto">
+                                            Foto do produto
+                                        </label>
+
+                                        <input
+                                            type="file"
+                                            id="produtoFoto"
+                                            accept="image/png,image/jpeg,image/webp,image/gif"
+                                        >
+
+                                        <small style="opacity: .55;">
+                                            Escolha uma imagem para o produto.
+                                        </small>
+
+
+                                        <div
+                                            id="produtoPreview"
+                                            class="admin-preview-image"
+                                            style="display: none;"
+                                        >
+
+                                            <img
+                                                id="produtoPreviewImg"
+                                                alt="Prévia do produto"
+                                            >
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="admin-form-group">
+
+                                        <label for="produtoAtivo">
+                                            Status
+                                        </label>
+
+                                        <select id="produtoAtivo">
+
+                                            <option value="1">
+                                                Ativo
+                                            </option>
+
+                                            <option value="0">
+                                                Inativo
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="admin-actions"
+                                    style="margin-top: 20px;"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="admin-button admin-button-primary"
+                                    >
+                                        Salvar produto
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        class="admin-button"
+                                        id="produtoCancelarButton"
+                                    >
+                                        Cancelar
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </section>
+                    <!-- =================================================
+                         CUPONS
+                    ================================================== -->
+
+                    <section
+                        class="admin-section"
+                        data-admin-content="cupons"
+                    >
+
+                        <div class="admin-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Cupons
+                                </h2>
+
+                                <p>
+                                    Crie e gerencie códigos promocionais.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="admin-button admin-button-primary"
+                                id="adminNewCouponButton"
+                            >
+                                + Novo cupom
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="cuponsContent"
+                            class="admin-card"
+                        >
+
+                            <div class="admin-loading">
+                                Carregando cupons...
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="cupomEditor"
+                            class="admin-card admin-editor"
+                        >
+
+                            <h3 id="cupomEditorTitulo">
+                                Novo cupom
+                            </h3>
+
+
+                            <form
+                                id="cupomForm"
+                                style="margin-top: 20px;"
+                            >
+
+                                <input
+                                    type="hidden"
+                                    id="cupomId"
+                                >
+
+
+                                <div class="admin-form-grid">
+
+
+                                    <div class="admin-form-group">
+
+                                        <label for="cupomCodigo">
+                                            Código
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="cupomCodigo"
+                                            maxlength="50"
+                                            placeholder="EXEMPLO10"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="admin-form-group">
+
+                                        <label for="cupomTipo">
+                                            Tipo
+                                        </label>
+
+                                        <select id="cupomTipo">
+
+                                            <option value="percentual">
+                                                Percentual
+                                            </option>
+
+                                            <option value="fixo">
+                                                Valor fixo
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="admin-form-group">
+
+                                        <label for="cupomValor">
+                                            Valor
+                                        </label>
+
+                                        <input
+                                            type="number"
+                                            id="cupomValor"
+                                            min="0.01"
+                                            step="0.01"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="admin-form-group">
+
+                                        <label for="cupomLimite">
+                                            Limite de usos
+                                        </label>
+
+                                        <input
+                                            type="number"
+                                            id="cupomLimite"
+                                            min="1"
+                                            step="1"
+                                            placeholder="Deixe vazio para ilimitado"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="admin-form-group">
+
+                                        <label for="cupomPrimeiraCompra">
+                                            Primeira compra
+                                        </label>
+
+                                        <select id="cupomPrimeiraCompra">
+
+                                            <option value="0">
+                                                Não
+                                            </option>
+
+                                            <option value="1">
+                                                Sim
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="admin-form-group">
+
+                                        <label for="cupomAtivo">
+                                            Status
+                                        </label>
+
+                                        <select id="cupomAtivo">
+
+                                            <option value="1">
+                                                Ativo
+                                            </option>
+
+                                            <option value="0">
+                                                Inativo
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    class="admin-actions"
+                                    style="margin-top: 20px;"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="admin-button admin-button-primary"
+                                    >
+                                        Salvar cupom
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        class="admin-button"
+                                        id="cupomCancelarButton"
+                                    >
+                                        Cancelar
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         AVALIAÇÕES
+                    ================================================== -->
+
+                    <section
+                        class="admin-section"
+                        data-admin-content="avaliacoes"
+                    >
+
+                        <div class="admin-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Avaliações
+                                </h2>
+
+                                <p>
+                                    Comentários enviados pelos clientes.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="admin-button"
+                                id="refreshAvaliacoes"
+                            >
+                                ↻ Atualizar
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="avaliacoesContent"
+                            class="admin-card"
+                        >
+
+                            <div class="admin-loading">
+                                Carregando avaliações...
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- =================================================
+                         CHAT
+                    ================================================== -->
+
+                    <section
+                        class="admin-section"
+                        data-admin-content="chat"
+                    >
+
+                        <div class="admin-section-header">
+
+                            <div>
+
+                                <h2>
+                                    Chat
+                                </h2>
+
+                                <p>
+                                    Converse diretamente com os clientes da GYAMAX.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="admin-button"
+                                id="refreshAdminChat"
+                            >
+                                ↻ Atualizar
+                            </button>
+
+                        </div>
+
+
+                        <div class="admin-chat-layout">
+
+
+                            <div class="admin-chat-list">
+
+                                <div class="admin-chat-list-header">
+
+                                    <strong>
+                                        Conversas
+                                    </strong>
+
+                                    <div
+                                        id="adminChatListStatus"
+                                        style="
+                                            margin-top: 4px;
+                                            font-size: 12px;
+                                            opacity: .55;
+                                        "
+                                    >
+                                        —
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    id="adminChatConversas"
+                                    class="admin-chat-list-items"
+                                >
+
+                                    <div class="admin-chat-placeholder">
+                                        Clique em Chat para carregar as conversas.
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="admin-chat-box">
+
+                                <div
+                                    id="adminChatBoxHeader"
+                                    class="admin-chat-box-header"
+                                >
+
+                                    <div class="admin-chat-box-title">
+                                        Selecione uma conversa
+                                    </div>
+
+                                    <div class="admin-chat-box-subtitle">
+                                        Escolha um cliente ao lado.
+                                    </div>
+
+                                </div>
+
+
+                                <div
+                                    id="adminChatMensagens"
+                                    class="admin-chat-messages"
+                                >
+
+                                    <div class="admin-chat-placeholder">
+                                        Nenhuma conversa selecionada.
+                                    </div>
+
+                                </div>
+
+
+                                <form
+                                    id="adminChatForm"
+                                    class="admin-chat-form"
+                                >
+
+                                    <input
+                                        type="text"
+                                        id="adminChatInput"
+                                        maxlength="2000"
+                                        placeholder="Digite uma resposta..."
+                                        autocomplete="off"
+                                        disabled
+                                    >
+
+
+                                    <button
+                                        type="submit"
+                                        id="adminChatEnviarButton"
+                                        disabled
+                                    >
+                                        Enviar
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </section>
+
+            </div>
+
+
+            <footer class="admin-footer">
+
+                <span>
+                    GYAMAX — Painel Administrativo
+                </span>
+
+                <span>
+                    Área exclusiva da empresa
+                </span>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        "use strict";
+
+
+        /* =====================================================
+           ESTADO
+        ===================================================== */
+
+        let administrador = null;
+
+        let adminChatConversaAtual = null;
+
+
+        /* =====================================================
+           HELPERS
+        ===================================================== */
+
+        function obterElemento(id) {
+
+            return document.getElementById(id);
+
+        }
+
+
+        function escaparHTML(valor) {
+
+            return String(valor ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        function formatarPreco(valor) {
+
+            return Number(valor || 0)
+                .toLocaleString(
+                    "pt-BR",
+                    {
+                        style: "currency",
+                        currency: "BRL"
+                    }
+                );
+
+        }
+
+
+        function formatarData(valor) {
+
+            if (!valor) {
+                return "—";
+            }
+
+            const data = new Date(valor);
+
+            if (Number.isNaN(data.getTime())) {
+                return String(valor);
+            }
+
+            return data.toLocaleString("pt-BR");
+
+        }
+
+
+        function converterArquivoBase64(arquivo) {
+
+            return new Promise(
+                (resolve, reject) => {
+
+                    const leitor = new FileReader();
+
+                    leitor.onload = () => {
+
+                        resolve(
+                            String(
+                                leitor.result || ""
+                            )
+                        );
+
+                    };
+
+                    leitor.onerror = reject;
+
+                    leitor.readAsDataURL(arquivo);
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           ADMIN
+        ===================================================== */
+
+        async function verificarAdministrador() {
+
+            try {
+
+                const resposta = await fetch(
+                    "/status-login",
+                    {
+                        method: "GET",
+                        credentials: "same-origin",
+                        cache: "no-store",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+
+                if (!resposta.ok) {
+
+                    window.location.href =
+                        "/login.html";
+
+                    return false;
+
+                }
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !dados?.logado ||
+                    !dados?.usuario
+                ) {
+
+                    window.location.href =
+                        "/login.html";
+
+                    return false;
+
+                }
+
+
+                if (
+                    Number(
+                        dados.usuario.admin
+                    ) !== 1
+                ) {
+
+                    document.body.innerHTML = `
+
+                        <main
+                            style="
+                                min-height: 100vh;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 30px;
+                            "
+                        >
+
+                            <section
+                                class="admin-card"
+                                style="
+                                    max-width: 620px;
+                                    width: 100%;
+                                    text-align: center;
+                                "
+                            >
+
+                                <span class="tag">
+                                    ACESSO NEGADO
+                                </span>
+
+                                <h1>
+                                    Sem permissão
+                                </h1>
+
+                                <p>
+                                    Esta área é exclusiva da administração da GYAMAX.
+                                </p>
+
+                                <a
+                                    href="/"
+                                    class="admin-button admin-button-primary"
+                                >
+                                    Voltar ao site
+                                </a>
+
+                            </section>
+
+                        </main>
+
+                    `;
+
+                    return false;
+
+                }
+
+
+                administrador =
+                    dados.usuario;
+
+
+                const welcome =
+                    obterElemento(
+                        "adminWelcome"
+                    );
+
+
+                if (welcome) {
+
+                    welcome.textContent =
+                        `Olá, ${
+                            administrador.nome ||
+                            "Administrador"
+                        }. Sua conta possui acesso administrativo completo.`;
+
+                }
+
+
+                return true;
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro verificando administrador:",
+                    erro
+                );
+
+
+                window.location.href =
+                    "/login.html";
+
+
+                return false;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           NAVEGAÇÃO
+        ===================================================== */
+
+        function configurarNavegacao() {
+
+            const botoes =
+                document.querySelectorAll(
+                    ".admin-nav-button[data-admin-section]"
+                );
+
+
+            const secoes =
+                document.querySelectorAll(
+                    ".admin-section[data-admin-content]"
+                );
+
+
+            botoes.forEach(
+                botao => {
+
+                    botao.addEventListener(
+                        "click",
+                        async () => {
+
+                            const secao =
+                                botao.getAttribute(
+                                    "data-admin-section"
+                                );
+
+
+                            if (!secao) {
+                                return;
+                            }
+
+
+                            botoes.forEach(
+                                outro => {
+
+                                    outro.classList.toggle(
+                                        "active",
+                                        outro === botao
+                                    );
+
+                                }
+                            );
+
+
+                            secoes.forEach(
+                                conteudo => {
+
+                                    conteudo.classList.toggle(
+                                        "active",
+                                        conteudo.getAttribute(
+                                            "data-admin-content"
+                                        ) === secao
+                                    );
+
+                                }
+                            );
+
+
+                            if (secao === "dashboard") {
+                                await carregarDashboard();
+                            }
+
+                            else if (secao === "pedidos") {
+                                await carregarPedidos();
+                            }
+
+                            else if (secao === "producao") {
+                                await carregarProducao();
+                            }
+
+                            else if (secao === "clientes") {
+                                await carregarClientes();
+                            }
+
+                            else if (secao === "produtos") {
+                                await carregarProdutos();
+                            }
+
+                            else if (secao === "cupons") {
+                                await carregarCupons();
+                            }
+
+                            else if (secao === "avaliacoes") {
+                                await carregarAvaliacoes();
+                            }
+
+                            else if (secao === "chat") {
+                                await carregarAdminChat();
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           ESTATÍSTICAS
+        ===================================================== */
+
+        function atualizarEstatisticasPedidos(pedidos) {
+
+            const total =
+                obterElemento(
+                    "statPedidos"
+                );
+
+
+            const pendentes =
+                obterElemento(
+                    "statPendentes"
+                );
+
+
+            if (total) {
+
+                total.textContent =
+                    pedidos.length;
+
+            }
+
+
+            if (pendentes) {
+
+                const quantidade =
+                    pedidos.filter(
+                        pedido =>
+                            String(
+                                pedido.status || ""
+                            )
+                                .trim()
+                                .toLowerCase() === "pending"
+                    ).length;
+
+
+                pendentes.textContent =
+                    quantidade;
+
+            }
+
+        }
+
+
+        function atualizarEstatisticaAvaliacoes(
+            quantidade
+        ) {
+
+            const elemento =
+                obterElemento(
+                    "statAvaliacoes"
+                );
+
+
+            if (elemento) {
+
+                elemento.textContent =
+                    quantidade;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PEDIDOS
+        ===================================================== */
+
+        async function carregarPedidos() {
+
+            const elemento =
+                obterElemento(
+                    "pedidosContent"
+                );
+
+
+            if (!elemento) {
+                return;
+            }
+
+
+            elemento.innerHTML = `
+                <div class="admin-loading">
+                    Carregando pedidos...
+                </div>
+            `;
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/admin/pedidos",
+                        {
+                            method: "GET",
+                            credentials: "same-origin",
+                            cache: "no-store",
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Não foi possível carregar os pedidos."
+                    );
+
+                }
+
+
+                const pedidos =
+                    Array.isArray(
+                        dados.pedidos
+                    )
+                        ? dados.pedidos
+                        : [];
+
+
+                atualizarEstatisticasPedidos(
+                    pedidos
+                );
+
+
+                if (!pedidos.length) {
+
+                    elemento.innerHTML = `
+                        <div class="admin-empty">
+                            Nenhum pedido encontrado.
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                elemento.innerHTML = `
+
+                    <div class="admin-table-wrapper">
+
+                        <table class="admin-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>E-mail</th>
+                                    <th>Total</th>
+                                    <th>Método</th>
+                                    <th>Status</th>
+                                    <th>Data</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                ${
+                                    pedidos
+                                        .map(
+                                            pedido => `
+
+                                                <tr>
+
+                                                    <td>
+                                                        #${escaparHTML(
+                                                            pedido.id
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            pedido.usuarioNome ||
+                                                            "Cliente"
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            pedido.usuarioEmail ||
+                                                            ""
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        ${formatarPreco(
+                                                            pedido.total
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            pedido.metodoPagamento ||
+                                                            "—"
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="admin-status">
+                                                            ${escaparHTML(
+                                                                pedido.status ||
+                                                                "—"
+                                                            )}
+                                                        </span>
+                                                    </td>
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            formatarData(
+                                                                pedido.criadoEm
+                                                            )
+                                                        )}
+                                                    </td>
+
+                                                </tr>
+
+                                            `
+                                        )
+                                        .join("")
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                `;
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar pedidos:",
+                    erro
+                );
+
+
+                elemento.innerHTML = `
+                    <div class="admin-empty">
+
+                        <strong>
+                            Não foi possível carregar os pedidos.
+                        </strong>
+
+                        <p>
+                            ${escaparHTML(
+                                erro.message
+                            )}
+                        </p>
+
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PRODUÇÃO
+        ===================================================== */
+
+        function normalizarStatusProducao(
+            pedido
+        ) {
+
+            const status =
+                String(
+                    pedido?.statusProducao ??
+                    pedido?.status_producao ??
+                    "aguardando_producao"
+                )
+                    .trim()
+                    .toLowerCase();
+
+
+            const equivalencias = {
+
+                aguardando_producao:
+                    "aguardando",
+
+                aguardando:
+                    "aguardando",
+
+                em_producao:
+                    "producao",
+
+                producao:
+                    "producao",
+
+                pronto:
+                    "pronto",
+
+                enviado:
+                    "enviado",
+
+                concluido:
+                    "enviado"
+
+            };
+
+
+            return (
+                equivalencias[status] ||
+                "aguardando"
+            );
+
+        }
+
+
+        function pedidoPodeEntrarNaProducao(
+            pedido
+        ) {
+
+            const status =
+                String(
+                    pedido?.statusPagamento ??
+                    pedido?.status ??
+                    ""
+                )
+                    .trim()
+                    .toLowerCase();
+
+
+            return [
+                "approved",
+                "paid",
+                "completed",
+                "delivered"
+            ].includes(
+                status
+            );
+
+        }
+
+
+        function nomeStatusProducao(
+            status
+        ) {
+
+            const nomes = {
+
+                aguardando:
+                    "Aguardando produção",
+
+                producao:
+                    "Em produção",
+
+                pronto:
+                    "Pronto",
+
+                enviado:
+                    "Enviado"
+
+            };
+
+
+            return (
+                nomes[status] ||
+                "Aguardando produção"
+            );
+
+        }
+
+
+        function proximoStatusVisual(
+            status
+        ) {
+
+            const ordem = [
+                "aguardando",
+                "producao",
+                "pronto",
+                "enviado"
+            ];
+
+
+            const indice =
+                ordem.indexOf(
+                    status
+                );
+
+
+            if (
+                indice < 0 ||
+                indice >= ordem.length - 1
+            ) {
+
+                return null;
+
+            }
+
+
+            return ordem[
+                indice + 1
+            ];
+
+        }
+
+
+        function renderizarCardProducao(
+            pedido
+        ) {
+
+            const status =
+                normalizarStatusProducao(
+                    pedido
+                );
+
+
+            const proximo =
+                proximoStatusVisual(
+                    status
+                );
+
+
+            const nomesBotoes = {
+
+                producao:
+                    "Iniciar produção",
+
+                pronto:
+                    "Marcar como pronto",
+
+                enviado:
+                    "Marcar como enviado"
+
+            };
+
+
+            return `
+
+                <article
+                    class="admin-production-card"
+                >
+
+                    <span
+                        class="admin-production-card-id"
+                    >
+                        PEDIDO #${escaparHTML(
+                            pedido.id
+                        )}
+                    </span>
+
+
+                    <div
+                        class="admin-production-card-name"
+                    >
+                        ${escaparHTML(
+                            pedido.usuarioNome ||
+                            "Cliente"
+                        )}
+                    </div>
+
+
+                    <div
+                        class="admin-production-card-info"
+                    >
+                        ${escaparHTML(
+                            pedido.usuarioEmail ||
+                            ""
+                        )}
+                    </div>
+
+
+                    <strong
+                        class="admin-production-card-total"
+                    >
+                        ${formatarPreco(
+                            pedido.total
+                        )}
+                    </strong>
+
+
+                    <span
+                        class="admin-production-status"
+                    >
+                        ${escaparHTML(
+                            nomeStatusProducao(
+                                status
+                            )
+                        )}
+                    </span>
+
+
+                    ${
+                        proximo
+                            ? `
+
+                                <div
+                                    class="admin-production-actions"
+                                >
+
+                                    <button
+                                        type="button"
+                                        class="admin-button admin-button-primary"
+                                        data-avancar-producao="${escaparHTML(
+                                            pedido.id
+                                        )}"
+                                    >
+                                        ${escaparHTML(
+                                            nomesBotoes[
+                                                proximo
+                                            ]
+                                        )}
+                                    </button>
+
+                                </div>
+
+                            `
+                            : ""
+                    }
+
+                </article>
+
+            `;
+
+        }
+
+
+        function renderizarColunaProducao(
+            status,
+            pedidos,
+            elementoId,
+            contadorId
+        ) {
+
+            const elemento =
+                obterElemento(
+                    elementoId
+                );
+
+
+            const contador =
+                obterElemento(
+                    contadorId
+                );
+
+
+            if (contador) {
+
+                contador.textContent =
+                    pedidos.length;
+
+            }
+
+
+            if (!elemento) {
+                return;
+            }
+
+
+            if (!pedidos.length) {
+
+                elemento.innerHTML = `
+                    <div class="admin-production-empty">
+                        Nenhum pedido aqui.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            elemento.innerHTML =
+                pedidos
+                    .map(
+                        pedido =>
+                            renderizarCardProducao(
+                                pedido
+                            )
+                    )
+                    .join("");
+
+
+            elemento
+                .querySelectorAll(
+                    "[data-avancar-producao]"
+                )
+                .forEach(
+                    botao => {
+
+                        botao.addEventListener(
+                            "click",
+                            async () => {
+
+                                const id =
+                                    Number(
+                                        botao.getAttribute(
+                                            "data-avancar-producao"
+                                        )
+                                    );
+
+
+                                if (!id) {
+                                    return;
+                                }
+
+
+                                await alterarStatusProducao(
+                                    id
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+        async function carregarProducao() {
+
+            const colunas = [
+
+                "productionAguardando",
+                "productionProducao",
+                "productionPronto",
+                "productionEnviado"
+
+            ];
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/admin/producao",
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "same-origin",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Não foi possível carregar a produção."
+                    );
+
+                }
+
+
+                const pedidos =
+                    Array.isArray(
+                        dados.pedidos
+                    )
+                        ? dados.pedidos
+                        : [];
+
+
+                const grupos = {
+
+                    aguardando:
+                        [],
+
+                    producao:
+                        [],
+
+                    pronto:
+                        [],
+
+                    enviado:
+                        []
+
+                };
+
+
+                pedidos.forEach(
+                    pedido => {
+
+                        const status =
+                            normalizarStatusProducao(
+                                pedido
+                            );
+
+
+                        if (
+                            grupos[status]
+                        ) {
+
+                            grupos[status].push(
+                                pedido
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                renderizarColunaProducao(
+                    "aguardando",
+                    grupos.aguardando,
+                    "productionAguardando",
+                    "productionCountAguardando"
+                );
+
+
+                renderizarColunaProducao(
+                    "producao",
+                    grupos.producao,
+                    "productionProducao",
+                    "productionCountProducao"
+                );
+
+
+                renderizarColunaProducao(
+                    "pronto",
+                    grupos.pronto,
+                    "productionPronto",
+                    "productionCountPronto"
+                );
+
+
+                renderizarColunaProducao(
+                    "enviado",
+                    grupos.enviado,
+                    "productionEnviado",
+                    "productionCountEnviado"
+                );
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar produção:",
+                    erro
+                );
+
+
+                colunas.forEach(
+                    id => {
+
+                        const elemento =
+                            obterElemento(
+                                id
+                            );
+
+
+                        if (elemento) {
+
+                            elemento.innerHTML = `
+
+                                <div
+                                    class="admin-production-empty"
+                                >
+                                    ${escaparHTML(
+                                        erro.message
+                                    )}
+                                </div>
+
+                            `;
+
+                        }
+
+                    }
+                );
+
+            }
+
+        }
+
+
+        async function alterarStatusProducao(
+            id
+        ) {
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        `/api/admin/producao/${encodeURIComponent(
+                            id
+                        )}/avancar`,
+                        {
+                            method:
+                                "POST",
+
+                            credentials:
+                                "same-origin",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const resultado =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !resultado?.sucesso
+                ) {
+
+                    throw new Error(
+                        resultado?.mensagem ||
+                        resultado?.erro ||
+                        "Não foi possível avançar a produção."
+                    );
+
+                }
+
+
+                await carregarProducao();
+
+
+                await carregarPedidos();
+
+
+                alert(
+                    "Pedido avançado com sucesso."
+                );
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro avançando produção:",
+                    erro
+                );
+
+
+                alert(
+                    erro.message
+                );
+
+            }
+
+        }
+        /* =====================================================
+           CLIENTES
+        ===================================================== */
+
+        async function carregarClientes() {
+
+            const elemento =
+                obterElemento(
+                    "clientesContent"
+                );
+
+
+            if (!elemento) {
+                return;
+            }
+
+
+            elemento.innerHTML = `
+                <div class="admin-loading">
+                    Carregando clientes...
+                </div>
+            `;
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/admin/clientes",
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "same-origin",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Não foi possível carregar os clientes."
+                    );
+
+                }
+
+
+                const clientes =
+                    Array.isArray(
+                        dados.clientes
+                    )
+                        ? dados.clientes
+                        : [];
+
+
+                const estatistica =
+                    obterElemento(
+                        "statClientes"
+                    );
+
+
+                if (estatistica) {
+
+                    estatistica.textContent =
+                        clientes.length;
+
+                }
+
+
+                if (!clientes.length) {
+
+                    elemento.innerHTML = `
+                        <div class="admin-empty">
+                            Nenhum cliente encontrado.
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                elemento.innerHTML = `
+
+                    <div class="admin-table-wrapper">
+
+                        <table class="admin-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>E-mail</th>
+                                    <th>Pedidos</th>
+                                    <th>Admin</th>
+                                    <th>Cadastro</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                ${
+                                    clientes
+                                        .map(
+                                            cliente => `
+
+                                                <tr>
+
+                                                    <td>
+
+                                                        <div class="admin-user">
+
+                                                            <span class="admin-user-avatar">
+
+                                                                ${escaparHTML(
+                                                                    String(
+                                                                        cliente.nome ||
+                                                                        "U"
+                                                                    )
+                                                                        .charAt(0)
+                                                                        .toUpperCase()
+                                                                )}
+
+                                                            </span>
+
+
+                                                            <div class="admin-user-info">
+
+                                                                <div class="admin-user-name">
+
+                                                                    ${escaparHTML(
+                                                                        cliente.nome ||
+                                                                        "Usuário"
+                                                                    )}
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </td>
+
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            cliente.email ||
+                                                            ""
+                                                        )}
+                                                    </td>
+
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            cliente.totalPedidos ??
+                                                            0
+                                                        )}
+                                                    </td>
+
+
+                                                    <td>
+
+                                                        <span class="admin-status">
+
+                                                            ${
+                                                                Number(
+                                                                    cliente.admin
+                                                                ) === 1
+                                                                    ? "Administrador"
+                                                                    : "Cliente"
+                                                            }
+
+                                                        </span>
+
+                                                    </td>
+
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            formatarData(
+                                                                cliente.criadoEm
+                                                            )
+                                                        )}
+                                                    </td>
+
+                                                </tr>
+
+                                            `
+                                        )
+                                        .join("")
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                `;
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar clientes:",
+                    erro
+                );
+
+
+                elemento.innerHTML = `
+                    <div class="admin-empty">
+
+                        <strong>
+                            Não foi possível carregar os clientes.
+                        </strong>
+
+                        <p>
+                            ${escaparHTML(
+                                erro.message
+                            )}
+                        </p>
+
+                    </div>
+                `;
+
+            }
+
+        }
+/* =====================================================
+           PRODUTOS
+        ===================================================== */
+
+        async function carregarProdutos() {
+
+            const elemento =
+                obterElemento(
+                    "produtosContent"
+                );
+
+
+            if (!elemento) {
+                return;
+            }
+
+
+            elemento.innerHTML = `
+                <div class="admin-loading">
+                    Carregando produtos...
+                </div>
+            `;
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/admin/produtos",
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "same-origin",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Não foi possível carregar os produtos."
+                    );
+
+                }
+
+
+                const produtos =
+                    Array.isArray(
+                        dados.produtos
+                    )
+                        ? dados.produtos
+                        : [];
+
+
+                if (!produtos.length) {
+
+                    elemento.innerHTML = `
+                        <div class="admin-empty">
+                            Nenhum produto cadastrado.
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                elemento.innerHTML =
+                    produtos
+                        .map(
+                            produto => `
+
+                                <article class="admin-card">
+
+                                    <div class="admin-product-image">
+
+                                        ${
+                                            produto.foto
+                                                ? `
+                                                    <img
+                                                        src="${escaparHTML(
+                                                            produto.foto
+                                                        )}"
+                                                        alt="${escaparHTML(
+                                                            produto.nome
+                                                        )}"
+                                                    >
+                                                `
+                                                : `
+                                                    <div class="admin-product-placeholder">
+                                                        GYAMAX
+                                                    </div>
+                                                `
+                                        }
+
+                                    </div>
+
+
+                                    <span class="admin-stat-label">
+                                        PRODUTO #${escaparHTML(
+                                            produto.id
+                                        )}
+                                    </span>
+
+
+                                    <h3>
+                                        ${escaparHTML(
+                                            produto.nome
+                                        )}
+                                    </h3>
+
+
+                                    <p>
+                                        ${escaparHTML(
+                                            produto.descricao ||
+                                            ""
+                                        )}
+                                    </p>
+
+
+                                    <strong>
+                                        ${formatarPreco(
+                                            produto.preco
+                                        )}
+                                    </strong>
+
+
+                                    <div style="margin-top: 12px;">
+
+                                        <span class="admin-status">
+
+                                            ${
+                                                Number(
+                                                    produto.ativo
+                                                ) === 1
+                                                    ? "Ativo"
+                                                    : "Inativo"
+                                            }
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <div
+                                        class="admin-actions"
+                                        style="margin-top: 16px;"
+                                    >
+
+                                        <button
+                                            type="button"
+                                            class="admin-button"
+                                            data-editar-produto="${produto.id}"
+                                        >
+                                            Editar
+                                        </button>
+
+
+                                        <button
+                                            type="button"
+                                            class="${
+                                                Number(
+                                                    produto.ativo
+                                                ) === 1
+                                                    ? "admin-button admin-button-danger"
+                                                    : "admin-button"
+                                            }"
+                                            data-status-produto="${produto.id}"
+                                            data-novo-status="${
+                                                Number(
+                                                    produto.ativo
+                                                ) === 1
+                                                    ? 0
+                                                    : 1
+                                            }"
+                                        >
+
+                                            ${
+                                                Number(
+                                                    produto.ativo
+                                                ) === 1
+                                                    ? "Desativar"
+                                                    : "Ativar"
+                                            }
+
+                                        </button>
+
+                                    </div>
+
+                                </article>
+
+                            `
+                        )
+                        .join("");
+
+
+                elemento
+                    .querySelectorAll(
+                        "[data-editar-produto]"
+                    )
+                    .forEach(
+                        botao => {
+
+                            botao.addEventListener(
+                                "click",
+                                () => {
+
+                                    const id =
+                                        Number(
+                                            botao.getAttribute(
+                                                "data-editar-produto"
+                                            )
+                                        );
+
+
+                                    const produto =
+                                        produtos.find(
+                                            item =>
+                                                Number(
+                                                    item.id
+                                                ) === id
+                                        );
+
+
+                                    if (produto) {
+
+                                        abrirEditorProduto(
+                                            produto
+                                        );
+
+                                    }
+
+                                }
+                            );
+
+                        }
+                    );
+
+
+                elemento
+                    .querySelectorAll(
+                        "[data-status-produto]"
+                    )
+                    .forEach(
+                        botao => {
+
+                            botao.addEventListener(
+                                "click",
+                                async () => {
+
+                                    const id =
+                                        Number(
+                                            botao.getAttribute(
+                                                "data-status-produto"
+                                            )
+                                        );
+
+
+                                    const ativo =
+                                        Number(
+                                            botao.getAttribute(
+                                                "data-novo-status"
+                                            )
+                                        );
+
+
+                                    await alterarStatusProduto(
+                                        id,
+                                        ativo
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar produtos:",
+                    erro
+                );
+
+
+                elemento.innerHTML = `
+                    <div class="admin-empty">
+
+                        <strong>
+                            Não foi possível carregar os produtos.
+                        </strong>
+
+                        <p>
+                            ${escaparHTML(
+                                erro.message
+                            )}
+                        </p>
+
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        function abrirEditorProduto(
+            produto = null
+        ) {
+
+            const editor =
+                obterElemento(
+                    "produtoEditor"
+                );
+
+
+            if (!editor) {
+                return;
+            }
+
+
+            obterElemento(
+                "produtoEditorTitulo"
+            ).textContent =
+                produto
+                    ? "Editar produto"
+                    : "Novo produto";
+
+
+            obterElemento(
+                "produtoId"
+            ).value =
+                produto?.id || "";
+
+
+            obterElemento(
+                "produtoNome"
+            ).value =
+                produto?.nome || "";
+
+
+            obterElemento(
+                "produtoDescricao"
+            ).value =
+                produto?.descricao || "";
+
+
+            obterElemento(
+                "produtoPreco"
+            ).value =
+                produto
+                    ? Number(
+                        produto.preco
+                    ).toFixed(2)
+                    : "";
+
+
+            obterElemento(
+                "produtoAtivo"
+            ).value =
+                Number(
+                    produto?.ativo ?? 1
+                ) === 1
+                    ? "1"
+                    : "0";
+
+
+            const preview =
+                obterElemento(
+                    "produtoPreview"
+                );
+
+
+            const previewImg =
+                obterElemento(
+                    "produtoPreviewImg"
+                );
+
+
+            if (
+                produto?.foto &&
+                preview &&
+                previewImg
+            ) {
+
+                previewImg.src =
+                    produto.foto;
+
+                preview.style.display =
+                    "block";
+
+            } else if (preview) {
+
+                preview.style.display =
+                    "none";
+
+            }
+
+
+            const foto =
+                obterElemento(
+                    "produtoFoto"
+                );
+
+
+            if (foto) {
+                foto.value = "";
+            }
+
+
+            editor.style.display =
+                "block";
+
+
+            editor.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+
+        function fecharEditorProduto() {
+
+            const editor =
+                obterElemento(
+                    "produtoEditor"
+                );
+
+
+            if (editor) {
+
+                editor.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        async function salvarProdutoAdmin(
+            evento
+        ) {
+
+            evento.preventDefault();
+
+
+            const id =
+                Number(
+                    obterElemento(
+                        "produtoId"
+                    )?.value
+                ) || 0;
+
+
+            const nome =
+                String(
+                    obterElemento(
+                        "produtoNome"
+                    )?.value ||
+                    ""
+                ).trim();
+
+
+            const descricao =
+                String(
+                    obterElemento(
+                        "produtoDescricao"
+                    )?.value ||
+                    ""
+                ).trim();
+
+
+            const preco =
+                Number(
+                    obterElemento(
+                        "produtoPreco"
+                    )?.value
+                );
+
+
+            const ativo =
+                obterElemento(
+                    "produtoAtivo"
+                )?.value ||
+                "1";
+
+
+            const arquivo =
+                obterElemento(
+                    "produtoFoto"
+                )?.files?.[0] ||
+                null;
+
+
+            if (!nome) {
+
+                alert(
+                    "Digite o nome do produto."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !Number.isFinite(
+                    preco
+                ) ||
+                preco <= 0
+            ) {
+
+                alert(
+                    "Digite um preço válido."
+                );
+
+                return;
+
+            }
+
+
+            const dados =
+                new URLSearchParams();
+
+
+            dados.set(
+                "nome",
+                nome
+            );
+
+
+            dados.set(
+                "descricao",
+                descricao
+            );
+
+
+            dados.set(
+                "preco",
+                String(
+                    preco
+                )
+            );
+
+
+            dados.set(
+                "ativo",
+                ativo
+            );
+
+
+            if (arquivo) {
+
+                if (
+                    arquivo.size >
+                    6 * 1024 * 1024
+                ) {
+
+                    alert(
+                        "A imagem deve ter no máximo 6 MB."
+                    );
+
+                    return;
+
+                }
+
+
+                dados.set(
+                    "foto",
+                    await converterArquivoBase64(
+                        arquivo
+                    )
+                );
+
+            }
+
+
+            try {
+
+                const url =
+                    id > 0
+                        ? `/api/admin/produtos/${id}`
+                        : "/api/admin/produtos";
+
+
+                const resposta =
+                    await fetch(
+                        url,
+                        {
+                            method: "POST",
+                            credentials: "same-origin",
+                            headers: {
+                                "Content-Type":
+                                    "application/x-www-form-urlencoded",
+                                "Accept":
+                                    "application/json"
+                            },
+                            body: dados
+                        }
+                    );
+
+
+                const resultado =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !resultado?.sucesso
+                ) {
+
+                    throw new Error(
+                        resultado?.mensagem ||
+                        resultado?.erro ||
+                        "Não foi possível salvar o produto."
+                    );
+
+                }
+
+
+                fecharEditorProduto();
+
+                await carregarProdutos();
+
+
+                alert(
+                    "Produto salvo com sucesso."
+                );
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro salvando produto:",
+                    erro
+                );
+
+
+                alert(
+                    erro.message
+                );
+
+            }
+
+        }
+
+
+        async function alterarStatusProduto(
+            id,
+            ativo
+        ) {
+
+            try {
+
+                const dados =
+                    new URLSearchParams();
+
+
+                dados.set(
+                    "ativo",
+                    String(
+                        ativo
+                    )
+                );
+
+
+                const resposta =
+                    await fetch(
+                        `/api/admin/produtos/${id}`,
+                        {
+                            method: "POST",
+                            credentials: "same-origin",
+                            headers: {
+                                "Content-Type":
+                                    "application/x-www-form-urlencoded",
+                                "Accept":
+                                    "application/json"
+                            },
+                            body: dados
+                        }
+                    );
+
+
+                const resultado =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !resultado?.sucesso
+                ) {
+
+                    throw new Error(
+                        resultado?.mensagem ||
+                        resultado?.erro ||
+                        "Não foi possível alterar o produto."
+                    );
+
+                }
+
+
+                await carregarProdutos();
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro alterando produto:",
+                    erro
+                );
+
+
+                alert(
+                    erro.message
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CUPONS
+        ===================================================== */
+
+        async function carregarCupons() {
+
+            const elemento =
+                obterElemento(
+                    "cuponsContent"
+                );
+
+
+            if (!elemento) {
+                return;
+            }
+
+
+            elemento.innerHTML = `
+                <div class="admin-loading">
+                    Carregando cupons...
+                </div>
+            `;
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/admin/cupons",
+                        {
+                            method: "GET",
+                            credentials: "same-origin",
+                            cache: "no-store",
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Não foi possível carregar os cupons."
+                    );
+
+                }
+
+
+                const cupons =
+                    Array.isArray(
+                        dados.cupons
+                    )
+                        ? dados.cupons
+                        : [];
+
+
+                if (!cupons.length) {
+
+                    elemento.innerHTML = `
+                        <div class="admin-empty">
+                            Nenhum cupom cadastrado.
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                elemento.innerHTML = `
+
+                    <div class="admin-table-wrapper">
+
+                        <table class="admin-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Tipo</th>
+                                    <th>Valor</th>
+                                    <th>Usos</th>
+                                    <th>Limite</th>
+                                    <th>Primeira compra</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                ${
+                                    cupons
+                                        .map(
+                                            cupom => `
+
+                                                <tr>
+
+                                                    <td>
+                                                        <strong>
+                                                            ${escaparHTML(
+                                                                cupom.codigo
+                                                            )}
+                                                        </strong>
+                                                    </td>
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            cupom.tipo
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        ${
+                                                            cupom.tipo === "percentual"
+                                                                ? `${escaparHTML(
+                                                                    cupom.valor
+                                                                )}%`
+                                                                : formatarPreco(
+                                                                    cupom.valor
+                                                                )
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            cupom.usos ?? 0
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        ${escaparHTML(
+                                                            cupom.limiteUsos ?? "∞"
+                                                        )}
+                                                    </td>
+
+                                                    <td>
+                                                        ${
+                                                            cupom.primeiraCompra
+                                                                ? "Sim"
+                                                                : "Não"
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="admin-status">
+                                                            ${
+                                                                Number(
+                                                                    cupom.ativo
+                                                                ) === 1
+                                                                    ? "Ativo"
+                                                                    : "Inativo"
+                                                            }
+                                                        </span>
+                                                    </td>
+
+                                                    <td>
+
+                                                        <div class="admin-actions">
+
+                                                            <button
+                                                                type="button"
+                                                                class="admin-button"
+                                                                data-editar-cupom="${cupom.id}"
+                                                            >
+                                                                Editar
+                                                            </button>
+
+
+                                                            <button
+                                                                type="button"
+                                                                class="${
+                                                                    Number(
+                                                                        cupom.ativo
+                                                                    ) === 1
+                                                                        ? "admin-button admin-button-danger"
+                                                                        : "admin-button"
+                                                                }"
+                                                                data-status-cupom="${cupom.id}"
+                                                                data-novo-status="${
+                                                                    Number(
+                                                                        cupom.ativo
+                                                                    ) === 1
+                                                                        ? 0
+                                                                        : 1
+                                                                }"
+                                                            >
+                                                                ${
+                                                                    Number(
+                                                                        cupom.ativo
+                                                                    ) === 1
+                                                                        ? "Desativar"
+                                                                        : "Ativar"
+                                                                }
+                                                            </button>
+
+                                                        </div>
+
+                                                    </td>
+
+                                                </tr>
+
+                                            `
+                                        )
+                                        .join("")
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                `;
+
+
+                elemento
+                    .querySelectorAll(
+                        "[data-editar-cupom]"
+                    )
+                    .forEach(
+                        botao => {
+
+                            botao.addEventListener(
+                                "click",
+                                () => {
+
+                                    const id =
+                                        Number(
+                                            botao.getAttribute(
+                                                "data-editar-cupom"
+                                            )
+                                        );
+
+
+                                    const cupom =
+                                        cupons.find(
+                                            item =>
+                                                Number(
+                                                    item.id
+                                                ) === id
+                                        );
+
+
+                                    if (cupom) {
+
+                                        abrirEditorCupom(
+                                            cupom
+                                        );
+
+                                    }
+
+                                }
+                            );
+
+                        }
+                    );
+
+
+                elemento
+                    .querySelectorAll(
+                        "[data-status-cupom]"
+                    )
+                    .forEach(
+                        botao => {
+
+                            botao.addEventListener(
+                                "click",
+                                async () => {
+
+                                    const id =
+                                        Number(
+                                            botao.getAttribute(
+                                                "data-status-cupom"
+                                            )
+                                        );
+
+
+                                    const ativo =
+                                        Number(
+                                            botao.getAttribute(
+                                                "data-novo-status"
+                                            )
+                                        );
+
+
+                                    await alterarStatusCupom(
+                                        id,
+                                        ativo
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar cupons:",
+                    erro
+                );
+
+
+                elemento.innerHTML = `
+                    <div class="admin-empty">
+
+                        <strong>
+                            Não foi possível carregar os cupons.
+                        </strong>
+
+                        <p>
+                            ${escaparHTML(
+                                erro.message
+                            )}
+                        </p>
+
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        function abrirEditorCupom(
+            cupom = null
+        ) {
+
+            const editor =
+                obterElemento(
+                    "cupomEditor"
+                );
+
+
+            if (!editor) {
+                return;
+            }
+
+
+            obterElemento(
+                "cupomEditorTitulo"
+            ).textContent =
+                cupom
+                    ? "Editar cupom"
+                    : "Novo cupom";
+
+
+            obterElemento(
+                "cupomId"
+            ).value =
+                cupom?.id || "";
+
+
+            obterElemento(
+                "cupomCodigo"
+            ).value =
+                cupom?.codigo || "";
+
+
+            obterElemento(
+                "cupomTipo"
+            ).value =
+                cupom?.tipo || "percentual";
+
+
+            obterElemento(
+                "cupomValor"
+            ).value =
+                cupom
+                    ? Number(
+                        cupom.valor
+                    ).toFixed(2)
+                    : "";
+
+
+            obterElemento(
+                "cupomLimite"
+            ).value =
+                cupom?.limiteUsos !== null &&
+                cupom?.limiteUsos !== undefined
+                    ? cupom.limiteUsos
+                    : "";
+
+
+            obterElemento(
+                "cupomPrimeiraCompra"
+            ).value =
+                cupom?.primeiraCompra
+                    ? "1"
+                    : "0";
+
+
+            obterElemento(
+                "cupomAtivo"
+            ).value =
+                Number(
+                    cupom?.ativo ?? 1
+                ) === 1
+                    ? "1"
+                    : "0";
+
+
+            obterElemento(
+                "cupomCodigo"
+            ).disabled =
+                Boolean(
+                    cupom
+                );
+
+
+            editor.style.display =
+                "block";
+
+
+            editor.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+
+        function fecharEditorCupom() {
+
+            const editor =
+                obterElemento(
+                    "cupomEditor"
+                );
+
+
+            if (editor) {
+
+                editor.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        async function salvarCupomAdmin(
+            evento
+        ) {
+
+            evento.preventDefault();
+
+
+            const id =
+                Number(
+                    obterElemento(
+                        "cupomId"
+                    )?.value
+                ) || 0;
+
+
+            const codigo =
+                String(
+                    obterElemento(
+                        "cupomCodigo"
+                    )?.value ||
+                    ""
+                )
+                    .trim()
+                    .toUpperCase();
+
+
+            const tipo =
+                obterElemento(
+                    "cupomTipo"
+                )?.value ||
+                "percentual";
+
+
+            const valor =
+                Number(
+                    obterElemento(
+                        "cupomValor"
+                    )?.value
+                );
+
+
+            const limiteTexto =
+                String(
+                    obterElemento(
+                        "cupomLimite"
+                    )?.value ||
+                    ""
+                ).trim();
+
+
+            const limite =
+                limiteTexto
+                    ? Number(
+                        limiteTexto
+                    )
+                    : null;
+
+
+            const primeiraCompra =
+                obterElemento(
+                    "cupomPrimeiraCompra"
+                )?.value ||
+                "0";
+
+
+            const ativo =
+                obterElemento(
+                    "cupomAtivo"
+                )?.value ||
+                "1";
+
+
+            if (!codigo) {
+
+                alert(
+                    "Digite o código do cupom."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !Number.isFinite(
+                    valor
+                ) ||
+                valor <= 0
+            ) {
+
+                alert(
+                    "Digite um valor válido para o cupom."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                tipo === "percentual" &&
+                valor > 100
+            ) {
+
+                alert(
+                    "O desconto percentual não pode passar de 100%."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                limite !== null &&
+                (
+                    !Number.isInteger(
+                        limite
+                    ) ||
+                    limite <= 0
+                )
+            ) {
+
+                alert(
+                    "O limite de usos precisa ser um número inteiro maior que zero."
+                );
+
+                return;
+
+            }
+
+
+            const dados =
+                new URLSearchParams();
+
+
+            dados.set(
+                "codigo",
+                codigo
+            );
+
+
+            dados.set(
+                "tipo",
+                tipo
+            );
+
+
+            dados.set(
+                "valor",
+                String(
+                    valor
+                )
+            );
+
+
+            if (limite !== null) {
+
+                dados.set(
+                    "limiteUsos",
+                    String(
+                        limite
+                    )
+                );
+
+            }
+
+
+            dados.set(
+                "primeiraCompra",
+                primeiraCompra
+            );
+
+
+            dados.set(
+                "ativo",
+                ativo
+            );
+
+
+            try {
+
+                const url =
+                    id > 0
+                        ? `/api/admin/cupons/${id}`
+                        : "/api/admin/cupons";
+
+
+                const resposta =
+                    await fetch(
+                        url,
+                        {
+                            method:
+                                "POST",
+
+                            credentials:
+                                "same-origin",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/x-www-form-urlencoded",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body:
+                                id > 0
+                                    ? new URLSearchParams({
+                                        ativo
+                                    })
+                                    : dados
+                        }
+                    );
+
+
+                const resultado =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !resultado?.sucesso
+                ) {
+
+                    throw new Error(
+                        resultado?.mensagem ||
+                        resultado?.erro ||
+                        "Não foi possível salvar o cupom."
+                    );
+
+                }
+
+
+                fecharEditorCupom();
+
+
+                await carregarCupons();
+
+
+                alert(
+                    id > 0
+                        ? "Cupom atualizado com sucesso."
+                        : "Cupom criado com sucesso."
+                );
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro salvando cupom:",
+                    erro
+                );
+
+
+                alert(
+                    erro.message
+                );
+
+            }
+
+        }
+
+
+        async function alterarStatusCupom(
+            id,
+            ativo
+        ) {
+
+            try {
+
+                const dados =
+                    new URLSearchParams();
+
+
+                dados.set(
+                    "ativo",
+                    String(
+                        ativo
+                    )
+                );
+
+
+                const resposta =
+                    await fetch(
+                        `/api/admin/cupons/${id}`,
+                        {
+                            method:
+                                "POST",
+
+                            credentials:
+                                "same-origin",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/x-www-form-urlencoded",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body:
+                                dados
+                        }
+                    );
+
+
+                const resultado =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !resultado?.sucesso
+                ) {
+
+                    throw new Error(
+                        resultado?.mensagem ||
+                        resultado?.erro ||
+                        "Não foi possível alterar o cupom."
+                    );
+
+                }
+
+
+                await carregarCupons();
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro alterando cupom:",
+                    erro
+                );
+
+
+                alert(
+                    erro.message
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           AVALIAÇÕES
+        ===================================================== */
+
+        async function carregarAvaliacoes() {
+
+            const elemento =
+                obterElemento(
+                    "avaliacoesContent"
+                );
+
+
+            if (!elemento) {
+                return;
+            }
+
+
+            elemento.innerHTML = `
+                <div class="admin-loading">
+                    Carregando avaliações...
+                </div>
+            `;
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/avaliacoes",
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "same-origin",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Não foi possível carregar as avaliações."
+                    );
+
+                }
+
+
+                const avaliacoes =
+                    Array.isArray(
+                        dados.avaliacoes
+                    )
+                        ? dados.avaliacoes
+                        : [];
+
+
+                atualizarEstatisticaAvaliacoes(
+                    avaliacoes.length
+                );
+
+
+                if (!avaliacoes.length) {
+
+                    elemento.innerHTML = `
+                        <div class="admin-empty">
+                            Nenhuma avaliação encontrada.
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                elemento.innerHTML = `
+
+                    <div
+                        style="
+                            display: grid;
+                            gap: 14px;
+                        "
+                    >
+
+                        ${
+                            avaliacoes
+                                .map(
+                                    avaliacao => {
+
+                                        const media =
+                                            (
+                                                Number(
+                                                    avaliacao.experiencia
+                                                ) +
+                                                Number(
+                                                    avaliacao.atendimento
+                                                ) +
+                                                Number(
+                                                    avaliacao.qualidade
+                                                ) +
+                                                Number(
+                                                    avaliacao.entrega
+                                                ) +
+                                                Number(
+                                                    avaliacao.geral
+                                                )
+                                            ) / 5;
+
+
+                                        const estrelas =
+                                            Math.max(
+                                                0,
+                                                Math.min(
+                                                    5,
+                                                    Math.round(
+                                                        media
+                                                    )
+                                                )
+                                            );
+
+
+                                        return `
+
+                                            <article
+                                                class="admin-card"
+                                            >
+
+                                                <strong>
+                                                    ${escaparHTML(
+                                                        avaliacao.nome ||
+                                                        "Cliente"
+                                                    )}
+                                                </strong>
+
+
+                                                <div
+                                                    class="admin-review-stars"
+                                                    style="
+                                                        margin-top: 6px;
+                                                    "
+                                                >
+                                                    ${"★".repeat(
+                                                        estrelas
+                                                    )}
+                                                    ${"☆".repeat(
+                                                        5 - estrelas
+                                                    )}
+                                                </div>
+
+
+                                                <span
+                                                    style="
+                                                        display: block;
+                                                        margin-top: 8px;
+                                                        font-size: 12px;
+                                                        opacity: .55;
+                                                    "
+                                                >
+                                                    ${escaparHTML(
+                                                        formatarData(
+                                                            avaliacao.criadoEm
+                                                        )
+                                                    )}
+                                                </span>
+
+
+                                                <p
+                                                    style="
+                                                        margin: 14px 0 0;
+                                                        line-height: 1.7;
+                                                    "
+                                                >
+                                                    ${escaparHTML(
+                                                        avaliacao.comentario ||
+                                                        ""
+                                                    )}
+                                                </p>
+
+                                            </article>
+
+                                        `;
+
+                                    }
+                                )
+                                .join("")
+                        }
+
+                    </div>
+
+                `;
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar avaliações:",
+                    erro
+                );
+
+
+                elemento.innerHTML = `
+                    <div class="admin-empty">
+
+                        <strong>
+                            Não foi possível carregar as avaliações.
+                        </strong>
+
+                        <p>
+                            ${escaparHTML(
+                                erro.message
+                            )}
+                        </p>
+
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           DASHBOARD
+        ===================================================== */
+
+        async function carregarDashboard() {
+
+            const elemento =
+                obterElemento(
+                    "dashboardPedidos"
+                );
+
+
+            if (!elemento) {
+                return;
+            }
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/admin/pedidos",
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "same-origin",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Erro ao carregar dashboard."
+                    );
+
+                }
+
+
+                const pedidos =
+                    Array.isArray(
+                        dados.pedidos
+                    )
+                        ? dados.pedidos
+                        : [];
+
+
+                atualizarEstatisticasPedidos(
+                    pedidos
+                );
+
+
+                const recentes =
+                    pedidos.slice(
+                        0,
+                        5
+                    );
+
+
+                if (!recentes.length) {
+
+                    elemento.innerHTML = `
+                        <div class="admin-empty">
+                            Nenhum pedido encontrado.
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                elemento.innerHTML = `
+
+                    <table class="admin-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Cliente</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Data</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            ${
+                                recentes
+                                    .map(
+                                        pedido => `
+
+                                            <tr>
+
+                                                <td>
+                                                    #${escaparHTML(
+                                                        pedido.id
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${escaparHTML(
+                                                        pedido.usuarioNome ||
+                                                        "Cliente"
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${formatarPreco(
+                                                        pedido.total
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    <span class="admin-status">
+                                                        ${escaparHTML(
+                                                            pedido.status ||
+                                                            "—"
+                                                        )}
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    ${escaparHTML(
+                                                        formatarData(
+                                                            pedido.criadoEm
+                                                        )
+                                                    )}
+                                                </td>
+
+                                            </tr>
+
+                                        `
+                                    )
+                                    .join("")
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                `;
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro dashboard:",
+                    erro
+                );
+
+
+                elemento.innerHTML = `
+                    <div class="admin-empty">
+                        Não foi possível carregar os pedidos administrativos.
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CHAT
+        ===================================================== */
+
+        function extrairConversas(dados) {
+
+            if (
+                Array.isArray(
+                    dados?.conversas
+                )
+            ) {
+
+                return dados.conversas;
+
+            }
+
+
+            return [];
+
+        }
+
+
+        function extrairMensagens(dados) {
+
+            if (
+                Array.isArray(
+                    dados?.mensagens
+                )
+            ) {
+
+                return dados.mensagens;
+
+            }
+
+
+            return [];
+
+        }
+
+
+        function obterNomeConversa(
+            conversa
+        ) {
+
+            return (
+                conversa?.usuarioNome ||
+                conversa?.usuario_nome ||
+                conversa?.nome ||
+                "Cliente"
+            );
+
+        }
+
+
+        function obterEmailConversa(
+            conversa
+        ) {
+
+            return (
+                conversa?.usuarioEmail ||
+                conversa?.usuario_email ||
+                conversa?.email ||
+                ""
+            );
+
+        }
+
+
+        function obterNaoLidas(
+            conversa
+        ) {
+
+            return Number(
+                conversa?.naoLidas ??
+                conversa?.nao_lidas ??
+                0
+            ) || 0;
+
+        }
+
+
+        function atualizarBadgeChatAdmin(
+            conversas
+        ) {
+
+            const badge =
+                obterElemento(
+                    "adminChatBadge"
+                );
+
+
+            if (!badge) {
+                return;
+            }
+
+
+            const total =
+                conversas.reduce(
+                    (
+                        soma,
+                        conversa
+                    ) =>
+                        soma +
+                        obterNaoLidas(
+                            conversa
+                        ),
+                    0
+                );
+
+
+            if (total > 0) {
+
+                badge.textContent =
+                    total > 99
+                        ? "99+"
+                        : String(total);
+
+                badge.style.display =
+                    "inline-flex";
+
+            } else {
+
+                badge.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        async function carregarAdminChat() {
+
+            const lista =
+                obterElemento(
+                    "adminChatConversas"
+                );
+
+
+            const status =
+                obterElemento(
+                    "adminChatListStatus"
+                );
+
+
+            if (!lista) {
+                return;
+            }
+
+
+            lista.innerHTML = `
+                <div class="admin-chat-placeholder">
+                    Carregando conversas...
+                </div>
+            `;
+
+
+            if (status) {
+
+                status.textContent =
+                    "Carregando...";
+
+            }
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/admin/chat/conversas",
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "same-origin",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Não foi possível carregar as conversas."
+                    );
+
+                }
+
+
+                const conversas =
+                    extrairConversas(
+                        dados
+                    );
+
+
+                atualizarBadgeChatAdmin(
+                    conversas
+                );
+
+
+                if (status) {
+
+                    status.textContent =
+                        conversas.length === 1
+                            ? "1 conversa"
+                            : `${conversas.length} conversas`;
+
+                }
+
+
+                if (!conversas.length) {
+
+                    lista.innerHTML = `
+                        <div class="admin-chat-placeholder">
+                            Nenhuma conversa encontrada.
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                lista.innerHTML =
+                    conversas
+                        .map(
+                            conversa => {
+
+                                const id =
+                                    Number(
+                                        conversa?.id
+                                    );
+
+
+                                const nome =
+                                    obterNomeConversa(
+                                        conversa
+                                    );
+
+
+                                const inicial =
+                                    nome
+                                        .charAt(0)
+                                        .toUpperCase();
+
+
+                                const naoLidas =
+                                    obterNaoLidas(
+                                        conversa
+                                    );
+
+
+                                return `
+
+                                    <button
+                                        type="button"
+                                        class="
+                                            admin-chat-conversa
+                                            ${
+                                                Number(
+                                                    adminChatConversaAtual
+                                                ) === id
+                                                    ? "active"
+                                                    : ""
+                                            }
+                                        "
+                                        data-admin-chat-conversa="${id}"
+                                    >
+
+                                        <span class="admin-chat-conversa-avatar">
+                                            ${escaparHTML(
+                                                inicial
+                                            )}
+                                        </span>
+
+
+                                        <span class="admin-chat-conversa-info">
+
+                                            <span class="admin-chat-conversa-name">
+                                                ${escaparHTML(
+                                                    nome
+                                                )}
+                                            </span>
+
+
+                                            <span class="admin-chat-conversa-last">
+                                                ${escaparHTML(
+                                                    conversa?.ultimaMensagem ||
+                                                    "Nenhuma mensagem"
+                                                )}
+                                            </span>
+
+                                        </span>
+
+
+                                        ${
+                                            naoLidas > 0
+                                                ? `
+                                                    <span class="admin-chat-conversa-badge">
+                                                        ${escaparHTML(
+                                                            naoLidas
+                                                        )}
+                                                    </span>
+                                                `
+                                                : ""
+                                        }
+
+                                    </button>
+
+                                `;
+
+                            }
+                        )
+                        .join("");
+
+
+                lista
+                    .querySelectorAll(
+                        "[data-admin-chat-conversa]"
+                    )
+                    .forEach(
+                        botao => {
+
+                            botao.addEventListener(
+                                "click",
+                                async () => {
+
+                                    const id =
+                                        Number(
+                                            botao.getAttribute(
+                                                "data-admin-chat-conversa"
+                                            )
+                                        );
+
+
+                                    if (!id) {
+                                        return;
+                                    }
+
+
+                                    await abrirAdminChatConversa(
+                                        id
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro no chat administrativo:",
+                    erro
+                );
+
+
+                lista.innerHTML = `
+                    <div class="admin-chat-placeholder">
+
+                        <strong>
+                            Não foi possível carregar as conversas.
+                        </strong>
+
+                        <p>
+                            ${escaparHTML(
+                                erro.message
+                            )}
+                        </p>
+
+                    </div>
+                `;
+
+
+                if (status) {
+
+                    status.textContent =
+                        "Erro ao carregar";
+
+                }
+
+            }
+
+        }
+
+
+        async function abrirAdminChatConversa(
+            id
+        ) {
+
+            adminChatConversaAtual =
+                Number(
+                    id
+                );
+
+
+            const mensagens =
+                obterElemento(
+                    "adminChatMensagens"
+                );
+
+
+            const header =
+                obterElemento(
+                    "adminChatBoxHeader"
+                );
+
+
+            const input =
+                obterElemento(
+                    "adminChatInput"
+                );
+
+
+            const enviar =
+                obterElemento(
+                    "adminChatEnviarButton"
+                );
+
+
+            if (!mensagens) {
+                return;
+            }
+
+
+            mensagens.innerHTML = `
+                <div class="admin-chat-placeholder">
+                    Carregando mensagens...
+                </div>
+            `;
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        `/api/admin/chat/conversas/${encodeURIComponent(
+                            id
+                        )}`,
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "same-origin",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Não foi possível abrir a conversa."
+                    );
+
+                }
+
+
+                const conversa =
+                    dados?.conversa ||
+                    {};
+
+
+                const lista =
+                    extrairMensagens(
+                        dados
+                    );
+
+
+                const nome =
+                    obterNomeConversa(
+                        conversa
+                    );
+
+
+                const email =
+                    obterEmailConversa(
+                        conversa
+                    );
+
+
+                if (header) {
+
+                    header.innerHTML = `
+
+                        <div class="admin-chat-box-title">
+                            ${escaparHTML(
+                                nome
+                            )}
+                        </div>
+
+                        <div class="admin-chat-box-subtitle">
+                            ${escaparHTML(
+                                email
+                            )}
+                        </div>
+
+                    `;
+
+                }
+
+
+                if (!lista.length) {
+
+                    mensagens.innerHTML = `
+                        <div class="admin-chat-placeholder">
+                            Nenhuma mensagem nesta conversa.
+                        </div>
+                    `;
+
+                } else {
+
+                    mensagens.innerHTML =
+                        lista
+                            .map(
+                                item => {
+
+                                    const tipo =
+                                        String(
+                                            item?.remetenteTipo ??
+                                            item?.remetente_tipo ??
+                                            ""
+                                        ).toLowerCase() ===
+                                        "admin"
+                                            ? "admin"
+                                            : "cliente";
+
+
+                                    const texto =
+                                        item?.mensagem ??
+                                        item?.message ??
+                                        "";
+
+
+                                    const data =
+                                        new Date(
+                                            item?.criadaEm ??
+                                            item?.criada_em ??
+                                            ""
+                                        );
+
+
+                                    const horario =
+                                        Number.isNaN(
+                                            data.getTime()
+                                        )
+                                            ? ""
+                                            : data.toLocaleTimeString(
+                                                "pt-BR",
+                                                {
+                                                    hour:
+                                                        "2-digit",
+
+                                                    minute:
+                                                        "2-digit"
+                                                }
+                                            );
+
+
+                                    return `
+
+                                        <div
+                                            class="admin-chat-message ${tipo}"
+                                        >
+
+                                            ${escaparHTML(
+                                                texto
+                                            )}
+
+                                            <span class="admin-chat-message-time">
+                                                ${escaparHTML(
+                                                    horario
+                                                )}
+                                            </span>
+
+                                        </div>
+
+                                    `;
+
+                                }
+                            )
+                            .join("");
+
+                }
+
+
+                mensagens.scrollTop =
+                    mensagens.scrollHeight;
+
+
+                if (input) {
+
+                    input.disabled =
+                        false;
+
+                    input.focus();
+
+                }
+
+
+                if (enviar) {
+
+                    enviar.disabled =
+                        false;
+
+                }
+
+
+                document
+                    .querySelectorAll(
+                        "[data-admin-chat-conversa]"
+                    )
+                    .forEach(
+                        botao => {
+
+                            botao.classList.toggle(
+                                "active",
+                                Number(
+                                    botao.getAttribute(
+                                        "data-admin-chat-conversa"
+                                    )
+                                ) ===
+                                Number(
+                                    id
+                                )
+                            );
+
+                        }
+                    );
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao abrir conversa:",
+                    erro
+                );
+
+
+                mensagens.innerHTML = `
+                    <div class="admin-chat-placeholder">
+                        ${escaparHTML(
+                            erro.message
+                        )}
+                    </div>
+                `;
+
+
+                if (input) {
+
+                    input.disabled =
+                        true;
+
+                }
+
+
+                if (enviar) {
+
+                    enviar.disabled =
+                        true;
+
+                }
+
+            }
+
+        }
+
+
+        async function enviarAdminChatMensagem(
+            evento
+        ) {
+
+            evento.preventDefault();
+
+
+            if (!adminChatConversaAtual) {
+                return;
+            }
+
+
+            const input =
+                obterElemento(
+                    "adminChatInput"
+                );
+
+
+            const enviar =
+                obterElemento(
+                    "adminChatEnviarButton"
+                );
+
+
+            if (!input) {
+                return;
+            }
+
+
+            const texto =
+                String(
+                    input.value ||
+                    ""
+                ).trim();
+
+
+            if (!texto) {
+                return;
+            }
+
+
+            input.disabled =
+                true;
+
+
+            if (enviar) {
+
+                enviar.disabled =
+                    true;
+
+            }
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        `/api/admin/chat/conversas/${encodeURIComponent(
+                            adminChatConversaAtual
+                        )}/mensagem`,
+                        {
+                            method:
+                                "POST",
+
+                            credentials:
+                                "same-origin",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    mensagem:
+                                        texto
+                                })
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        dados?.erro ||
+                        "Não foi possível enviar a resposta."
+                    );
+
+                }
+
+
+                input.value =
+                    "";
+
+
+                await abrirAdminChatConversa(
+                    adminChatConversaAtual
+                );
+
+
+                await carregarAdminChat();
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao responder chat:",
+                    erro
+                );
+
+
+                alert(
+                    erro.message
+                );
+
+
+                input.disabled =
+                    false;
+
+
+                if (enviar) {
+
+                    enviar.disabled =
+                        false;
+
+                }
+
+            }
+
+        }
+
+
+        /* =====================================================
+           BOTÕES
+        ===================================================== */
+
+        function configurarBotoes() {
+
+            const logout =
+                obterElemento(
+                    "adminLogoutButton"
+                );
+
+
+            if (logout) {
+
+                logout.addEventListener(
+                    "click",
+                    async () => {
+
+                        logout.disabled =
+                            true;
+
+
+                        try {
+
+                            await fetch(
+                                "/logout",
+                                {
+                                    method:
+                                        "POST",
+
+                                    credentials:
+                                        "same-origin",
+
+                                    headers: {
+                                        "Accept":
+                                            "application/json"
+                                    }
+                                }
+                            );
+
+                        } catch (erro) {
+
+                            console.error(
+                                "Erro no logout:",
+                                erro
+                            );
+
+                        }
+
+
+                        window.location.href =
+                            "/login.html";
+
+                    }
+                );
+
+            }
+
+
+            const atualizarPedidos =
+                obterElemento(
+                    "refreshPedidos"
+                );
+
+
+            if (atualizarPedidos) {
+
+                atualizarPedidos.addEventListener(
+                    "click",
+                    carregarPedidos
+                );
+
+            }
+
+
+            const atualizarProducao =
+                obterElemento(
+                    "refreshProducao"
+                );
+
+
+            if (atualizarProducao) {
+
+                atualizarProducao.addEventListener(
+                    "click",
+                    carregarProducao
+                );
+
+            }
+
+
+            const atualizarClientes =
+                obterElemento(
+                    "refreshClientes"
+                );
+
+
+            if (atualizarClientes) {
+
+                atualizarClientes.addEventListener(
+                    "click",
+                    carregarClientes
+                );
+
+            }
+
+
+            const atualizarAvaliacoes =
+                obterElemento(
+                    "refreshAvaliacoes"
+                );
+
+
+            if (atualizarAvaliacoes) {
+
+                atualizarAvaliacoes.addEventListener(
+                    "click",
+                    carregarAvaliacoes
+                );
+
+            }
+
+
+            const atualizarChat =
+                obterElemento(
+                    "refreshAdminChat"
+                );
+
+
+            if (atualizarChat) {
+
+                atualizarChat.addEventListener(
+                    "click",
+                    carregarAdminChat
+                );
+
+            }
+
+
+            const novoProduto =
+                obterElemento(
+                    "adminNewProductButton"
+                );
+
+
+            if (novoProduto) {
+
+                novoProduto.addEventListener(
+                    "click",
+                    () => {
+
+                        abrirEditorProduto();
+
+                    }
+                );
+
+            }
+
+
+            const cancelarProduto =
+                obterElemento(
+                    "produtoCancelarButton"
+                );
+
+
+            if (cancelarProduto) {
+
+                cancelarProduto.addEventListener(
+                    "click",
+                    fecharEditorProduto
+                );
+
+            }
+
+
+            const produtoForm =
+                obterElemento(
+                    "produtoForm"
+                );
+
+
+            if (produtoForm) {
+
+                produtoForm.addEventListener(
+                    "submit",
+                    salvarProdutoAdmin
+                );
+
+            }
+
+
+            const produtoFoto =
+                obterElemento(
+                    "produtoFoto"
+                );
+
+
+            if (produtoFoto) {
+
+                produtoFoto.addEventListener(
+                    "change",
+                    async () => {
+
+                        const arquivo =
+                            produtoFoto.files?.[0];
+
+
+                        const preview =
+                            obterElemento(
+                                "produtoPreview"
+                            );
+
+
+                        const previewImg =
+                            obterElemento(
+                                "produtoPreviewImg"
+                            );
+
+
+                        if (
+                            !arquivo ||
+                            !preview ||
+                            !previewImg
+                        ) {
+
+                            if (preview) {
+
+                                preview.style.display =
+                                    "none";
+
+                            }
+
+                            return;
+
+                        }
+
+
+                        if (
+                            arquivo.size >
+                            6 * 1024 * 1024
+                        ) {
+
+                            alert(
+                                "A imagem deve ter no máximo 6 MB."
+                            );
+
+
+                            produtoFoto.value =
+                                "";
+
+
+                            preview.style.display =
+                                "none";
+
+
+                            return;
+
+                        }
+
+
+                        try {
+
+                            previewImg.src =
+                                await converterArquivoBase64(
+                                    arquivo
+                                );
+
+
+                            preview.style.display =
+                                "block";
+
+                        } catch (erro) {
+
+                            console.error(
+                                "Erro na prévia:",
+                                erro
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            const novoCupom =
+                obterElemento(
+                    "adminNewCouponButton"
+                );
+
+
+            if (novoCupom) {
+
+                novoCupom.addEventListener(
+                    "click",
+                    () => {
+
+                        abrirEditorCupom();
+
+                    }
+                );
+
+            }
+
+
+            const cancelarCupom =
+                obterElemento(
+                    "cupomCancelarButton"
+                );
+
+
+            if (cancelarCupom) {
+
+                cancelarCupom.addEventListener(
+                    "click",
+                    fecharEditorCupom
+                );
+
+            }
+
+
+            const cupomForm =
+                obterElemento(
+                    "cupomForm"
+                );
+
+
+            if (cupomForm) {
+
+                cupomForm.addEventListener(
+                    "submit",
+                    salvarCupomAdmin
+                );
+
+            }
+
+
+            const cupomTipo =
+                obterElemento(
+                    "cupomTipo"
+                );
+
+
+            if (cupomTipo) {
+
+                cupomTipo.addEventListener(
+                    "change",
+                    () => {
+
+                        const valor =
+                            obterElemento(
+                                "cupomValor"
+                            );
+
+
+                        if (!valor) {
+                            return;
+                        }
+
+
+                        if (
+                            cupomTipo.value ===
+                            "percentual"
+                        ) {
+
+                            valor.max =
+                                "100";
+
+                            valor.placeholder =
+                                "Ex.: 10";
+
+                        } else {
+
+                            valor.removeAttribute(
+                                "max"
+                            );
+
+                            valor.placeholder =
+                                "Ex.: 10.00";
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            const chatForm =
+                obterElemento(
+                    "adminChatForm"
+                );
+
+
+            if (chatForm) {
+
+                chatForm.addEventListener(
+                    "submit",
+                    enviarAdminChatMensagem
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           INICIALIZAÇÃO
+        ===================================================== */
+
+        async function iniciarAdmin() {
+
+            const autorizado =
+                await verificarAdministrador();
+
+
+            if (!autorizado) {
+                return;
+            }
+
+
+            configurarNavegacao();
+
+            configurarBotoes();
+
+
+            await carregarClientes();
+
+            await carregarProdutos();
+
+            await carregarCupons();
+
+            await carregarAvaliacoes();
+
+            await carregarDashboard();
+
+        }
+
+
+        iniciarAdmin();
+
+    </script>
+
+</body>
+
+</html>

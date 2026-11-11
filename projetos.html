@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Projetos | GYAMAX</title>
+
+<meta
+    name="description"
+    content="Portfólio de projetos desenvolvidos pela GYAMAX."
+>
+
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+
+<style>
+
+    /* =====================================================
+       TOPO DA PÁGINA
+    ===================================================== */
+
+    .page-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 20px;
+
+        width: 100%;
+
+        margin-top: 35px;
+        margin-bottom: 18px;
+    }
+
+
+    /* =====================================================
+       BOTÃO VOLTAR AO INÍCIO
+    ===================================================== */
+
+    .back-home-page {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 8px;
+
+        padding: 10px 16px;
+
+        border:
+            1px solid rgba(255, 255, 255, 0.12);
+
+        border-radius: 12px;
+
+        background:
+            rgba(20, 20, 20, 0.85);
+
+        backdrop-filter:
+            blur(10px);
+
+        -webkit-backdrop-filter:
+            blur(10px);
+
+        color:
+            inherit;
+
+        text-decoration:
+            none;
+
+        font-size:
+            14px;
+
+        font-weight:
+            600;
+
+        white-space:
+            nowrap;
+
+        transition:
+            transform 0.2s ease,
+            background 0.2s ease,
+            border-color 0.2s ease;
+    }
+
+
+    .back-home-page:hover {
+
+        transform:
+            translateY(-2px);
+
+        background:
+            rgba(255, 255, 255, 0.08);
+
+        border-color:
+            rgba(255, 255, 255, 0.22);
+    }
+
+
+    /* =====================================================
+       RESPONSIVO
+    ===================================================== */
+
+    @media (max-width: 700px) {
+
+        .page-top-row {
+
+            gap:
+                12px;
+
+            margin-top:
+                25px;
+        }
+
+
+        .back-home-page {
+
+            padding:
+                9px 14px;
+
+            font-size:
+                13px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+
+<div class="container nav">
+
+
+    <a
+        href="index.html"
+        class="logo"
+    >
+
+        <img
+            src="img/GYAMAX.png"
+            alt="GYAMAX"
+        >
+
+    </a>
+
+
+    <nav class="menu">
+
+        <a
+            href="index.html#inicio"
+            data-i18n="nav.home"
+        >
+            Início
+        </a>
+
+
+        <a
+            href="index.html#servicos"
+            data-i18n="nav.services"
+        >
+            Serviços
+        </a>
+
+
+        <a
+            href="index.html#processo"
+            data-i18n="nav.process"
+        >
+            Como funciona
+        </a>
+
+
+        <a
+            href="projetos.html"
+            data-i18n="nav.projects"
+        >
+            Projetos
+        </a>
+
+
+        <a
+            href="index.html#sobre"
+            data-i18n="nav.about"
+        >
+            Sobre
+        </a>
+
+    </nav>
+
+
+    <div id="accountArea"></div>
+
+
+    <a
+        href="index.html#orcamento"
+        class="btn btn-small"
+        data-i18n="quote.request"
+    >
+        Solicitar orçamento
+    </a>
+
+
+    <button
+        class="menu-mobile"
+        id="menuMobile"
+        type="button"
+        aria-label="Menu"
+        aria-expanded="false"
+    >
+        ☰
+    </button>
+
+</div>
+
+
+</header>
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main>
+
+
+<section class="section projects-page">
+
+    <div class="container">
+
+
+        <!-- =================================================
+             TOPO DA PÁGINA
+        ================================================== -->
+
+        <div class="page-top-row">
+
+            <span
+                class="tag"
+                data-i18n="portfolio.tag"
+            >
+                PORTFÓLIO GYAMAX
+            </span>
+
+
+            <a
+                href="index.html#inicio"
+                class="back-home-page"
+            >
+                ← Voltar ao início
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             TÍTULO
+        ================================================== -->
+
+        <div class="section-title">
+
+            <h1 data-i18n="portfolio.title">
+                Nossos projetos.
+            </h1>
+
+
+            <p data-i18n="portfolio.description">
+                Explore alguns dos projetos desenvolvidos pela GYAMAX.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             FILTROS
+        ================================================== -->
+
+        <div class="project-filters">
+
+            <button
+                type="button"
+                class="filter-btn active"
+                data-filter="todos"
+                data-i18n="filter.all"
+            >
+                Todos
+            </button>
+
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="pecas"
+                data-i18n="filter.parts"
+            >
+                Peças
+            </button>
+
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="prototipos"
+                data-i18n="filter.prototypes"
+            >
+                Protótipos
+            </button>
+
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="personalizados"
+                data-i18n="filter.custom"
+            >
+                Personalizados
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             PROJETOS
+        ================================================== -->
+
+        <div class="projects-grid">
+
+
+            <!-- PROJETO 01 -->
+
+            <article
+                class="project-card project-item"
+                data-category="pecas"
+            >
+
+                <div class="project-placeholder">
+
+                    <span data-i18n="portfolio.project1">
+                        PROJETO 01
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <span data-i18n="portfolio.project1.category">
+                        PEÇAS
+                    </span>
+
+
+                    <h3 data-i18n="portfolio.project1.title">
+                        Peça personalizada
+                    </h3>
+
+
+                    <p data-i18n="portfolio.project1.description">
+                        Projeto produzido através de impressão 3D.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJETO 02 -->
+
+            <article
+                class="project-card project-item"
+                data-category="prototipos"
+            >
+
+                <div class="project-placeholder">
+
+                    <span data-i18n="portfolio.project2">
+                        PROJETO 02
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <span data-i18n="portfolio.project2.category">
+                        PROTÓTIPOS
+                    </span>
+
+
+                    <h3 data-i18n="portfolio.project2.title">
+                        Protótipo funcional
+                    </h3>
+
+
+                    <p data-i18n="portfolio.project2.description">
+                        Modelo desenvolvido para testes e validação.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJETO 03 -->
+
+            <article
+                class="project-card project-item"
+                data-category="personalizados"
+            >
+
+                <div class="project-placeholder">
+
+                    <span data-i18n="portfolio.project3">
+                        PROJETO 03
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <span data-i18n="portfolio.project3.category">
+                        PERSONALIZADOS
+                    </span>
+
+
+                    <h3 data-i18n="portfolio.project3.title">
+                        Produto personalizado
+                    </h3>
+
+
+                    <p data-i18n="portfolio.project3.description">
+                        Projeto desenvolvido sob medida para o cliente.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJETO 04 -->
+
+            <article
+                class="project-card project-item extra-project"
+                data-category="pecas"
+            >
+
+                <div class="project-placeholder">
+
+                    <span data-i18n="portfolio.project4">
+                        PROJETO 04
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <span data-i18n="portfolio.project4.category">
+                        PEÇAS
+                    </span>
+
+
+                    <h3 data-i18n="portfolio.project4.title">
+                        Projeto em desenvolvimento
+                    </h3>
+
+
+                    <p data-i18n="portfolio.project4.description">
+                        Em breve mais detalhes.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJETO 05 -->
+
+            <article
+                class="project-card project-item extra-project"
+                data-category="prototipos"
+            >
+
+                <div class="project-placeholder">
+
+                    <span data-i18n="portfolio.project5">
+                        PROJETO 05
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <span data-i18n="portfolio.project5.category">
+                        PROTÓTIPOS
+                    </span>
+
+
+                    <h3 data-i18n="portfolio.project5.title">
+                        Novo protótipo
+                    </h3>
+
+
+                    <p data-i18n="portfolio.project5.description">
+                        Projeto em desenvolvimento.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJETO 06 -->
+
+            <article
+                class="project-card project-item extra-project"
+                data-category="personalizados"
+            >
+
+                <div class="project-placeholder">
+
+                    <span data-i18n="portfolio.project6">
+                        PROJETO 06
+                    </span>
+
+                </div>
+
+
+                <div class="project-info">
+
+                    <span data-i18n="portfolio.project6.category">
+                        PERSONALIZADOS
+                    </span>
+
+
+                    <h3 data-i18n="portfolio.project6.title">
+                        Nova criação
+                    </h3>
+
+
+                    <p data-i18n="portfolio.project6.description">
+                        Projeto em desenvolvimento.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- =================================================
+             VER MAIS
+        ================================================== -->
+
+        <div class="load-more-container">
+
+            <button
+                type="button"
+                class="btn"
+                id="loadMore"
+                data-i18n="portfolio.loadMore"
+            >
+                Ver mais projetos
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+</main>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+
+<div class="container footer-content">
+
+
+    <div>
+
+        <div class="footer-logo">
+            GYAMAX
+        </div>
+
+
+        <p data-i18n="footer.description">
+            Impressão 3D & Fabricação
+        </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+        <a
+            href="index.html#inicio"
+            data-i18n="nav.home"
+        >
+            Início
+        </a>
+
+
+        <a
+            href="index.html#servicos"
+            data-i18n="nav.services"
+        >
+            Serviços
+        </a>
+
+
+        <a
+            href="projetos.html"
+            data-i18n="nav.projects"
+        >
+            Projetos
+        </a>
+
+
+        <a
+            href="index.html#sobre"
+            data-i18n="nav.about"
+        >
+            Sobre
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="container copyright">
+
+    © 2026 GYAMAX.
+
+    <span data-i18n="footer.rights">
+        Todos os direitos reservados.
+    </span>
+
+</div>
+
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GYAMAX | Avaliação</title>
+
+    <meta
+        name="description"
+        content="Avalie sua experiência com a GYAMAX."
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           AVALIAÇÕES
+        ===================================================== */
+
+        .review-hero {
+            padding: 175px 0 70px;
+            text-align: center;
+        }
+
+
+        .review-hero .container {
+            width: 100%;
+        }
+
+
+        .review-hero .section-title {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+
+        .review-hero h1 {
+            margin-bottom: 18px;
+        }
+
+
+        .review-hero p {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+
+        /* =====================================================
+           TOPO DA PÁGINA
+        ===================================================== */
+
+        .review-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            width: 100%;
+            max-width: 800px;
+
+            margin: 0 auto 24px;
+
+            gap: 20px;
+
+            text-align: left;
+        }
+
+
+        .review-top-row .tag {
+            margin: 0;
+        }
+
+
+        /* =====================================================
+           BOTÃO VOLTAR AO INÍCIO
+        ===================================================== */
+
+        .back-home-page {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 10px 16px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.12);
+
+            border-radius: 12px;
+
+            background:
+                rgba(20, 20, 20, 0.85);
+
+            backdrop-filter:
+                blur(10px);
+
+            -webkit-backdrop-filter:
+                blur(10px);
+
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+
+            white-space:
+                nowrap;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .back-home-page:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border-color:
+                rgba(255, 255, 255, 0.22);
+        }
+
+
+        /* =====================================================
+           FORMULÁRIO
+        ===================================================== */
+
+        .review-section {
+            padding-top:
+                30px;
+        }
+
+
+        .review-card {
+            max-width:
+                850px;
+
+            margin:
+                0 auto;
+
+            padding:
+                42px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            border-radius:
+                24px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            box-sizing:
+                border-box;
+        }
+
+
+        .review-category {
+            padding:
+                24px 0;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.07);
+        }
+
+
+        .review-category:first-child {
+            padding-top:
+                0;
+        }
+
+
+        .review-category:last-child {
+            border-bottom:
+                none;
+        }
+
+
+        .review-category-title {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            margin-bottom:
+                14px;
+        }
+
+
+        .review-category-title h3 {
+            margin:
+                0;
+        }
+
+
+        .review-stars {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                6px;
+        }
+
+
+        .review-star {
+            border:
+                none;
+
+            background:
+                transparent;
+
+            padding:
+                2px;
+
+            margin:
+                0;
+
+            font-size:
+                32px;
+
+            line-height:
+                1;
+
+            cursor:
+                pointer;
+
+            color:
+                rgba(255, 153, 0, 0.22);
+
+            transition:
+                transform 0.18s ease,
+                color 0.18s ease;
+        }
+
+
+        .review-star:hover {
+            transform:
+                translateY(-2px)
+                scale(1.08);
+
+            color:
+                rgba(255, 153, 0, 0.7);
+        }
+
+
+        .review-star.active {
+            color:
+                #ff9800;
+        }
+
+
+        .review-comment {
+            margin-top:
+                34px;
+        }
+
+
+        .review-comment label {
+            display:
+                block;
+
+            margin-bottom:
+                12px;
+
+            font-weight:
+                600;
+        }
+
+
+        .review-comment textarea {
+            width:
+                100%;
+
+            min-height:
+                170px;
+
+            resize:
+                vertical;
+
+            box-sizing:
+                border-box;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.1);
+
+            border-radius:
+                16px;
+
+            padding:
+                17px 18px;
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            color:
+                inherit;
+
+            font:
+                inherit;
+
+            outline:
+                none;
+
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        .review-comment textarea:focus {
+            border-color:
+                rgba(255, 255, 255, 0.28);
+
+            background:
+                rgba(255, 255, 255, 0.05);
+        }
+
+
+        .review-footer {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            margin-top:
+                34px;
+
+            flex-wrap:
+                wrap;
+        }
+
+
+        .review-note {
+            margin:
+                0;
+
+            font-size:
+                14px;
+
+            opacity:
+                0.65;
+        }
+
+
+        .review-message {
+            display:
+                none;
+
+            width:
+                100%;
+
+            margin-top:
+                22px;
+
+            padding:
+                15px 18px;
+
+            border-radius:
+                14px;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255, 255, 255, 0.04);
+
+            box-sizing:
+                border-box;
+        }
+
+
+        .review-message.show {
+            display:
+                block;
+        }
+
+
+        .review-message.success {
+            border-color:
+                rgba(70, 180, 100, 0.3);
+
+            background:
+                rgba(70, 180, 100, 0.08);
+        }
+
+
+        .review-message.error {
+            border-color:
+                rgba(255, 80, 80, 0.3);
+
+            background:
+                rgba(255, 80, 80, 0.08);
+        }
+
+
+        .review-loading {
+            text-align:
+                center;
+
+            padding:
+                35px 20px;
+
+            opacity:
+                0.65;
+        }
+
+
+        /* =====================================================
+           AVALIAÇÕES PUBLICADAS
+        ===================================================== */
+
+        .reviews-list-section {
+            padding-top:
+                25px;
+        }
+
+
+        .reviews-list {
+            max-width:
+                850px;
+
+            margin:
+                0 auto;
+        }
+
+
+        .review-item {
+            padding:
+                28px 0;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+
+        .review-item:first-child {
+            padding-top:
+                0;
+        }
+
+
+        .review-item:last-child {
+            border-bottom:
+                none;
+        }
+
+
+        .review-item-header {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .review-item-name {
+            font-weight:
+                700;
+        }
+
+
+        .review-item-stars {
+            display:
+                flex;
+
+            gap:
+                2px;
+
+            font-size:
+                19px;
+
+            color:
+                #ff9800;
+        }
+
+
+        .review-item-date {
+            font-size:
+                13px;
+
+            opacity:
+                0.55;
+
+            margin-bottom:
+                10px;
+        }
+
+
+        .review-item-text {
+            margin:
+                0;
+
+            line-height:
+                1.7;
+
+            opacity:
+                0.9;
+
+            white-space:
+                pre-wrap;
+
+            overflow-wrap:
+                anywhere;
+        }
+
+
+        .reviews-empty {
+            text-align:
+                center;
+
+            padding:
+                35px 20px;
+
+            opacity:
+                0.65;
+        }
+
+
+        .reviews-more {
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            margin-top:
+                25px;
+        }
+
+
+        .reviews-more button {
+            cursor:
+                pointer;
+        }
+
+
+        .reviews-hidden {
+            display:
+                none;
+        }
+
+
+        .reviews-hidden.show {
+            display:
+                block;
+        }
+
+
+        #sendReview:disabled {
+            opacity:
+                0.6;
+
+            cursor:
+                wait;
+        }
+
+
+        /* =====================================================
+           RESPONSIVO
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .review-hero {
+                padding:
+                    135px 20px 50px;
+            }
+
+
+            .review-top-row {
+                gap:
+                    12px;
+
+                margin-bottom:
+                    20px;
+            }
+
+
+            .review-section,
+            .reviews-list-section {
+                padding-left:
+                    20px;
+
+                padding-right:
+                    20px;
+            }
+
+
+            .review-card {
+                padding:
+                    26px 20px;
+
+                border-radius:
+                    18px;
+            }
+
+
+            .review-category-title {
+                display:
+                    block;
+            }
+
+
+            .review-stars {
+                margin-top:
+                    12px;
+            }
+
+
+            .review-star {
+                font-size:
+                    29px;
+            }
+
+
+            .review-footer {
+                align-items:
+                    stretch;
+            }
+
+
+            .review-footer .btn {
+                width:
+                    100%;
+
+                text-align:
+                    center;
+            }
+
+
+            .review-item-header {
+                display:
+                    block;
+            }
+
+
+            .review-item-stars {
+                margin-top:
+                    8px;
+            }
+
+
+            .back-home-page {
+                padding:
+                    9px 14px;
+
+                font-size:
+                    13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <img
+                id="gyamaxLogo"
+                src="img/GYAMAX.png"
+                alt="GYAMAX"
+            >
+
+        </a>
+
+
+        <nav class="menu">
+
+            <a
+                href="index.html#inicio"
+                data-i18n="nav.home"
+            >
+                Início
+            </a>
+
+
+            <a
+                href="index.html#servicos"
+                data-i18n="nav.services"
+            >
+                Serviços
+            </a>
+
+
+            <a
+                href="index.html#processo"
+                data-i18n="nav.process"
+            >
+                Como funciona
+            </a>
+
+
+            <a
+                href="projetos.html"
+                data-i18n="nav.projects"
+            >
+                Projetos
+            </a>
+
+
+            <a
+                href="loja.html"
+                data-i18n="nav.store"
+            >
+                Loja
+            </a>
+
+
+            <a
+                href="index.html#sobre"
+                data-i18n="nav.about"
+            >
+                Sobre
+            </a>
+
+
+            <a
+                href="avaliacao.html"
+                data-i18n="nav.review"
+            >
+                Avaliação
+            </a>
+
+        </nav>
+
+
+        <div id="accountArea">
+
+            <a
+                href="login.html"
+                class="btn btn-small"
+                data-i18n="login.enter"
+            >
+                Entrar
+            </a>
+
+        </div>
+
+
+        <a
+            href="index.html#orcamento"
+            class="btn btn-small quote-header-button"
+            data-i18n="quote.request"
+        >
+            Solicitar orçamento
+        </a>
+
+
+        <button
+            class="menu-mobile"
+            id="menuMobile"
+            type="button"
+            aria-label="Menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     CONTEÚDO
+===================================================== -->
+
+<main>
+
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
+    <section class="review-hero">
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 TOPO DA PÁGINA
+            ================================================== -->
+
+            <div class="review-top-row">
+
+                <span class="tag">
+                    GYAMAX
+                </span>
+
+
+                <a
+                    href="index.html#inicio"
+                    class="back-home-page"
+                >
+                    ← Voltar ao início
+                </a>
+
+            </div>
+
+
+            <div class="section-title">
+
+                <h1>
+                    Avalie sua experiência.
+                </h1>
+
+
+                <p>
+                    Queremos saber como foi sua experiência com a GYAMAX.
+                    Sua opinião nos ajuda a melhorar nossos produtos,
+                    atendimento e serviço.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FORMULÁRIO
+    ===================================================== -->
+
+    <section class="section review-section">
+
+        <div class="container">
+
+            <div class="review-card">
+
+
+                <!-- EXPERIÊNCIA DE COMPRA -->
+
+                <div class="review-category">
+
+                    <div class="review-category-title">
+
+                        <h3>
+                            Experiência de compra
+                        </h3>
+
+
+                        <div
+                            class="review-stars"
+                            data-category="experiencia"
+                        >
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="1"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="2"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="3"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="4"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="5"
+                            >
+                                ★
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ATENDIMENTO -->
+
+                <div class="review-category">
+
+                    <div class="review-category-title">
+
+                        <h3>
+                            Atendimento
+                        </h3>
+
+
+                        <div
+                            class="review-stars"
+                            data-category="atendimento"
+                        >
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="1"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="2"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="3"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="4"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="5"
+                            >
+                                ★
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUALIDADE -->
+
+                <div class="review-category">
+
+                    <div class="review-category-title">
+
+                        <h3>
+                            Qualidade do produto
+                        </h3>
+
+
+                        <div
+                            class="review-stars"
+                            data-category="qualidade"
+                        >
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="1"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="2"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="3"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="4"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="5"
+                            >
+                                ★
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ENTREGA -->
+
+                <div class="review-category">
+
+                    <div class="review-category-title">
+
+                        <h3>
+                            Prazo e entrega
+                        </h3>
+
+
+                        <div
+                            class="review-stars"
+                            data-category="entrega"
+                        >
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="1"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="2"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="3"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="4"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="5"
+                            >
+                                ★
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXPERIÊNCIA GERAL -->
+
+                <div class="review-category">
+
+                    <div class="review-category-title">
+
+                        <h3>
+                            Experiência geral
+                        </h3>
+
+
+                        <div
+                            class="review-stars"
+                            data-category="geral"
+                        >
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="1"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="2"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="3"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="4"
+                            >
+                                ★
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="review-star"
+                                data-value="5"
+                            >
+                                ★
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMENTÁRIO -->
+
+                <div class="review-comment">
+
+                    <label for="reviewComment">
+                        Conte mais sobre sua experiência
+                    </label>
+
+
+                    <textarea
+                        id="reviewComment"
+                        maxlength="2000"
+                        placeholder="Escreva seu comentário..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- RODAPÉ -->
+
+                <div class="review-footer">
+
+                    <p class="review-note">
+                        Sua avaliação ajuda a GYAMAX a evoluir.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="btn"
+                        id="sendReview"
+                    >
+                        Enviar avaliação
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="review-message"
+                    id="reviewMessage"
+                ></div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         AVALIAÇÕES PUBLICADAS
+    ===================================================== -->
+
+    <section
+        class="section reviews-list-section"
+    >
+
+        <div class="container">
+
+
+            <div class="section-title">
+
+                <span class="tag">
+                    EXPERIÊNCIAS
+                </span>
+
+
+                <h2>
+                    O que nossos clientes dizem.
+                </h2>
+
+
+                <p>
+                    Veja algumas avaliações compartilhadas pela comunidade GYAMAX.
+                </p>
+
+            </div>
+
+
+            <div
+                class="reviews-list"
+                id="reviewsList"
+            ></div>
+
+
+            <div
+                class="reviews-more"
+                id="reviewsMore"
+            >
+
+                <button
+                    type="button"
+                    class="btn btn-outline"
+                    id="showMoreReviews"
+                >
+                    Ver outros comentários
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container footer-content">
+
+        <div>
+
+            <div class="footer-logo">
+                GYAMAX
+            </div>
+
+
+            <p data-i18n="footer.description">
+                Impressão 3D & Fabricação
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a
+                href="index.html#inicio"
+                data-i18n="nav.home"
+            >
+                Início
+            </a>
+
+
+            <a
+                href="index.html#servicos"
+                data-i18n="nav.services"
+            >
+                Serviços
+            </a>
+
+
+            <a
+                href="loja.html"
+                data-i18n="nav.store"
+            >
+                Loja
+            </a>
+
+
+            <a
+                href="projetos.html"
+                data-i18n="nav.projects"
+            >
+                Projetos
+            </a>
+
+
+            <a
+                href="avaliacao.html"
+                data-i18n="nav.review"
+            >
+                Avaliação
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container copyright">
+
+        © 2026 GYAMAX.
+
+        <span data-i18n="footer.rights">
+            Todos os direitos reservados.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+const avaliacoes = {};
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+function mostrarMensagem(
+    texto,
+    tipo = "error"
+) {
+
+    const mensagem =
+        document.getElementById(
+            "reviewMessage"
+        );
+
+
+    if (!mensagem) {
+        return;
+    }
+
+
+    mensagem.textContent =
+        texto;
+
+
+    mensagem.classList.remove(
+        "success",
+        "error"
+    );
+
+
+    mensagem.classList.add(
+        "show",
+        tipo
+    );
+
+}
+
+
+/* =========================================================
+   ESTRELAS
+========================================================= */
+
+document
+    .querySelectorAll(".review-stars")
+    .forEach(
+        grupo => {
+
+            const categoria =
+                grupo.dataset.category;
+
+
+            avaliacoes[categoria] =
+                0;
+
+
+            const estrelas =
+                grupo.querySelectorAll(
+                    ".review-star"
+                );
+
+
+            estrelas.forEach(
+                estrela => {
+
+                    estrela.addEventListener(
+                        "click",
+                        () => {
+
+                            const valor =
+                                Number(
+                                    estrela.dataset.value
+                                );
+
+
+                            avaliacoes[categoria] =
+                                valor;
+
+
+                            estrelas.forEach(
+                                item => {
+
+                                    item.classList.toggle(
+                                        "active",
+                                        Number(
+                                            item.dataset.value
+                                        ) <= valor
+                                    );
+
+                                }
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   ESCAPAR TEXTO
+========================================================= */
+
+function escaparTexto(
+    valor
+) {
+
+    return String(
+        valor ?? ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   ESTRELAS PUBLICADAS
+========================================================= */
+
+function gerarEstrelas(
+    nota
+) {
+
+    const valor =
+        Math.max(
+            0,
+            Math.min(
+                5,
+                Number(
+                    nota
+                ) || 0
+            )
+        );
+
+
+    let resultado =
+        "";
+
+
+    for (
+        let i = 1;
+        i <= 5;
+        i++
+    ) {
+
+        resultado +=
+            i <= valor
+                ? "★"
+                : "☆";
+
+    }
+
+
+    return resultado;
+
+}
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+function formatarData(
+    valor
+) {
+
+    if (!valor) {
+        return "";
+    }
+
+
+    const texto =
+        String(
+            valor
+        );
+
+
+    let data;
+
+
+    if (
+        /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(
+            texto
+        )
+    ) {
+
+        data =
+            new Date(
+                texto.replace(
+                    " ",
+                    "T"
+                ) + "Z"
+            );
+
+    } else {
+
+        data =
+            new Date(
+                texto
+            );
+
+    }
+
+
+    if (
+        Number.isNaN(
+            data.getTime()
+        )
+    ) {
+
+        return escaparTexto(
+            texto
+        );
+
+    }
+
+
+    return data.toLocaleDateString(
+        "pt-BR",
+        {
+            day:
+                "2-digit",
+
+            month:
+                "2-digit",
+
+            year:
+                "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CARREGAR AVALIAÇÕES
+========================================================= */
+
+async function carregarAvaliacoes() {
+
+    const resposta =
+        await fetch(
+            "/api/avaliacoes",
+            {
+                method:
+                    "GET",
+
+                credentials:
+                    "same-origin",
+
+                headers: {
+                    Accept:
+                        "application/json"
+                }
+            }
+        );
+
+
+    let dados;
+
+
+    try {
+
+        dados =
+            await resposta.json();
+
+    } catch {
+
+        throw new Error(
+            "Resposta inválida do servidor."
+        );
+
+    }
+
+
+    if (
+        !resposta.ok ||
+        !dados?.sucesso
+    ) {
+
+        throw new Error(
+            dados?.mensagem ||
+            "Não foi possível carregar as avaliações."
+        );
+
+    }
+
+
+    return Array.isArray(
+        dados.avaliacoes
+    )
+        ? dados.avaliacoes
+        : [];
+
+}
+
+
+/* =========================================================
+   RENDERIZAR
+========================================================= */
+
+async function renderizarAvaliacoes() {
+
+    const container =
+        document.getElementById(
+            "reviewsList"
+        );
+
+
+    const botao =
+        document.getElementById(
+            "showMoreReviews"
+        );
+
+
+    const controleBotao =
+        document.getElementById(
+            "reviewsMore"
+        );
+
+
+    if (
+        !container ||
+        !botao ||
+        !controleBotao
+    ) {
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+        <div class="review-loading">
+            Carregando avaliações...
+        </div>
+    `;
+
+
+    try {
+
+        const lista =
+            await carregarAvaliacoes();
+
+
+        if (
+            !lista.length
+        ) {
+
+            container.innerHTML = `
+                <div class="reviews-empty">
+                    Ainda não há avaliações publicadas.
+                    Seja o primeiro a avaliar a GYAMAX.
+                </div>
+            `;
+
+
+            controleBotao.style.display =
+                "none";
+
+
+            return;
+
+        }
+
+
+        const visiveis =
+            lista.slice(
+                0,
+                3
+            );
+
+
+        const ocultas =
+            lista.slice(
+                3
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        visiveis.forEach(
+            avaliacao => {
+
+                container.insertAdjacentHTML(
+                    "beforeend",
+                    `
+                    <article class="review-item">
+
+                        <div class="review-item-header">
+
+                            <div class="review-item-name">
+                                ${escaparTexto(
+                                    avaliacao.nome ||
+                                    "Cliente GYAMAX"
+                                )}
+                            </div>
+
+
+                            <div class="review-item-stars">
+                                ${gerarEstrelas(
+                                    avaliacao.geral
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="review-item-date">
+                            ${formatarData(
+                                avaliacao.criadoEm
+                            )}
+                        </div>
+
+
+                        <p class="review-item-text">
+                            ${escaparTexto(
+                                avaliacao.comentario ||
+                                "Sem comentário."
+                            )}
+                        </p>
+
+                    </article>
+                    `
+                );
+
+            }
+        );
+
+
+        ocultas.forEach(
+            avaliacao => {
+
+                container.insertAdjacentHTML(
+                    "beforeend",
+                    `
+                    <article class="review-item reviews-hidden">
+
+                        <div class="review-item-header">
+
+                            <div class="review-item-name">
+                                ${escaparTexto(
+                                    avaliacao.nome ||
+                                    "Cliente GYAMAX"
+                                )}
+                            </div>
+
+
+                            <div class="review-item-stars">
+                                ${gerarEstrelas(
+                                    avaliacao.geral
+                                )}
+                            </div>
+
+                        </div>
+
+
+                        <div class="review-item-date">
+                            ${formatarData(
+                                avaliacao.criadoEm
+                            )}
+                        </div>
+
+
+                        <p class="review-item-text">
+                            ${escaparTexto(
+                                avaliacao.comentario ||
+                                "Sem comentário."
+                            )}
+                        </p>
+
+                    </article>
+                    `
+                );
+
+            }
+        );
+
+
+        const escondidas =
+            container.querySelectorAll(
+                ".reviews-hidden"
+            );
+
+
+        if (
+            !escondidas.length
+        ) {
+
+            controleBotao.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        controleBotao.style.display =
+            "flex";
+
+
+        botao.textContent =
+            "Ver outros comentários";
+
+
+        botao.onclick =
+            () => {
+
+                escondidas.forEach(
+                    item => {
+
+                        item.classList.add(
+                            "show"
+                        );
+
+                    }
+                );
+
+
+                botao.style.display =
+                    "none";
+
+            };
+
+    } catch (erro) {
+
+        console.error(
+            "ERRO AO CARREGAR AVALIAÇÕES:",
+            erro
+        );
+
+
+        container.innerHTML = `
+            <div class="reviews-empty">
+                Não foi possível carregar as avaliações agora.
+            </div>
+        `;
+
+
+        controleBotao.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================================================
+   ENVIAR AVALIAÇÃO
+========================================================= */
+
+const botaoEnviar =
+    document.getElementById(
+        "sendReview"
+    );
+
+
+if (botaoEnviar) {
+
+    botaoEnviar.addEventListener(
+        "click",
+        async () => {
+
+            const botao =
+                document.getElementById(
+                    "sendReview"
+                );
+
+
+            const campoComentario =
+                document.getElementById(
+                    "reviewComment"
+                );
+
+
+            const comentario =
+                campoComentario
+                    ? campoComentario.value.trim()
+                    : "";
+
+
+            const notas =
+                Object.values(
+                    avaliacoes
+                );
+
+
+            if (
+                notas.some(
+                    nota =>
+                        !Number.isInteger(
+                            nota
+                        ) ||
+                        nota < 1 ||
+                        nota > 5
+                )
+            ) {
+
+                mostrarMensagem(
+                    "Avalie todas as categorias antes de enviar.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if (
+                comentario.length < 3
+            ) {
+
+                mostrarMensagem(
+                    "Escreva um comentário antes de enviar.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            botao.disabled =
+                true;
+
+
+            const textoOriginal =
+                botao.textContent;
+
+
+            botao.textContent =
+                "Enviando...";
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/avaliacoes",
+                        {
+                            method:
+                                "POST",
+
+                            credentials:
+                                "same-origin",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                Accept:
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    experiencia:
+                                        avaliacoes.experiencia,
+
+                                    atendimento:
+                                        avaliacoes.atendimento,
+
+                                    qualidade:
+                                        avaliacoes.qualidade,
+
+                                    entrega:
+                                        avaliacoes.entrega,
+
+                                    geral:
+                                        avaliacoes.geral,
+
+                                    comentario
+
+                                })
+                        }
+                    );
+
+
+                let dados =
+                    null;
+
+
+                try {
+
+                    dados =
+                        await resposta.json();
+
+                } catch {
+
+                    dados =
+                        null;
+
+                }
+
+
+                if (
+                    !resposta.ok ||
+                    !dados?.sucesso
+                ) {
+
+                    if (
+                        resposta.status === 401 ||
+                        dados?.erro === "notLogged"
+                    ) {
+
+                        throw new Error(
+                            "Você precisa estar logado para enviar uma avaliação."
+                        );
+
+                    }
+
+
+                    throw new Error(
+                        dados?.mensagem ||
+                        "Não foi possível enviar sua avaliação."
+                    );
+
+                }
+
+
+                mostrarMensagem(
+                    dados.mensagem ||
+                    "Sua avaliação foi enviada com sucesso.",
+                    "success"
+                );
+
+
+                if (campoComentario) {
+
+                    campoComentario.value =
+                        "";
+
+                }
+
+
+                document
+                    .querySelectorAll(
+                        ".review-star"
+                    )
+                    .forEach(
+                        estrela => {
+
+                            estrela.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                Object.keys(
+                    avaliacoes
+                ).forEach(
+                    categoria => {
+
+                        avaliacoes[categoria] =
+                            0;
+
+                    }
+                );
+
+
+                await renderizarAvaliacoes();
+
+            } catch (erro) {
+
+                console.error(
+                    "ERRO AO ENVIAR AVALIAÇÃO:",
+                    erro
+                );
+
+
+                mostrarMensagem(
+                    erro?.message ||
+                    "Não foi possível enviar sua avaliação.",
+                    "error"
+                );
+
+            } finally {
+
+                botao.disabled =
+                    false;
+
+
+                botao.textContent =
+                    textoOriginal;
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+renderizarAvaliacoes();
+
+</script>
+
+
+</body>
+
+</html>

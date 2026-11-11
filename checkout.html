@@ -1,0 +1,4685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>GYAMAX | Checkout</title>
+
+    <meta
+        name="description"
+        content="GYAMAX — Finalização segura da compra."
+    >
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <script
+        src="https://sdk.mercadopago.com/js/v2"
+    ></script>
+
+
+    <!-- =====================================================
+         PIX OFICIAL
+    ====================================================== -->
+
+    <style>
+
+        .pix-symbol-official {
+
+            display:
+                block;
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            background-image:
+                url(
+                    "https://www.bcb.gov.br/content/estabilidadefinanceira/piximg/logo_pix.png"
+                );
+
+            background-repeat:
+                no-repeat;
+
+            background-position:
+                center;
+
+            background-size:
+                contain;
+
+            background-color:
+                transparent;
+
+            flex-shrink:
+                0;
+        }
+
+
+        .payment-method-icon
+        .pix-symbol-official {
+
+            width:
+                27px;
+
+            height:
+                27px;
+        }
+
+
+        .payment-info-icon
+        .pix-symbol-official {
+
+            width:
+                26px;
+
+            height:
+                26px;
+        }
+
+
+        .payment-result-mini-icon
+        .pix-symbol-official {
+
+            width:
+                19px;
+
+            height:
+                19px;
+        }
+
+
+        .payment-icon-pix {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3d4146,
+                    #24272b
+                ) !important;
+
+            color:
+                #ffffff !important;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="checkout-body">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a
+            href="/index.html"
+            class="logo"
+            aria-label="GYAMAX"
+        >
+
+            <img
+                id="gyamaxLogo"
+                src="/img/GYAMAX.png"
+                alt="GYAMAX"
+            >
+
+        </a>
+
+
+        <nav
+            class="menu"
+            aria-label="Navegação principal"
+        >
+
+            <a
+                href="/index.html#inicio"
+                data-i18n="nav.home"
+            >
+                Início
+            </a>
+
+
+            <a
+                href="/index.html#servicos"
+                data-i18n="nav.services"
+            >
+                Serviços
+            </a>
+
+
+            <a
+                href="/index.html#processo"
+                data-i18n="nav.process"
+            >
+                Como funciona
+            </a>
+
+
+            <a
+                href="/projetos.html"
+                data-i18n="nav.projects"
+            >
+                Projetos
+            </a>
+
+
+            <a
+                href="/loja.html"
+                class="menu-active"
+                data-i18n="nav.store"
+            >
+                Loja
+            </a>
+
+
+            <a
+                href="/index.html#sobre"
+                data-i18n="nav.about"
+            >
+                Sobre
+            </a>
+
+        </nav>
+
+
+        <div id="accountArea">
+
+            <a
+                href="/login.html"
+                class="btn btn-small"
+                data-i18n="login.enter"
+            >
+                Entrar
+            </a>
+
+        </div>
+
+
+        <a
+            href="/carrinho.html"
+            class="gyamax-cart-avatar"
+            title="Carrinho"
+            aria-label="Carrinho"
+        >
+
+            <span
+                class="gyamax-cart-icon"
+                aria-hidden="true"
+            >
+
+                <span class="cart-basket-handle"></span>
+
+                <span class="cart-basket-body"></span>
+
+                <span
+                    class="cart-basket-wheel cart-basket-wheel-1"
+                ></span>
+
+                <span
+                    class="cart-basket-wheel cart-basket-wheel-2"
+                ></span>
+
+            </span>
+
+
+            <span
+                class="store-cart-count"
+                id="cartCount"
+            >
+                0
+            </span>
+
+        </a>
+
+
+        <button
+            class="menu-mobile"
+            id="menuMobile"
+            type="button"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main class="checkout-page">
+
+    <div class="container">
+
+
+        <!-- =====================================================
+             CABEÇALHO
+        ====================================================== -->
+
+        <section class="checkout-header checkout-header-professional">
+
+
+            <div class="checkout-breadcrumb">
+
+                <a href="/carrinho.html">
+                    Carrinho
+                </a>
+
+                <span aria-hidden="true">
+                    ›
+                </span>
+
+                <strong>
+                    Pagamento
+                </strong>
+
+            </div>
+
+
+            <div class="checkout-heading-row">
+
+
+                <div class="checkout-heading-content">
+
+                    <span class="tag">
+                        CHECKOUT SEGURO
+                    </span>
+
+                    <h1>
+                        Finalize sua compra.
+                    </h1>
+
+                    <p>
+                        Revise seus dados, escolha a forma de pagamento e conclua seu pedido.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="checkout-security-badge"
+                    aria-label="Compra segura"
+                >
+
+                    <span class="checkout-security-icon">
+                        ✓
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Compra segura
+                        </strong>
+
+                        <small>
+                            Seus dados são protegidos
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="checkout-progress">
+
+                <div class="checkout-progress-item is-active">
+
+                    <span>
+                        01
+                    </span>
+
+                    <strong>
+                        Pagamento
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="checkout-progress-line"
+                    aria-hidden="true"
+                ></div>
+
+
+                <div class="checkout-progress-item">
+
+                    <span>
+                        02
+                    </span>
+
+                    <strong>
+                        Dados
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="checkout-progress-line"
+                    aria-hidden="true"
+                ></div>
+
+
+                <div class="checkout-progress-item">
+
+                    <span>
+                        03
+                    </span>
+
+                    <strong>
+                        Endereço
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <div
+            id="checkoutMessage"
+            class="checkout-message"
+            role="status"
+            aria-live="polite"
+            style="display:none;"
+        ></div>
+
+
+        <!-- =====================================================
+             LAYOUT
+        ====================================================== -->
+
+        <section class="checkout-layout">
+
+
+            <div class="checkout-main">
+
+
+                <!-- =================================================
+                     01 — PAGAMENTO
+                ================================================== -->
+
+                <section class="checkout-card checkout-payment-card">
+
+
+                    <div class="checkout-card-header">
+
+                        <div>
+
+                            <span class="checkout-section-number">
+                                01
+                            </span>
+
+                            <div>
+
+                                <h2>
+                                    Forma de pagamento
+                                </h2>
+
+                                <p>
+                                    Escolha a opção que você prefere.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="payment-methods">
+
+
+                        <!-- CARTÃO -->
+
+                        <label class="payment-method">
+
+                            <input
+                                type="radio"
+                                name="paymentMethod"
+                                value="cartao"
+                                checked
+                            >
+
+
+                            <span class="payment-method-content">
+
+                                <span
+                                    class="payment-method-icon payment-icon-card"
+                                    aria-hidden="true"
+                                >
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        role="img"
+                                    >
+
+                                        <rect
+                                            x="2.5"
+                                            y="5"
+                                            width="19"
+                                            height="14"
+                                            rx="2"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.8"
+                                        />
+
+                                        <path
+                                            d="M2.5 9h19"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.8"
+                                        />
+
+                                        <path
+                                            d="M6 14h4"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.8"
+                                            stroke-linecap="round"
+                                        />
+
+                                    </svg>
+
+                                </span>
+
+
+                                <span class="payment-method-text">
+
+                                    <strong>
+                                        Cartão
+                                    </strong>
+
+                                    <small>
+                                        Crédito
+                                    </small>
+
+                                </span>
+
+
+                                <span
+                                    class="payment-method-check"
+                                    aria-hidden="true"
+                                >
+                                    ✓
+                                </span>
+
+                            </span>
+
+                        </label>
+
+
+                        <!-- PIX -->
+
+                        <label class="payment-method">
+
+                            <input
+                                type="radio"
+                                name="paymentMethod"
+                                value="pix"
+                            >
+
+
+                            <span class="payment-method-content">
+
+                                <span
+                                    class="payment-method-icon payment-icon-pix"
+                                    aria-hidden="true"
+                                >
+
+                                    <span class="pix-symbol-official"></span>
+
+                                </span>
+
+
+                                <span class="payment-method-text">
+
+                                    <strong>
+                                        Pix
+                                    </strong>
+
+                                    <small>
+                                        Instantâneo
+                                    </small>
+
+                                </span>
+
+
+                                <span
+                                    class="payment-method-check"
+                                    aria-hidden="true"
+                                >
+                                    ✓
+                                </span>
+
+                            </span>
+
+                        </label>
+
+
+                        <!-- BOLETO -->
+
+                        <label class="payment-method">
+
+                            <input
+                                type="radio"
+                                name="paymentMethod"
+                                value="boleto"
+                            >
+
+
+                            <span class="payment-method-content">
+
+                                <span
+                                    class="payment-method-icon payment-icon-boleto"
+                                    aria-hidden="true"
+                                >
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        role="img"
+                                    >
+
+                                        <path d="M4 5v14"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                        />
+
+                                        <path d="M7 5v14"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                        />
+
+                                        <path d="M10 5v14"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.3"
+                                        />
+
+                                        <path d="M12 5v14"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2.5"
+                                        />
+
+                                        <path d="M15 5v14"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.2"
+                                        />
+
+                                        <path d="M17.5 5v14"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2.3"
+                                        />
+
+                                        <path d="M20 5v14"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                        />
+
+                                    </svg>
+
+                                </span>
+
+
+                                <span class="payment-method-text">
+
+                                    <strong>
+                                        Boleto
+                                    </strong>
+
+                                    <small>
+                                        Bancário
+                                    </small>
+
+                                </span>
+
+
+                                <span
+                                    class="payment-method-check"
+                                    aria-hidden="true"
+                                >
+                                    ✓
+                                </span>
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         CARTÃO
+                    ================================================== -->
+
+                    <div
+                        id="cardPaymentFields"
+                        class="payment-panel payment-panel-card"
+                    >
+
+                        <div class="payment-panel-heading">
+
+                            <div>
+
+                                <h3>
+                                    Pague com cartão
+                                </h3>
+
+                                <p>
+                                    Seus dados são inseridos em campos protegidos.
+                                </p>
+
+                            </div>
+
+                            <span class="payment-panel-secure">
+                                SEGURO
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            id="cardPaymentBrick_container"
+                            class="mp-card-container"
+                        ></div>
+
+
+                        <div
+                            id="cardTestMode"
+                            class="payment-info-box payment-test-box"
+                            style="display:none;"
+                        >
+
+                            <div class="payment-info-icon">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <rect
+                                        x="2.5"
+                                        y="5"
+                                        width="19"
+                                        height="14"
+                                        rx="2"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+
+                                    <path
+                                        d="M2.5 9h19"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    />
+
+                                    <path
+                                        d="M6 14h4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                        stroke-linecap="round"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Cartão em modo de teste
+                                </h3>
+
+                                <p>
+                                    O Mercado Pago ainda não possui uma Public Key real configurada.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="btn checkout-confirm-button"
+                                id="cardTestButton"
+                            >
+                                Simular pagamento
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         PIX
+                    ================================================== -->
+
+                    <div
+                        id="pixPaymentFields"
+                        class="payment-panel"
+                        style="display:none;"
+                    >
+
+                        <div class="payment-panel-heading">
+
+                            <div>
+
+                                <h3>
+                                    Pague com Pix
+                                </h3>
+
+                                <p>
+                                    O código será gerado nesta página.
+                                </p>
+
+                            </div>
+
+                            <span class="payment-panel-badge payment-panel-badge-orange">
+                                PIX
+                            </span>
+
+                        </div>
+
+
+                        <div class="checkout-form-grid">
+
+                            <div
+                                class="checkout-field checkout-field-full"
+                            >
+
+                                <label for="pixCpf">
+                                    CPF
+                                </label>
+
+                                <input
+                                    id="pixCpf"
+                                    inputmode="numeric"
+                                    maxlength="14"
+                                    autocomplete="off"
+                                    placeholder="000.000.000-00"
+                                >
+
+                                <small class="field-help">
+                                    Necessário para identificação do pagamento.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="payment-info-box payment-method-info">
+
+                            <div
+                                class="payment-info-icon"
+                                aria-hidden="true"
+                            >
+
+                                <span class="pix-symbol-official"></span>
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Pagamento rápido
+                                </h3>
+
+                                <p>
+                                    Depois de gerar, o QR Code e o código Copia e Cola aparecerão no resumo da compra.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="btn checkout-confirm-button checkout-payment-button"
+                            id="pixConfirmButton"
+                        >
+
+                            <span>
+                                Gerar Pix
+                            </span>
+
+                            <span
+                                class="button-arrow"
+                                aria-hidden="true"
+                            >
+                                →
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         BOLETO
+                    ================================================== -->
+
+                    <div
+                        id="boletoPaymentFields"
+                        class="payment-panel"
+                        style="display:none;"
+                    >
+
+                        <div class="payment-panel-heading">
+
+                            <div>
+
+                                <h3>
+                                    Pague com boleto
+                                </h3>
+
+                                <p>
+                                    O boleto será preparado após a confirmação.
+                                </p>
+
+                            </div>
+
+                            <span class="payment-panel-badge">
+                                BOLETO
+                            </span>
+
+                        </div>
+
+
+                        <div class="checkout-form-grid">
+
+                            <div
+                                class="checkout-field checkout-field-full"
+                            >
+
+                                <label for="boletoCpf">
+                                    CPF
+                                </label>
+
+                                <input
+                                    id="boletoCpf"
+                                    inputmode="numeric"
+                                    maxlength="14"
+                                    autocomplete="off"
+                                    placeholder="000.000.000-00"
+                                >
+
+                                <small class="field-help">
+                                    Necessário para emissão.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="payment-info-box payment-method-info">
+
+                            <div
+                                class="payment-info-icon"
+                                aria-hidden="true"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+
+                                    <path d="M4 5v14"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                    />
+
+                                    <path d="M7 5v14"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    />
+
+                                    <path d="M10 5v14"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.3"
+                                    />
+
+                                    <path d="M12 5v14"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.5"
+                                    />
+
+                                    <path d="M15 5v14"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.2"
+                                    />
+
+                                    <path d="M17.5 5v14"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2.3"
+                                    />
+
+                                    <path d="M20 5v14"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                    />
+
+                                </svg>
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Endereço obrigatório
+                                </h3>
+
+                                <p>
+                                    Para emitir um boleto, preencha também o endereço completo na seção abaixo.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="btn checkout-confirm-button checkout-payment-button"
+                            id="boletoConfirmButton"
+                        >
+
+                            <span>
+                                Gerar boleto
+                            </span>
+
+                            <span
+                                class="button-arrow"
+                                aria-hidden="true"
+                            >
+                                →
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     02 — CLIENTE
+                ================================================== -->
+
+                <section class="checkout-card">
+
+                    <div class="checkout-card-header">
+
+                        <div>
+
+                            <span class="checkout-section-number">
+                                02
+                            </span>
+
+                            <div>
+
+                                <h2>
+                                    Dados do cliente
+                                </h2>
+
+                                <p>
+                                    Confirme os dados usados no pedido.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="checkout-form-grid">
+
+                        <div
+                            class="checkout-field checkout-field-full"
+                        >
+
+                            <label for="checkoutName">
+                                Nome completo
+                            </label>
+
+                            <input
+                                id="checkoutName"
+                                autocomplete="name"
+                                placeholder="Seu nome completo"
+                            >
+
+                        </div>
+
+
+                        <div class="checkout-field">
+
+                            <label for="checkoutEmail">
+                                E-mail
+                            </label>
+
+                            <input
+                                id="checkoutEmail"
+                                type="email"
+                                autocomplete="email"
+                                placeholder="seu@email.com"
+                            >
+
+                        </div>
+
+
+                        <div class="checkout-field">
+
+                            <label for="checkoutPhone">
+                                Telefone
+                            </label>
+
+                            <input
+                                id="checkoutPhone"
+                                type="tel"
+                                autocomplete="tel"
+                                placeholder="(00) 00000-0000"
+                            >
+
+                        </div>
+
+
+                        <div
+                            class="checkout-field checkout-field-full"
+                        >
+
+                            <label for="checkoutCpf">
+                                CPF
+                            </label>
+
+                            <input
+                                id="checkoutCpf"
+                                inputmode="numeric"
+                                maxlength="14"
+                                autocomplete="off"
+                                placeholder="000.000.000-00"
+                            >
+
+                            <small class="field-help">
+                                O CPF será usado para identificação do pagamento.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     03 — ENDEREÇO
+                ================================================== -->
+
+                <section class="checkout-card">
+
+                    <div class="checkout-card-header">
+
+                        <div>
+
+                            <span class="checkout-section-number">
+                                03
+                            </span>
+
+                            <div>
+
+                                <h2>
+                                    Endereço
+                                </h2>
+
+                                <p>
+                                    Usado para cobrança e emissão do boleto.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="checkout-form-grid">
+
+                        <div class="checkout-field">
+
+                            <label for="checkoutCep">
+                                CEP
+                            </label>
+
+                            <input
+                                id="checkoutCep"
+                                inputmode="numeric"
+                                autocomplete="postal-code"
+                                maxlength="9"
+                                placeholder="00000-000"
+                            >
+
+                        </div>
+
+
+                        <div class="checkout-field">
+
+                            <label for="checkoutState">
+                                Estado
+                            </label>
+
+                            <input
+                                id="checkoutState"
+                                maxlength="2"
+                                autocomplete="address-level1"
+                                placeholder="PR"
+                            >
+
+                        </div>
+
+
+                        <div
+                            class="checkout-field checkout-field-full"
+                        >
+
+                            <label for="checkoutCity">
+                                Cidade
+                            </label>
+
+                            <input
+                                id="checkoutCity"
+                                autocomplete="address-level2"
+                                placeholder="Sua cidade"
+                            >
+
+                        </div>
+
+
+                        <div
+                            class="checkout-field checkout-field-full"
+                        >
+
+                            <label for="checkoutNeighborhood">
+                                Bairro
+                            </label>
+
+                            <input
+                                id="checkoutNeighborhood"
+                                placeholder="Seu bairro"
+                            >
+
+                        </div>
+
+
+                        <div
+                            class="checkout-field checkout-field-full"
+                        >
+
+                            <label for="checkoutAddress">
+                                Endereço
+                            </label>
+
+                            <input
+                                id="checkoutAddress"
+                                autocomplete="street-address"
+                                placeholder="Rua, avenida..."
+                            >
+
+                        </div>
+
+
+                        <div class="checkout-field">
+
+                            <label for="checkoutNumber">
+                                Número
+                            </label>
+
+                            <input
+                                id="checkoutNumber"
+                                placeholder="123"
+                            >
+
+                        </div>
+
+
+                        <div class="checkout-field">
+
+                            <label for="checkoutComplement">
+                                Complemento
+                            </label>
+
+                            <input
+                                id="checkoutComplement"
+                                placeholder="Apartamento, bloco..."
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+
+            <!-- =================================================
+                 RESUMO
+            ================================================== -->
+
+            <aside class="checkout-summary checkout-summary-professional">
+
+
+                <div class="checkout-summary-top">
+
+                    <span class="checkout-summary-label">
+                        SEU PEDIDO
+                    </span>
+
+                    <h2>
+                        Resumo da compra
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="checkoutItems"
+                    class="checkout-items"
+                ></div>
+
+
+                <div class="checkout-summary-divider"></div>
+
+
+                <div class="checkout-summary-line">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="checkoutSubtotal">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="checkout-summary-line"
+                    id="checkoutDiscountLine"
+                    style="display:none;"
+                >
+
+                    <span>
+                        Desconto
+                    </span>
+
+                    <strong id="checkoutDiscount">
+                        - R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="checkout-summary-line">
+
+                    <span>
+                        Frete
+                    </span>
+
+                    <strong id="checkoutShipping">
+                        A calcular
+                    </strong>
+
+                </div>
+
+
+                <!-- CUPOM -->
+
+                <div class="checkout-coupon">
+
+                    <label
+                        for="checkoutCoupon"
+                        class="checkout-coupon-label"
+                    >
+                        Cupom de desconto
+                    </label>
+
+
+                    <div class="checkout-coupon-row">
+
+                        <input
+                            type="text"
+                            id="checkoutCoupon"
+                            placeholder="Digite seu cupom"
+                            autocomplete="off"
+                            maxlength="50"
+                        >
+
+
+                        <button
+                            type="button"
+                            class="btn btn-small"
+                            id="checkoutCouponButton"
+                        >
+                            Aplicar
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="checkoutCouponMessage"
+                        class="checkout-coupon-message"
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+
+                </div>
+
+
+                <div class="checkout-summary-divider"></div>
+
+
+                <div class="checkout-summary-total">
+
+                    <div>
+
+                        <span>
+                            Total
+                        </span>
+
+                        <small>
+                            À vista
+                        </small>
+
+                    </div>
+
+                    <strong id="checkoutTotal">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <div class="checkout-summary-security">
+
+                    <span>
+                        ✓
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Checkout protegido
+                        </strong>
+
+                        <small>
+                            Seus dados permanecem protegidos durante o processo.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="checkoutPaymentResult"
+                    class="payment-result"
+                    style="display:none;"
+                ></div>
+
+
+                <a
+                    href="/carrinho.html"
+                    class="checkout-back-cart"
+                >
+                    ← Voltar ao carrinho
+                </a>
+
+            </aside>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container footer-content">
+
+        <div>
+
+            <div class="footer-logo">
+                GYAMAX
+            </div>
+
+            <p data-i18n="footer.description">
+                Impressão 3D & Fabricação
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a
+                href="/index.html#inicio"
+                data-i18n="nav.home"
+            >
+                Início
+            </a>
+
+            <a
+                href="/index.html#servicos"
+                data-i18n="nav.services"
+            >
+                Serviços
+            </a>
+
+            <a
+                href="/loja.html"
+                data-i18n="nav.store"
+            >
+                Loja
+            </a>
+
+            <a
+                href="/index.html#sobre"
+                data-i18n="nav.about"
+            >
+                Sobre
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container copyright">
+
+        © 2026 GYAMAX.
+
+        <span data-i18n="footer.rights">
+            Todos os direitos reservados.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="/script.js"></script>
+
+
+<script>
+
+"use strict";
+
+(function () {
+
+
+    /* =====================================================
+       CATÁLOGO
+    ===================================================== */
+
+    const catalogo = {
+
+        1: {
+            nome:
+                "Modelo GYAMAX 01",
+
+            preco:
+                19.90
+        },
+
+        2: {
+            nome:
+                "Modelo GYAMAX 02",
+
+            preco:
+                29.90
+        },
+
+        3: {
+            nome:
+                "Modelo GYAMAX 03",
+
+            preco:
+                39.90
+        }
+
+    };
+
+
+    /* =====================================================
+       HELPERS
+    ===================================================== */
+
+    const $ =
+        id =>
+            document.getElementById(id);
+
+
+    const money =
+        valor =>
+            Number(
+                valor || 0
+            ).toLocaleString(
+                "pt-BR",
+                {
+                    style:
+                        "currency",
+
+                    currency:
+                        "BRL"
+                }
+            );
+
+
+    const esc =
+        valor =>
+            String(
+                valor ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+
+    let pagamentoProcessando =
+        false;
+
+
+    /* =====================================================
+       CUPOM
+    ===================================================== */
+
+    window.gyamaxCupomAplicado =
+        null;
+
+
+    function calcularDescontoCupom(
+        valorSubtotal
+    ) {
+
+        const cupom =
+            window.gyamaxCupomAplicado;
+
+
+        if (
+            !cupom ||
+            !cupom.tipo ||
+            !Number.isFinite(
+                Number(
+                    cupom.valor
+                )
+            )
+        ) {
+
+            return 0;
+
+        }
+
+
+        const valor =
+            Number(
+                cupom.valor
+            );
+
+
+        if (
+            valor <= 0 ||
+            valorSubtotal <= 0
+        ) {
+
+            return 0;
+
+        }
+
+
+        if (
+            String(
+                cupom.tipo
+            ).toLowerCase() ===
+            "percentual"
+        ) {
+
+            return Math.min(
+                valorSubtotal,
+                valorSubtotal *
+                    (
+                        valor / 100
+                    )
+            );
+
+        }
+
+
+        if (
+            String(
+                cupom.tipo
+            ).toLowerCase() ===
+            "fixo"
+        ) {
+
+            return Math.min(
+                valorSubtotal,
+                valor
+            );
+
+        }
+
+
+        return 0;
+
+    }
+
+
+    function obterTotalComDesconto(
+        valorSubtotal
+    ) {
+
+        const desconto =
+            calcularDescontoCupom(
+                valorSubtotal
+            );
+
+
+        return Math.max(
+            0,
+            valorSubtotal -
+                desconto
+        );
+
+    }
+
+
+    window.gyamaxObterTotalCheckout =
+        function (
+            valorSubtotal
+        ) {
+
+            return obterTotalComDesconto(
+                valorSubtotal
+            );
+
+        };
+
+
+    /* =====================================================
+       CARRINHO
+    ===================================================== */
+
+    function obterCarrinho() {
+
+        try {
+
+            const valor =
+                JSON.parse(
+                    localStorage.getItem(
+                        "gyamax_carrinho"
+                    ) || "[]"
+                );
+
+
+            if (
+                !Array.isArray(
+                    valor
+                )
+            ) {
+
+                return [];
+
+            }
+
+
+            return valor
+                .map(
+                    item => ({
+
+                        id:
+                            Number(
+                                item?.id
+                            ),
+
+                        quantidade:
+                            Math.max(
+                                1,
+                                Math.floor(
+                                    Number(
+                                        item?.quantidade
+                                    ) || 1
+                                )
+                            )
+
+                    })
+                )
+                .filter(
+                    item =>
+                        catalogo[
+                            item.id
+                        ]
+                );
+
+        } catch {
+
+            return [];
+
+        }
+
+    }
+
+
+    function subtotal() {
+
+        return obterCarrinho()
+            .reduce(
+                (
+                    total,
+                    item
+                ) => {
+
+                    const produto =
+                        catalogo[
+                            item.id
+                        ];
+
+
+                    return (
+                        total +
+                        (
+                            produto.preco *
+                            item.quantidade
+                        )
+                    );
+
+                },
+                0
+            );
+
+    }
+
+
+    /* =====================================================
+       MENSAGEM
+    ===================================================== */
+
+    function mostrarMensagem(
+        texto,
+        erro = false
+    ) {
+
+        const elemento =
+            $("checkoutMessage");
+
+
+        if (
+            !elemento
+        ) {
+
+            return;
+
+        }
+
+
+        elemento.textContent =
+            texto;
+
+
+        elemento.style.display =
+            "flex";
+
+
+        elemento.classList.toggle(
+            "erro",
+            erro
+        );
+
+
+        elemento.classList.toggle(
+            "sucesso",
+            !erro
+        );
+
+    }
+
+
+    /* =====================================================
+       MÉTODO
+    ===================================================== */
+
+    function obterMetodo() {
+
+        return (
+            document.querySelector(
+                'input[name="paymentMethod"]:checked'
+            )?.value ||
+            "cartao"
+        );
+
+    }
+
+
+    /* =====================================================
+       CPF
+    ===================================================== */
+
+    function obterCpf() {
+
+        const metodo =
+            obterMetodo();
+
+
+        let cpf =
+            $("checkoutCpf")?.value ||
+            "";
+
+
+        if (
+            metodo === "pix" &&
+            $("pixCpf")?.value
+        ) {
+
+            cpf =
+                $("pixCpf").value;
+
+        }
+
+
+        if (
+            metodo === "boleto" &&
+            $("boletoCpf")?.value
+        ) {
+
+            cpf =
+                $("boletoCpf").value;
+
+        }
+
+
+        return String(
+            cpf
+        )
+            .replace(
+                /\D/g,
+                ""
+            );
+
+    }
+
+
+    /* =====================================================
+       CLIENTE
+    ===================================================== */
+
+    function obterDadosCliente() {
+
+        return {
+
+            checkoutName:
+                $("checkoutName")
+                    ?.value
+                    .trim() ||
+                "",
+
+            checkoutEmail:
+                $("checkoutEmail")
+                    ?.value
+                    .trim() ||
+                "",
+
+            checkoutPhone:
+                $("checkoutPhone")
+                    ?.value
+                    .trim() ||
+                "",
+
+            cpf:
+                obterCpf()
+
+        };
+
+    }
+
+
+    /* =====================================================
+       ENDEREÇO
+    ===================================================== */
+
+    function obterEndereco() {
+
+        return {
+
+            checkoutCep:
+                (
+                    $("checkoutCep")
+                        ?.value ||
+                    ""
+                )
+                    .replace(
+                        /\D/g,
+                        ""
+                    ),
+
+            checkoutState:
+                (
+                    $("checkoutState")
+                        ?.value ||
+                    ""
+                )
+                    .trim()
+                    .toUpperCase(),
+
+            checkoutCity:
+                (
+                    $("checkoutCity")
+                        ?.value ||
+                    ""
+                )
+                    .trim(),
+
+            checkoutNeighborhood:
+                (
+                    $("checkoutNeighborhood")
+                        ?.value ||
+                    ""
+                )
+                    .trim(),
+
+            checkoutAddress:
+                (
+                    $("checkoutAddress")
+                        ?.value ||
+                    ""
+                )
+                    .trim(),
+
+            checkoutNumber:
+                (
+                    $("checkoutNumber")
+                        ?.value ||
+                    ""
+                )
+                    .trim(),
+
+            checkoutComplement:
+                (
+                    $("checkoutComplement")
+                        ?.value ||
+                    ""
+                )
+                    .trim()
+
+        };
+
+    }
+
+
+    /* =====================================================
+       RESUMO
+    ===================================================== */
+
+    function renderizarResumo() {
+
+        const itens =
+            obterCarrinho();
+
+
+        const itemsElement =
+            $("checkoutItems");
+
+
+        if (
+            !itens.length
+        ) {
+
+            if (
+                itemsElement
+            ) {
+
+                itemsElement.innerHTML = `
+
+                    <div class="checkout-empty-order">
+
+                        <span>
+                            Carrinho vazio
+                        </span>
+
+                        <a href="/loja.html">
+                            Voltar para a loja
+                        </a>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            if (
+                $("checkoutSubtotal")
+            ) {
+
+                $("checkoutSubtotal")
+                    .textContent =
+                    money(0);
+
+            }
+
+
+            if (
+                $("checkoutDiscount")
+            ) {
+
+                $("checkoutDiscount")
+                    .textContent =
+                    money(0);
+
+            }
+
+
+            if (
+                $("checkoutDiscountLine")
+            ) {
+
+                $("checkoutDiscountLine")
+                    .style.display =
+                    "none";
+
+            }
+
+
+            if (
+                $("checkoutTotal")
+            ) {
+
+                $("checkoutTotal")
+                    .textContent =
+                    money(0);
+
+            }
+
+
+            return;
+
+        }
+
+
+        let total =
+            0;
+
+
+        if (
+            itemsElement
+        ) {
+
+            itemsElement.innerHTML =
+                itens
+                    .map(
+                        item => {
+
+                            const produto =
+                                catalogo[
+                                    item.id
+                                ];
+
+
+                            const subtotalItem =
+                                produto.preco *
+                                item.quantidade;
+
+
+                            total +=
+                                subtotalItem;
+
+
+                            return `
+
+                                <div class="checkout-item">
+
+                                    <div class="checkout-item-main">
+
+                                        <div class="checkout-item-thumb">
+
+                                            <span>
+                                                G
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="checkout-item-info">
+
+                                            <strong>
+                                                ${esc(
+                                                    produto.nome
+                                                )}
+                                            </strong>
+
+                                            <span>
+
+                                                ${item.quantidade}
+
+                                                unidade${
+                                                    item.quantidade > 1
+                                                        ? "s"
+                                                        : ""
+                                                }
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <strong class="checkout-item-price">
+
+                                        ${money(
+                                            subtotalItem
+                                        )}
+
+                                    </strong>
+
+                                </div>
+
+                            `;
+
+                        }
+                    )
+                    .join("");
+
+        }
+
+
+        const desconto =
+            calcularDescontoCupom(
+                total
+            );
+
+
+        const totalFinal =
+            Math.max(
+                0,
+                total -
+                    desconto
+            );
+
+
+        if (
+            $("checkoutSubtotal")
+        ) {
+
+            $("checkoutSubtotal")
+                .textContent =
+                money(total);
+
+        }
+
+
+        if (
+            $("checkoutDiscount")
+        ) {
+
+            $("checkoutDiscount")
+                .textContent =
+                `- ${money(
+                    desconto
+                )}`;
+
+        }
+
+
+        if (
+            $("checkoutDiscountLine")
+        ) {
+
+            $("checkoutDiscountLine")
+                .style.display =
+                desconto > 0
+                    ? "flex"
+                    : "none";
+
+        }
+
+
+        if (
+            $("checkoutTotal")
+        ) {
+
+            $("checkoutTotal")
+                .textContent =
+                money(
+                    totalFinal
+                );
+
+        }
+
+    }
+
+
+    window.gyamaxAtualizarResumo =
+        renderizarResumo;
+
+
+    /* =====================================================
+       LIMPAR CARRINHO APÓS APROVAÇÃO
+    ===================================================== */
+
+    function limparCarrinhoAposAprovacao() {
+
+        localStorage.setItem(
+            "gyamax_carrinho",
+            "[]"
+        );
+
+
+        localStorage.removeItem(
+            "gyamax_pedido_pendente"
+        );
+
+
+        if (
+            typeof window.gyamaxAtualizarContadorCarrinho ===
+            "function"
+        ) {
+
+            window.gyamaxAtualizarContadorCarrinho();
+
+        }
+
+
+        if (
+            typeof window.atualizarContadorCarrinho ===
+            "function"
+        ) {
+
+            window.atualizarContadorCarrinho();
+
+        }
+
+
+        renderizarResumo();
+
+
+        console.log(
+            "GYAMAX — carrinho limpo após pagamento aprovado."
+        );
+
+    }
+
+
+    /* =====================================================
+       RESULTADO DO PAGAMENTO
+    ===================================================== */
+
+    function mostrarResultadoPagamento(
+        dados
+    ) {
+
+        const box =
+            $("checkoutPaymentResult");
+
+
+        if (
+            !box
+        ) {
+
+            return;
+
+        }
+
+
+        const pagamento =
+            dados?.pagamento ||
+            {};
+
+
+        const pedido =
+            dados?.pedido ||
+            {};
+
+
+        const status =
+            pagamento.status ||
+            pedido.status ||
+            "pending";
+
+
+        let html = `
+
+            <div class="payment-result-head">
+
+                <div class="payment-result-icon">
+                    ✓
+                </div>
+
+
+                <div>
+
+                    <span class="payment-result-eyebrow">
+                        PAGAMENTO
+                    </span>
+
+
+                    <h3>
+
+                        ${
+                            dados?.modoTeste
+                                ? "Pagamento de teste criado"
+                                : "Pagamento criado"
+                        }
+
+                    </h3>
+
+
+                    <p>
+                        Pedido #${esc(
+                            pedido.id ||
+                            ""
+                        )}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="payment-result-status">
+
+                <span>
+                    Status
+                </span>
+
+                <strong>
+                    ${esc(
+                        status
+                    )}
+                </strong>
+
+            </div>
+
+        `;
+
+
+        if (
+            dados?.modoTeste
+        ) {
+
+            html += `
+
+                <div class="payment-result-demo">
+
+                    <strong>
+                        Modo de teste
+                    </strong>
+
+                    <span>
+                        Nenhum pagamento real foi realizado.
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =================================================
+           PIX
+        ================================================= */
+
+        if (
+            pagamento.qrCodeBase64 ||
+            pagamento.qrCode
+        ) {
+
+            html += `
+
+                <div class="payment-result-section">
+
+                    <div class="payment-result-section-title">
+
+                        <span class="payment-result-mini-icon">
+
+                            <span class="pix-symbol-official"></span>
+
+                        </span>
+
+                        <div>
+
+                            <h4>
+                                Pague com Pix
+                            </h4>
+
+                            <p>
+                                Escaneie o QR Code ou copie o código.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+            `;
+
+
+            if (
+                pagamento.qrCodeBase64
+            ) {
+
+                html += `
+
+                    <div class="payment-qr-wrap">
+
+                        <img
+                            class="payment-result-qr-image"
+                            alt="QR Code Pix"
+                            src="data:image/svg+xml;base64,${esc(
+                                pagamento.qrCodeBase64
+                            )}"
+                        >
+
+                    </div>
+
+                `;
+
+            }
+
+
+            if (
+                pagamento.qrCode
+            ) {
+
+                html += `
+
+                    <div class="payment-copy-block">
+
+                        <label
+                            class="payment-result-label"
+                            for="pixCopyCode"
+                        >
+                            Pix Copia e Cola
+                        </label>
+
+
+                        <div class="payment-result-copy">
+
+                            <input
+                                id="pixCopyCode"
+                                type="text"
+                                readonly
+                                value="${esc(
+                                    pagamento.qrCode
+                                )}"
+                            >
+
+
+                            <button
+                                type="button"
+                                class="btn btn-small payment-copy-button"
+                                id="copyPixButton"
+                            >
+                                Copiar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            html += `
+                </div>
+            `;
+
+        }
+
+
+        /* =================================================
+           BOLETO
+        ================================================= */
+
+        if (
+            pagamento.ticketUrl ||
+            pagamento.barcode ||
+            pagamento.digitableLine
+        ) {
+
+            html += `
+
+                <div class="payment-result-section">
+
+                    <div class="payment-result-section-title">
+
+                        <span class="payment-result-mini-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+
+                                <path d="M4 5v14"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                />
+
+                                <path d="M7 5v14"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                />
+
+                                <path d="M10 5v14"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.3"
+                                />
+
+                                <path d="M12 5v14"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                />
+
+                                <path d="M15 5v14"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.2"
+                                />
+
+                                <path d="M17.5 5v14"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.3"
+                                />
+
+                                <path d="M20 5v14"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                />
+
+                            </svg>
+
+                        </span>
+
+
+                        <div>
+
+                            <h4>
+                                Boleto gerado
+                            </h4>
+
+                            <p>
+                                Use a linha digitável para pagar.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+            `;
+
+
+            if (
+                pagamento.ticketUrl &&
+                pagamento.ticketUrl !== "#"
+            ) {
+
+                html += `
+
+                    <a
+                        class="btn payment-ticket-button"
+                        target="_blank"
+                        rel="noopener"
+                        href="${esc(
+                            pagamento.ticketUrl
+                        )}"
+                    >
+
+                        Abrir boleto
+
+                        <span>
+                            ↗
+                        </span>
+
+                    </a>
+
+                `;
+
+            }
+
+
+            const codigo =
+                pagamento.digitableLine ||
+                pagamento.barcode ||
+                "";
+
+
+            if (
+                codigo
+            ) {
+
+                html += `
+
+                    <div class="payment-copy-block">
+
+                        <label
+                            class="payment-result-label"
+                            for="boletoCode"
+                        >
+                            Linha digitável
+                        </label>
+
+
+                        <div class="payment-result-copy">
+
+                            <input
+                                id="boletoCode"
+                                type="text"
+                                readonly
+                                value="${esc(
+                                    codigo
+                                )}"
+                            >
+
+
+                            <button
+                                type="button"
+                                class="btn btn-small payment-copy-button"
+                                id="copyBoletoButton"
+                            >
+                                Copiar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            html += `
+                </div>
+            `;
+
+        }
+
+
+        box.innerHTML =
+            html;
+
+
+        box.style.display =
+            "block";
+
+
+        configurarCopia();
+
+
+        box.scrollIntoView({
+
+            behavior:
+                "smooth",
+
+            block:
+                "nearest"
+
+        });
+
+    }
+
+
+    /* =====================================================
+       COPIAR
+    ===================================================== */
+
+    function configurarCopia() {
+
+
+        const copyPixButton =
+            $("copyPixButton");
+
+
+        if (
+            copyPixButton
+        ) {
+
+            copyPixButton.addEventListener(
+                "click",
+
+                async () => {
+
+                    const input =
+                        $("pixCopyCode");
+
+
+                    if (
+                        !input
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    try {
+
+                        await navigator.clipboard.writeText(
+                            input.value
+                        );
+
+                    } catch {
+
+                        input.select();
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+                    }
+
+
+                    copyPixButton.textContent =
+                        "Copiado ✓";
+
+
+                    copyPixButton.classList.add(
+                        "copied"
+                    );
+
+
+                    setTimeout(
+                        () => {
+
+                            copyPixButton.textContent =
+                                "Copiar";
+
+                            copyPixButton.classList.remove(
+                                "copied"
+                            );
+
+                        },
+                        1800
+                    );
+
+                }
+            );
+
+        }
+
+
+        const copyBoletoButton =
+            $("copyBoletoButton");
+
+
+        if (
+            copyBoletoButton
+        ) {
+
+            copyBoletoButton.addEventListener(
+                "click",
+
+                async () => {
+
+                    const input =
+                        $("boletoCode");
+
+
+                    if (
+                        !input
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    try {
+
+                        await navigator.clipboard.writeText(
+                            input.value
+                        );
+
+                    } catch {
+
+                        input.select();
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+                    }
+
+
+                    copyBoletoButton.textContent =
+                        "Copiado ✓";
+
+
+                    copyBoletoButton.classList.add(
+                        "copied"
+                    );
+
+
+                    setTimeout(
+                        () => {
+
+                            copyBoletoButton.textContent =
+                                "Copiar";
+
+                            copyBoletoButton.classList.remove(
+                                "copied"
+                            );
+
+                        },
+                        1800
+                    );
+
+                }
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       ERROS
+    ===================================================== */
+
+    function obterMensagemErro(
+        dados
+    ) {
+
+        if (
+            dados?.mensagem
+        ) {
+
+            return dados.mensagem;
+
+        }
+
+
+        const causas =
+            dados?.detalhes?.cause;
+
+
+        if (
+            Array.isArray(
+                causas
+            ) &&
+            causas.length
+        ) {
+
+            return causas
+                .map(
+                    item =>
+                        item?.description ||
+                        item?.message ||
+                        item?.code
+                )
+                .filter(
+                    Boolean
+                )
+                .join(
+                    " | "
+                );
+
+        }
+
+
+        switch (
+            dados?.erro
+        ) {
+
+            case "notLogged":
+
+                return "Sua sessão expirou. Faça login novamente.";
+
+
+            case "paymentNotConfigured":
+
+                return "Mercado Pago sem credenciais reais. O sistema deve permanecer em modo de teste.";
+
+
+            case "invalidCpf":
+
+                return "Informe um CPF válido.";
+
+
+            case "invalidAddress":
+
+                return "Preencha corretamente o endereço completo.";
+
+
+            case "invalidCustomer":
+
+                return "Confira nome e e-mail.";
+
+
+            case "invalidPhone":
+
+                return "Informe o telefone.";
+
+
+            case "cardTokenRequired":
+
+                return "Não foi possível obter o token do cartão.";
+
+
+            case "paymentMethodRequired":
+
+                return "Não foi possível identificar o cartão.";
+
+
+            case "invalidCart":
+
+                return "Não foi possível validar o carrinho.";
+
+
+            case "emptyCart":
+
+                return "Seu carrinho está vazio.";
+
+
+            default:
+
+                return "Não foi possível criar o pagamento.";
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CRIAR PAGAMENTO
+    ===================================================== */
+
+    async function criarPagamento(
+        metodo,
+        extras = {}
+    ) {
+
+        if (
+            pagamentoProcessando
+        ) {
+
+            return null;
+
+        }
+
+
+        const itens =
+            obterCarrinho();
+
+
+        if (
+            !itens.length
+        ) {
+
+            mostrarMensagem(
+                "Seu carrinho está vazio.",
+                true
+            );
+
+            return null;
+
+        }
+
+
+        const cliente =
+            obterDadosCliente();
+
+
+        if (
+            !cliente.checkoutName ||
+            !cliente.checkoutEmail ||
+            !cliente.checkoutPhone
+        ) {
+
+            mostrarMensagem(
+                "Preencha nome, e-mail e telefone.",
+                true
+            );
+
+            return null;
+
+        }
+
+
+        if (
+            cliente.cpf.length !==
+            11
+        ) {
+
+            mostrarMensagem(
+                "Informe um CPF válido.",
+                true
+            );
+
+            return null;
+
+        }
+
+
+        const endereco =
+            obterEndereco();
+
+
+        if (
+            metodo ===
+            "boleto"
+        ) {
+
+            if (
+                endereco.checkoutCep.length !== 8 ||
+                endereco.checkoutState.length !== 2 ||
+                !endereco.checkoutCity ||
+                !endereco.checkoutNeighborhood ||
+                !endereco.checkoutAddress ||
+                !endereco.checkoutNumber
+            ) {
+
+                mostrarMensagem(
+                    "Para gerar o boleto, preencha o endereço completo.",
+                    true
+                );
+
+                return null;
+
+            }
+
+        }
+
+
+        const checkoutId =
+            window.crypto &&
+            typeof window.crypto.randomUUID ===
+                "function"
+
+                ? window.crypto.randomUUID()
+
+                : (
+                    Date.now()
+                        .toString(36) +
+
+                    Math.random()
+                        .toString(36)
+                        .slice(2)
+                );
+
+
+        const body = {
+
+            cart:
+                itens,
+
+            paymentMethod:
+                metodo,
+
+            checkoutName:
+                cliente.checkoutName,
+
+            checkoutEmail:
+                cliente.checkoutEmail,
+
+            checkoutPhone:
+                cliente.checkoutPhone,
+
+            cpf:
+                cliente.cpf,
+
+            couponCode:
+                window.gyamaxCupomAplicado?.codigo ||
+                "",
+
+            ...endereco,
+
+            ...extras,
+
+            checkoutId
+
+        };
+
+
+        pagamentoProcessando =
+            true;
+
+
+        const botao =
+            metodo ===
+                "pix"
+
+                ? $("pixConfirmButton")
+
+                : metodo ===
+                    "boleto"
+
+                    ? $("boletoConfirmButton")
+
+                    : $("cardTestButton");
+
+
+        const textoOriginal =
+            botao?.innerText ||
+            "";
+
+
+        if (
+            botao
+        ) {
+
+            botao.disabled =
+                true;
+
+            botao.classList.add(
+                "is-loading"
+            );
+
+            botao.innerHTML = `
+
+                <span class="checkout-spinner"></span>
+
+                <span>
+
+                    ${
+                        metodo === "pix"
+                            ? "Gerando Pix..."
+                            : metodo === "boleto"
+                                ? "Gerando boleto..."
+                                : "Processando..."
+                    }
+
+                </span>
+
+            `;
+
+        }
+
+
+        try {
+
+            mostrarMensagem(
+
+                metodo === "pix"
+                    ? "Gerando seu Pix..."
+
+                    : metodo === "boleto"
+                        ? "Gerando seu boleto..."
+
+                        : "Processando pagamento de teste...",
+
+                false
+
+            );
+
+
+            const resposta =
+                await fetch(
+                    "/api/pagamentos",
+                    {
+
+                        method:
+                            "POST",
+
+                        credentials:
+                            "include",
+
+                        cache:
+                            "no-store",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Accept":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                body
+                            )
+
+                    }
+                );
+
+
+            const dados =
+                await resposta
+                    .json()
+                    .catch(
+                        () => ({})
+                    );
+
+
+            if (
+                resposta.status === 401 ||
+                dados?.erro ===
+                    "notLogged"
+            ) {
+
+                mostrarMensagem(
+                    "Sua sessão expirou. Faça login novamente.",
+                    true
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "/login.html";
+
+                    },
+                    900
+                );
+
+
+                return null;
+
+            }
+
+
+            if (
+                !resposta.ok ||
+                !dados.sucesso
+            ) {
+
+                console.error(
+                    "Erro retornado pelo servidor:",
+                    dados
+                );
+
+
+                mostrarMensagem(
+                    obterMensagemErro(
+                        dados
+                    ),
+                    true
+                );
+
+
+                return null;
+
+            }
+
+
+            mostrarResultadoPagamento(
+                dados
+            );
+
+
+            /* =================================================
+               STATUS REAL DO PEDIDO
+            ================================================= */
+
+            const statusPagamento =
+                String(
+                    dados?.pagamento?.status ||
+                    dados?.pedido?.status ||
+                    ""
+                )
+                    .trim()
+                    .toLowerCase();
+
+
+            console.log(
+                "GYAMAX — pagamento criado:",
+                {
+                    pedidoId:
+                        dados?.pedido?.id,
+
+                    status:
+                        statusPagamento,
+
+                    modoTeste:
+                        dados?.modoTeste
+                }
+            );
+
+
+            /* =================================================
+               APROVADO → LIMPAR CARRINHO
+            ================================================= */
+
+            if (
+                [
+                    "approved",
+                    "paid",
+                    "completed",
+                    "delivered"
+                ].includes(
+                    statusPagamento
+                )
+            ) {
+
+                limparCarrinhoAposAprovacao();
+
+            }
+
+
+            /* =================================================
+               PENDENTE → VINCULAR AO CARRINHO
+            ================================================= */
+
+            else if (
+                statusPagamento === "pending" &&
+                dados?.pedido?.id
+            ) {
+
+                localStorage.setItem(
+                    "gyamax_pedido_pendente",
+                    String(
+                        dados.pedido.id
+                    )
+                );
+
+
+                console.log(
+                    "GYAMAX — pedido pendente vinculado ao carrinho:",
+                    dados.pedido.id
+                );
+
+            }
+
+
+            mostrarMensagem(
+
+                dados.modoTeste
+
+                    ? (
+
+                        metodo === "pix"
+
+                            ? "Pix de teste gerado."
+
+                            : metodo === "boleto"
+
+                                ? "Boleto de teste gerado."
+
+                                : "Pagamento de cartão simulado com sucesso."
+
+                    )
+
+                    : (
+
+                        metodo === "pix"
+
+                            ? "Pix gerado com sucesso."
+
+                            : metodo === "boleto"
+
+                                ? "Boleto gerado com sucesso."
+
+                                : "Pagamento criado com sucesso."
+
+                    ),
+
+                false
+
+            );
+
+
+            return dados;
+
+
+        } catch (
+            erro
+        ) {
+
+            console.error(
+                "Erro ao criar pagamento:",
+                erro
+            );
+
+
+            mostrarMensagem(
+                "Não foi possível conectar ao servidor de pagamento.",
+                true
+            );
+
+
+            return null;
+
+
+        } finally {
+
+            pagamentoProcessando =
+                false;
+
+
+            if (
+                botao
+            ) {
+
+                botao.disabled =
+                    false;
+
+                botao.classList.remove(
+                    "is-loading"
+                );
+
+
+                botao.innerHTML = `
+
+                    <span>
+
+                        ${
+                            textoOriginal ||
+
+                            (
+                                metodo === "pix"
+                                    ? "Gerar Pix"
+
+                                    : metodo === "boleto"
+                                        ? "Gerar boleto"
+
+                                        : "Simular pagamento"
+                            )
+                        }
+
+                    </span>
+
+
+                    ${
+                        metodo === "card"
+                            ? ""
+                            : `
+                                <span
+                                    class="button-arrow"
+                                    aria-hidden="true"
+                                >
+                                    →
+                                </span>
+                            `
+                    }
+
+                `;
+
+            }
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CARTÃO TESTE
+    ===================================================== */
+
+    async function simularCartao() {
+
+        await criarPagamento(
+            "card"
+        );
+
+    }
+
+
+    /* =====================================================
+       MÉTODO VISÍVEL
+    ===================================================== */
+
+    function atualizarMetodo() {
+
+        const metodo =
+            obterMetodo();
+
+
+        if (
+            $("cardPaymentFields")
+        ) {
+
+            $("cardPaymentFields")
+                .style.display =
+
+                metodo ===
+                    "cartao"
+
+                    ? "block"
+
+                    : "none";
+
+        }
+
+
+        if (
+            $("pixPaymentFields")
+        ) {
+
+            $("pixPaymentFields")
+                .style.display =
+
+                metodo ===
+                    "pix"
+
+                    ? "block"
+
+                    : "none";
+
+        }
+
+
+        if (
+            $("boletoPaymentFields")
+        ) {
+
+            $("boletoPaymentFields")
+                .style.display =
+
+                metodo ===
+                    "boleto"
+
+                    ? "block"
+
+                    : "none";
+
+        }
+
+
+        document
+            .querySelectorAll(
+                ".payment-method"
+            )
+            .forEach(
+                label => {
+
+                    const radio =
+                        label.querySelector(
+                            'input[name="paymentMethod"]'
+                        );
+
+
+                    label.classList.toggle(
+                        "is-selected",
+                        Boolean(
+                            radio?.checked
+                        )
+                    );
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       CPF
+    ===================================================== */
+
+    function formatarCpfInput(
+        elemento
+    ) {
+
+        if (
+            !elemento
+        ) {
+
+            return;
+
+        }
+
+
+        elemento.addEventListener(
+            "input",
+
+            () => {
+
+                let valor =
+                    elemento.value
+                        .replace(
+                            /\D/g,
+                            ""
+                        )
+                        .slice(
+                            0,
+                            11
+                        );
+
+
+                if (
+                    valor.length >
+                    9
+                ) {
+
+                    valor =
+                        valor.replace(
+                            /(\d{3})(\d{3})(\d{3})(\d{1,2})/,
+                            "$1.$2.$3-$4"
+                        );
+
+                } else if (
+                    valor.length >
+                    6
+                ) {
+
+                    valor =
+                        valor.replace(
+                            /(\d{3})(\d{3})(\d+)/,
+                            "$1.$2.$3"
+                        );
+
+                } else if (
+                    valor.length >
+                    3
+                ) {
+
+                    valor =
+                        valor.replace(
+                            /(\d{3})(\d+)/,
+                            "$1.$2"
+                        );
+
+                }
+
+
+                elemento.value =
+                    valor;
+
+            }
+        );
+
+    }
+
+
+    formatarCpfInput(
+        $("checkoutCpf")
+    );
+
+    formatarCpfInput(
+        $("pixCpf")
+    );
+
+    formatarCpfInput(
+        $("boletoCpf")
+    );
+
+
+    /* =====================================================
+       SINCRONIZAR CPF
+    ===================================================== */
+
+    if (
+        $("pixCpf")
+    ) {
+
+        $("pixCpf")
+            .addEventListener(
+                "input",
+
+                () => {
+
+                    if (
+                        $("checkoutCpf")
+                    ) {
+
+                        $("checkoutCpf").value =
+                            $("pixCpf").value;
+
+                    }
+
+                }
+            );
+
+    }
+
+
+    if (
+        $("boletoCpf")
+    ) {
+
+        $("boletoCpf")
+            .addEventListener(
+                "input",
+
+                () => {
+
+                    if (
+                        $("checkoutCpf")
+                    ) {
+
+                        $("checkoutCpf").value =
+                            $("boletoCpf").value;
+
+                    }
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       CEP
+    ===================================================== */
+
+    if (
+        $("checkoutCep")
+    ) {
+
+        $("checkoutCep")
+            .addEventListener(
+                "input",
+
+                evento => {
+
+                    let valor =
+                        evento.target.value
+                            .replace(
+                                /\D/g,
+                                ""
+                            )
+                            .slice(
+                                0,
+                                8
+                            );
+
+
+                    if (
+                        valor.length >
+                        5
+                    ) {
+
+                        valor =
+                            valor.slice(
+                                0,
+                                5
+                            ) +
+
+                            "-" +
+
+                            valor.slice(
+                                5
+                            );
+
+                    }
+
+
+                    evento.target.value =
+                        valor;
+
+                }
+            );
+
+    }
+
+
+    /* =====================================================
+       BOTÃO PIX
+    ===================================================== */
+
+    const pixButton =
+        $("pixConfirmButton");
+
+
+    if (
+        pixButton
+    ) {
+
+        pixButton.addEventListener(
+            "click",
+
+            () => {
+
+                criarPagamento(
+                    "pix"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       BOTÃO BOLETO
+    ===================================================== */
+
+    const boletoButton =
+        $("boletoConfirmButton");
+
+
+    if (
+        boletoButton
+    ) {
+
+        boletoButton.addEventListener(
+            "click",
+
+            () => {
+
+                criarPagamento(
+                    "boleto"
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CARTÃO TESTE
+    ===================================================== */
+
+    const cardTestButton =
+        $("cardTestButton");
+
+
+    if (
+        cardTestButton
+    ) {
+
+        cardTestButton.addEventListener(
+            "click",
+            simularCartao
+        );
+
+    }
+
+
+    /* =====================================================
+       MÉTODOS
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            'input[name="paymentMethod"]'
+        )
+        .forEach(
+            radio => {
+
+                radio.addEventListener(
+                    "change",
+                    atualizarMetodo
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       CARREGAR USUÁRIO
+    ===================================================== */
+
+    async function carregarUsuario() {
+
+        const resposta =
+            await fetch(
+                "/status-login",
+                {
+
+                    method:
+                        "GET",
+
+                    credentials:
+                        "include",
+
+                    cache:
+                        "no-store",
+
+                    headers: {
+
+                        "Accept":
+                            "application/json"
+
+                    }
+
+                }
+            );
+
+
+        const dados =
+            await resposta.json();
+
+
+        if (
+            !dados?.logado
+        ) {
+
+            mostrarMensagem(
+                "Você precisa estar logado para continuar.",
+                true
+            );
+
+
+            setTimeout(
+                () => {
+
+                    window.location.href =
+                        "/login.html";
+
+                },
+                800
+            );
+
+
+            return null;
+
+        }
+
+
+        const usuario =
+            dados.usuario ||
+            null;
+
+
+        if (
+            usuario
+        ) {
+
+            if (
+                $("checkoutName")
+            ) {
+
+                $("checkoutName").value =
+                    usuario.nome ||
+                    "";
+
+            }
+
+
+            if (
+                $("checkoutEmail")
+            ) {
+
+                $("checkoutEmail").value =
+                    usuario.email ||
+                    "";
+
+            }
+
+        }
+
+
+        return usuario;
+
+    }
+
+
+    /* =====================================================
+       CARTÃO REAL
+    ===================================================== */
+
+    async function iniciarCardReal() {
+
+        const container =
+            $("cardPaymentBrick_container");
+
+
+        if (
+            !container
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const resposta =
+                await fetch(
+                    "/api/pagamentos/config",
+                    {
+
+                        method:
+                            "GET",
+
+                        credentials:
+                            "include",
+
+                        cache:
+                            "no-store",
+
+                        headers: {
+
+                            "Accept":
+                                "application/json"
+
+                        }
+
+                    }
+                );
+
+
+            const config =
+                await resposta.json();
+
+
+            const publicKey =
+                config?.mercadoPago?.publicKey;
+
+
+            if (
+                !publicKey ||
+                publicKey === "SUA_PUBLIC_KEY"
+            ) {
+
+                const testBox =
+                    $("cardTestMode");
+
+
+                if (
+                    testBox
+                ) {
+
+                    testBox.style.display =
+                        "grid";
+
+                }
+
+
+                return;
+
+            }
+
+
+            if (
+                typeof MercadoPago ===
+                "undefined"
+            ) {
+
+                const testBox =
+                    $("cardTestMode");
+
+
+                if (
+                    testBox
+                ) {
+
+                    testBox.style.display =
+                        "grid";
+
+                }
+
+
+                return;
+
+            }
+
+
+            const valor =
+                obterTotalComDesconto(
+                    subtotal()
+                );
+
+
+            if (
+                valor <= 0
+            ) {
+
+                return;
+
+            }
+
+
+            const mp =
+                new MercadoPago(
+                    publicKey,
+                    {
+                        locale:
+                            "pt-BR"
+                    }
+                );
+
+
+            const bricks =
+                mp.bricks();
+
+
+            window.gyamaxCardBrick =
+                await bricks.create(
+                    "cardPayment",
+                    "cardPaymentBrick_container",
+                    {
+
+                        initialization: {
+
+                            amount:
+                                Number(
+                                    valor.toFixed(
+                                        2
+                                    )
+                                )
+
+                        },
+
+
+                        customization: {
+
+                            paymentMethods: {
+
+                                minInstallments:
+                                    1,
+
+                                maxInstallments:
+                                    12
+
+                            },
+
+
+                            visual: {
+
+                                style: {
+
+                                    theme:
+                                        "dark"
+
+                                }
+
+                            }
+
+                        },
+
+
+                        callbacks: {
+
+                            onReady:
+                                () => {
+
+                                    console.log(
+                                        "Mercado Pago Card Brick carregado."
+                                    );
+
+                                },
+
+
+                            onError:
+                                erro => {
+
+                                    console.error(
+                                        "Erro Card Brick:",
+                                        erro
+                                    );
+
+                                },
+
+
+                            onSubmit:
+                                async ({
+                                    formData
+                                }) => {
+
+                                    const dados =
+                                        await criarPagamento(
+                                            "card",
+                                            {
+
+                                                token:
+                                                    formData?.token,
+
+                                                paymentMethodId:
+                                                    formData?.payment_method_id ||
+                                                    formData?.paymentMethodId,
+
+                                                installments:
+                                                    Number(
+                                                        formData?.installments ||
+                                                        1
+                                                    ),
+
+                                                issuerId:
+                                                    formData?.issuer_id ||
+                                                    formData?.issuerId
+
+                                            }
+                                        );
+
+
+                                    if (
+                                        !dados
+                                    ) {
+
+                                        throw new Error(
+                                            "Pagamento não criado."
+                                        );
+
+                                    }
+
+
+                                    return dados;
+
+                                }
+
+                        }
+
+                    }
+                );
+
+
+        } catch (
+            erro
+        ) {
+
+            console.error(
+                "Erro inicializando cartão:",
+                erro
+            );
+
+
+            const testBox =
+                $("cardTestMode");
+
+
+            if (
+                testBox
+            ) {
+
+                testBox.style.display =
+                    "grid";
+
+            }
+
+        }
+
+    }
+
+
+    /* =====================================================
+       INICIALIZAÇÃO
+    ===================================================== */
+
+    async function iniciarCheckout() {
+
+        renderizarResumo();
+
+        atualizarMetodo();
+
+
+        try {
+
+            const usuario =
+                await carregarUsuario();
+
+
+            if (
+                !usuario
+            ) {
+
+                return;
+
+            }
+
+
+            await iniciarCardReal();
+
+
+        } catch (
+            erro
+        ) {
+
+            console.error(
+                "Erro iniciando checkout:",
+                erro
+            );
+
+
+            mostrarMensagem(
+                "Não foi possível carregar o checkout.",
+                true
+            );
+
+        }
+
+    }
+
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            iniciarCheckout
+        );
+
+
+    } else {
+
+        iniciarCheckout();
+
+    }
+
+
+})();
+
+</script>
+
+
+<!-- =====================================================
+     CUPOM — VALIDAR
+===================================================== -->
+
+<script>
+
+"use strict";
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const input =
+            document.getElementById(
+                "checkoutCoupon"
+            );
+
+
+        const botao =
+            document.getElementById(
+                "checkoutCouponButton"
+            );
+
+
+        const mensagem =
+            document.getElementById(
+                "checkoutCouponMessage"
+            );
+
+
+        if (
+            !input ||
+            !botao ||
+            !mensagem
+        ) {
+
+            console.error(
+                "GYAMAX — elementos do cupom não encontrados."
+            );
+
+            return;
+
+        }
+
+
+        botao.addEventListener(
+            "click",
+
+            async function () {
+
+                const codigo =
+                    input.value
+                        .trim()
+                        .toUpperCase();
+
+
+                if (
+                    !codigo
+                ) {
+
+                    mensagem.textContent =
+                        "Digite um código de cupom.";
+
+                    mensagem.className =
+                        "checkout-coupon-message erro";
+
+                    window.gyamaxCupomAplicado =
+                        null;
+
+
+                    if (
+                        typeof window.gyamaxAtualizarResumo ===
+                        "function"
+                    ) {
+
+                        window.gyamaxAtualizarResumo();
+
+                    }
+
+                    return;
+
+                }
+
+
+                botao.disabled =
+                    true;
+
+
+                botao.textContent =
+                    "Validando...";
+
+
+                mensagem.textContent =
+                    "";
+
+
+                mensagem.className =
+                    "checkout-coupon-message";
+
+
+                try {
+
+                    const resposta =
+                        await fetch(
+                            "/api/cupons/validar",
+                            {
+
+                                method:
+                                    "POST",
+
+                                credentials:
+                                    "same-origin",
+
+                                cache:
+                                    "no-store",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Accept":
+                                        "application/json"
+
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        codigo
+                                    })
+
+                            }
+                        );
+
+
+                    const dados =
+                        await resposta
+                            .json()
+                            .catch(
+                                () => ({})
+                            );
+
+
+                    if (
+                        !resposta.ok ||
+                        !dados.sucesso
+                    ) {
+
+                        window.gyamaxCupomAplicado =
+                            null;
+
+
+                        mensagem.textContent =
+                            dados.mensagem ||
+                            "Cupom inválido.";
+
+
+                        mensagem.className =
+                            "checkout-coupon-message erro";
+
+
+                        if (
+                            typeof window.gyamaxAtualizarResumo ===
+                            "function"
+                        ) {
+
+                            window.gyamaxAtualizarResumo();
+
+                        }
+
+
+                        return;
+
+                    }
+
+
+                    window.gyamaxCupomAplicado =
+                        dados.cupom;
+
+
+                    mensagem.textContent =
+                        dados.mensagem ||
+                        "Cupom aplicado com sucesso.";
+
+
+                    mensagem.className =
+                        "checkout-coupon-message sucesso";
+
+
+                    console.log(
+                        "GYAMAX — cupom validado:",
+                        dados
+                    );
+
+
+                    if (
+                        typeof window.gyamaxAtualizarResumo ===
+                        "function"
+                    ) {
+
+                        window.gyamaxAtualizarResumo();
+
+                    }
+
+
+                } catch (
+                    erro
+                ) {
+
+                    console.error(
+                        "GYAMAX — erro ao validar cupom:",
+                        erro
+                    );
+
+
+                    window.gyamaxCupomAplicado =
+                        null;
+
+
+                    mensagem.textContent =
+                        "Não foi possível validar o cupom.";
+
+
+                    mensagem.className =
+                        "checkout-coupon-message erro";
+
+
+                    if (
+                        typeof window.gyamaxAtualizarResumo ===
+                        "function"
+                    ) {
+
+                        window.gyamaxAtualizarResumo();
+
+                    }
+
+                } finally {
+
+                    botao.disabled =
+                        false;
+
+
+                    botao.textContent =
+                        "Aplicar";
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

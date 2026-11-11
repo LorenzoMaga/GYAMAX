@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | GYAMAX</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="login-page">
+
+    <main class="login-container">
+
+        <div class="login-box">
+
+            <a
+                href="/"
+                class="login-logo"
+            >
+                <img
+                    src="/img/GYAMAX.png"
+                    alt="GYAMAX"
+                >
+            </a>
+
+            <span
+                class="login-tag"
+                data-i18n="login.tag"
+            >
+                ÁREA DO CLIENTE
+            </span>
+
+            <h1 data-i18n="login.title">
+                Bem-vindo de volta.
+            </h1>
+
+            <p
+                class="login-description"
+                data-i18n="login.description"
+            >
+                Entre na sua conta para acompanhar
+                seus projetos e solicitações.
+            </p>
+
+            <div
+                id="loginMessage"
+                class="form-message"
+            ></div>
+
+            <form
+                id="formLogin"
+                action="/login"
+                method="POST"
+                autocomplete="on"
+            >
+
+                <div class="input-group">
+
+                    <label
+                        for="email"
+                        data-i18n="login.email"
+                    >
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="seu@email.com"
+                        data-i18n-placeholder="login.emailPlaceholder"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+                <div class="input-group">
+
+                    <label
+                        for="password"
+                        data-i18n="login.password"
+                    >
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Digite sua senha"
+                        data-i18n-placeholder="login.passwordPlaceholder"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+                <div class="login-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        <span data-i18n="login.remember">
+                            Lembrar de mim
+                        </span>
+
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot-password"
+                        id="forgotPassword"
+                        data-i18n="login.forgot"
+                    >
+                        Esqueci minha senha
+                    </a>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn login-button"
+                    data-i18n="login.submit"
+                >
+                    Entrar
+                </button>
+
+            </form>
+
+            <div class="login-divider">
+
+                <span data-i18n="common.or">
+                    ou
+                </span>
+
+            </div>
+
+            <p class="create-account">
+
+                <span data-i18n="login.noAccount">
+                    Ainda não possui uma conta?
+                </span>
+
+                <a
+                    href="/cadastro.html"
+                    data-i18n="login.create"
+                >
+                    Criar conta
+                </a>
+
+            </p>
+
+            <a
+                href="/"
+                class="back-home"
+                data-i18n="common.backHome"
+            >
+                ← Voltar para o site
+            </a>
+
+        </div>
+
+    </main>
+
+    <script src="/script.js"></script>
+
+</body>
+
+</html>

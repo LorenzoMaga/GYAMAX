@@ -1,0 +1,2360 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        GYAMAX | Impressão 3D & Fabricação
+    </title>
+
+    <meta
+        name="description"
+        content="GYAMAX — Impressão 3D, fabricação de peças personalizadas, prototipagem e soluções sob medida."
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <!-- =====================================================
+         AVATAR DO MENU + CHAT
+    ====================================================== -->
+
+    <style>
+
+        /* =====================================================
+           AVATAR DO MENU
+        ====================================================== */
+
+        .gyamax-header-avatar {
+
+            width: 42px !important;
+            height: 42px !important;
+
+            min-width: 42px !important;
+            min-height: 42px !important;
+
+            max-width: 42px !important;
+            max-height: 42px !important;
+
+            display: block !important;
+
+            position: relative !important;
+
+            overflow: hidden !important;
+
+            border-radius: 50% !important;
+
+            padding: 0 !important;
+            margin: 0 !important;
+
+            box-sizing: border-box !important;
+
+            flex-shrink: 0 !important;
+
+            line-height: 0 !important;
+
+            background: transparent !important;
+            background-color: transparent !important;
+        }
+
+
+        .gyamax-header-avatar img {
+
+            position: absolute !important;
+
+            left: 50% !important;
+            top: 50% !important;
+
+            width: auto !important;
+            height: auto !important;
+
+            min-width: 0 !important;
+            min-height: 0 !important;
+
+            max-width: none !important;
+            max-height: none !important;
+
+            margin: 0 !important;
+            padding: 0 !important;
+
+            border: 0 !important;
+
+            display: block !important;
+
+            object-fit: initial !important;
+            object-position: center center !important;
+
+            background: transparent !important;
+
+            box-shadow: none !important;
+
+            transform-origin: center center !important;
+
+            pointer-events: none !important;
+
+            user-select: none !important;
+        }
+
+
+        .gyamax-header-avatar .profile-avatar-letter {
+
+            position: absolute !important;
+
+            inset: 0 !important;
+
+            width: 100% !important;
+            height: 100% !important;
+
+            display: flex !important;
+
+            align-items: center !important;
+            justify-content: center !important;
+
+            line-height: 1 !important;
+
+            z-index: 2 !important;
+        }
+
+
+        /* =====================================================
+           CONTA + CHAT
+        ====================================================== */
+
+        .header-account-group {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =====================================================
+           BOTÃO DO CHAT
+        ====================================================== */
+
+        .gyamax-chat-button {
+
+            position: relative;
+
+            width: 42px;
+            height: 42px;
+
+            min-width: 42px;
+            min-height: 42px;
+
+            padding: 0;
+
+            border:
+                1px solid rgba(
+                    127,
+                    127,
+                    127,
+                    .20
+                );
+
+            border-radius: 50%;
+
+            background:
+                rgba(
+                    127,
+                    127,
+                    127,
+                    .08
+                );
+
+            color: inherit;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            line-height: 1;
+
+            box-sizing: border-box;
+
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        .gyamax-chat-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(
+                    255,
+                    106,
+                    0,
+                    .12
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    106,
+                    0,
+                    .40
+                );
+
+            box-shadow:
+                0 8px 22px rgba(
+                    0,
+                    0,
+                    0,
+                    .15
+                );
+        }
+
+
+        .gyamax-chat-button:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           CHAT — WIDGET
+        ====================================================== */
+
+        .gyamax-chat-widget {
+
+            position: static;
+
+            display: block;
+        }
+
+
+        /* =====================================================
+           CHAT — JANELA
+        ====================================================== */
+
+        .gyamax-chat-window {
+
+            position: fixed;
+
+            top: 78px;
+
+            right: 24px;
+
+            left: auto;
+
+            width: 360px;
+
+            max-width:
+                calc(
+                    100vw - 28px
+                );
+
+            height: 520px;
+
+            display: none;
+
+            flex-direction: column;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            border:
+                1px solid rgba(
+                    127,
+                    127,
+                    127,
+                    .18
+                );
+
+            background:
+                rgba(
+                    20,
+                    20,
+                    20,
+                    .97
+                );
+
+            backdrop-filter:
+                blur(18px);
+
+            box-shadow:
+                0 25px 70px rgba(
+                    0,
+                    0,
+                    0,
+                    .35
+                );
+
+            z-index: 10000;
+
+            box-sizing: border-box;
+        }
+
+
+        .gyamax-chat-window.active {
+
+            display: flex;
+        }
+
+
+        /* =====================================================
+           CABEÇALHO DO CHAT
+        ====================================================== */
+
+        .gyamax-chat-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding:
+                16px 18px;
+
+            border-bottom:
+                1px solid rgba(
+                    127,
+                    127,
+                    127,
+                    .16
+                );
+        }
+
+
+        .gyamax-chat-header strong {
+
+            display: block;
+
+            font-size: 15px;
+
+            font-weight: 700;
+        }
+
+
+        .gyamax-chat-header span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            font-size: 12px;
+
+            opacity: .6;
+        }
+
+
+        .gyamax-chat-close {
+
+            width: 32px;
+            height: 32px;
+
+            min-width: 32px;
+            min-height: 32px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background:
+                rgba(
+                    127,
+                    127,
+                    127,
+                    .10
+                );
+
+            color: inherit;
+
+            font-size: 22px;
+
+            line-height: 1;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            padding: 0;
+
+            transition:
+                background .2s ease,
+                transform .2s ease;
+        }
+
+
+        .gyamax-chat-close:hover {
+
+            background:
+                rgba(
+                    127,
+                    127,
+                    127,
+                    .18
+                );
+
+            transform:
+                scale(1.05);
+        }
+
+
+        /* =====================================================
+           MENSAGENS
+        ====================================================== */
+
+        .gyamax-chat-messages {
+
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 18px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+
+            min-height: 0;
+        }
+
+
+        .gyamax-chat-message {
+
+            max-width: 82%;
+
+            padding:
+                10px 13px;
+
+            border-radius: 14px;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            word-break: break-word;
+        }
+
+
+        .gyamax-chat-message.cliente {
+
+            align-self: flex-end;
+
+            background:
+                #ff6a00;
+
+            color:
+                #ffffff;
+
+            border-bottom-right-radius:
+                5px;
+        }
+
+
+        .gyamax-chat-message.admin {
+
+            align-self: flex-start;
+
+            background:
+                rgba(
+                    127,
+                    127,
+                    127,
+                    .12
+                );
+
+            border-bottom-left-radius:
+                5px;
+        }
+
+
+        .gyamax-chat-time {
+
+            display: block;
+
+            margin-top: 4px;
+
+            font-size: 10px;
+
+            opacity: .55;
+        }
+
+
+        .gyamax-chat-loading,
+        .gyamax-chat-empty {
+
+            margin: auto;
+
+            padding: 20px;
+
+            text-align: center;
+
+            opacity: .55;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           FORMULÁRIO
+        ====================================================== */
+
+        .gyamax-chat-form {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 12px;
+
+            border-top:
+                1px solid rgba(
+                    127,
+                    127,
+                    127,
+                    .16
+                );
+
+            flex-shrink: 0;
+        }
+
+
+        .gyamax-chat-form input {
+
+            flex: 1;
+
+            min-width: 0;
+
+            height: 42px;
+
+            padding:
+                0 12px;
+
+            border-radius: 11px;
+
+            border:
+                1px solid rgba(
+                    127,
+                    127,
+                    127,
+                    .20
+                );
+
+            background:
+                rgba(
+                    127,
+                    127,
+                    127,
+                    .08
+                );
+
+            color: inherit;
+
+            outline: none;
+
+            font: inherit;
+
+            box-sizing: border-box;
+        }
+
+
+        .gyamax-chat-form input:focus {
+
+            border-color:
+                rgba(
+                    255,
+                    106,
+                    0,
+                    .45
+                );
+
+            box-shadow:
+                0 0 0 3px rgba(
+                    255,
+                    106,
+                    0,
+                    .08
+                );
+        }
+
+
+        .gyamax-chat-form button {
+
+            height: 42px;
+
+            min-width: 46px;
+
+            padding:
+                0 15px;
+
+            border: 0;
+
+            border-radius: 11px;
+
+            background:
+                #ff6a00;
+
+            color:
+                #ffffff;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                background .2s ease,
+                transform .2s ease;
+        }
+
+
+        .gyamax-chat-form button:hover {
+
+            background:
+                #e85f00;
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .gyamax-chat-form button:disabled {
+
+            opacity: .6;
+
+            cursor:
+                default;
+
+            transform:
+                none;
+        }
+
+
+        /* =====================================================
+           BADGE
+        ====================================================== */
+
+        .gyamax-chat-badge {
+
+            position: absolute;
+
+            top: -4px;
+
+            right: -4px;
+
+            min-width: 18px;
+
+            height: 18px;
+
+            padding:
+                0 5px;
+
+            border-radius: 999px;
+
+            background:
+                #ff6a00;
+
+            color:
+                #ffffff;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            line-height: 1;
+
+            box-sizing: border-box;
+
+            border:
+                2px solid
+                var(--background, #111111);
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .header-account-group {
+
+                gap: 8px;
+            }
+
+
+            .gyamax-chat-button {
+
+                width: 40px;
+                height: 40px;
+
+                min-width: 40px;
+                min-height: 40px;
+
+                font-size: 17px;
+            }
+
+
+            .gyamax-chat-window {
+
+                position: fixed;
+
+                top: 70px;
+
+                right: 14px;
+
+                left: 14px;
+
+                width: auto;
+
+                max-width: none;
+
+                height:
+                    min(
+                        520px,
+                        calc(
+                            100vh - 100px
+                        )
+                    );
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="container nav">
+
+
+        <!-- =================================================
+             LOGO
+        ================================================== -->
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <img
+                id="gyamaxLogo"
+                src="img/GYAMAX.png"
+                alt="GYAMAX"
+            >
+
+        </a>
+
+
+        <!-- =================================================
+             MENU
+        ================================================== -->
+
+        <nav class="menu">
+
+            <a
+                href="#inicio"
+                data-i18n="nav.home"
+            >
+                Início
+            </a>
+
+
+            <a
+                href="#servicos"
+                data-i18n="nav.services"
+            >
+                Serviços
+            </a>
+
+
+            <a
+                href="#processo"
+                data-i18n="nav.process"
+            >
+                Como funciona
+            </a>
+
+
+            <a
+                href="projetos.html"
+                data-i18n="nav.projects"
+            >
+                Projetos
+            </a>
+
+
+            <a
+                href="/loja.html"
+                data-i18n="nav.store"
+            >
+                Loja
+            </a>
+
+
+            <a
+                href="#sobre"
+                data-i18n="nav.about"
+            >
+                Sobre
+            </a>
+
+
+            <a
+                href="avaliacao.html"
+                data-i18n="nav.review"
+            >
+                Avaliação
+            </a>
+
+
+            <a
+                href="acompanhar-pedido.html"
+            >
+                Acompanhar pedido
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             CONTA + CHAT
+        ================================================== -->
+
+        <div class="header-account-group">
+
+            <button
+                type="button"
+                id="gyamaxChatButton"
+                class="gyamax-chat-button"
+                aria-label="Abrir chat"
+                title="Falar com a GYAMAX"
+            >
+                💬
+
+                <span
+                    id="gyamaxChatBadge"
+                    class="gyamax-chat-badge"
+                    style="display: none;"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+            <div id="accountArea">
+
+                <a
+                    href="login.html"
+                    class="btn btn-small"
+                    data-i18n="login.enter"
+                >
+                    Entrar
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ORÇAMENTO
+        ================================================== -->
+
+        <a
+            href="#orcamento"
+            class="btn btn-small quote-header-button"
+            data-i18n="quote.request"
+        >
+            Solicitar orçamento
+        </a>
+
+
+        <!-- =================================================
+             MENU MOBILE
+        ================================================== -->
+
+        <button
+            class="menu-mobile"
+            id="menuMobile"
+            type="button"
+            aria-label="Menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+    class="hero"
+    id="inicio"
+>
+
+    <div class="container hero-content">
+
+
+        <div class="hero-text">
+
+            <span
+                class="tag"
+                data-i18n="hero.tag"
+            >
+                IMPRESSÃO 3D & FABRICAÇÃO
+            </span>
+
+
+            <h1>
+
+                <span data-i18n="hero.title">
+                    Sua ideia.
+                </span>
+
+                <span data-i18n="hero.titleSpan">
+                    Nossa tecnologia.
+                </span>
+
+            </h1>
+
+
+            <p data-i18n="hero.description">
+                Transformamos ideias, projetos e necessidades em peças reais através da impressão 3D e fabricação personalizada.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#orcamento"
+                    class="btn"
+                    data-i18n="quote.request"
+                >
+                    Solicitar orçamento
+                </a>
+
+
+                <a
+                    href="#projetos"
+                    class="btn btn-outline"
+                    data-i18n="hero.projects"
+                >
+                    Ver projetos
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="cube">
+
+                <div class="face front"></div>
+                <div class="face back"></div>
+                <div class="face right"></div>
+                <div class="face left"></div>
+                <div class="face top"></div>
+                <div class="face bottom"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SERVIÇOS
+===================================================== -->
+
+<section
+    class="section"
+    id="servicos"
+>
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span
+                class="tag"
+                data-i18n="services.tag"
+            >
+                O QUE FAZEMOS
+            </span>
+
+
+            <h2 data-i18n="services.title">
+                Soluções que ganham forma.
+            </h2>
+
+
+            <p data-i18n="services.description">
+                Da ideia à peça final, a GYAMAX transforma projetos digitais em objetos reais.
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    01
+                </div>
+
+
+                <span
+                    class="service-label"
+                    data-i18n="service.1.label"
+                >
+                    FABRICAÇÃO
+                </span>
+
+
+                <h3 data-i18n="service.1.title">
+                    Impressão 3D
+                </h3>
+
+
+                <p data-i18n="service.1.description">
+                    Transformamos modelos digitais em peças físicas com precisão e qualidade.
+                </p>
+
+
+                <div class="service-arrow">
+                    →
+                </div>
+
+            </article>
+
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    02
+                </div>
+
+
+                <span
+                    class="service-label"
+                    data-i18n="service.2.label"
+                >
+                    SOB MEDIDA
+                </span>
+
+
+                <h3 data-i18n="service.2.title">
+                    Peças personalizadas
+                </h3>
+
+
+                <p data-i18n="service.2.description">
+                    Criamos peças desenvolvidas de acordo com a necessidade de cada projeto.
+                </p>
+
+
+                <div class="service-arrow">
+                    →
+                </div>
+
+            </article>
+
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    03
+                </div>
+
+
+                <span
+                    class="service-label"
+                    data-i18n="service.3.label"
+                >
+                    DESENVOLVIMENTO
+                </span>
+
+
+                <h3 data-i18n="service.3.title">
+                    Prototipagem
+                </h3>
+
+
+                <p data-i18n="service.3.description">
+                    Dê vida às suas ideias criando protótipos para testar, ajustar e evoluir projetos.
+                </p>
+
+
+                <div class="service-arrow">
+                    →
+                </div>
+
+            </article>
+
+
+            <article class="service-card">
+
+                <div class="service-icon">
+                    04
+                </div>
+
+
+                <span
+                    class="service-label"
+                    data-i18n="service.4.label"
+                >
+                    REPOSIÇÃO
+                </span>
+
+
+                <h3 data-i18n="service.4.title">
+                    Reposição de peças
+                </h3>
+
+
+                <p data-i18n="service.4.description">
+                    Reproduzimos peças quebradas, antigas ou difíceis de encontrar.
+                </p>
+
+
+                <div class="service-arrow">
+                    →
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROCESSO
+===================================================== -->
+
+<section
+    class="section process-section"
+    id="processo"
+>
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span
+                class="tag"
+                data-i18n="process.tag"
+            >
+                COMO FUNCIONA
+            </span>
+
+
+            <h2 data-i18n="process.title">
+                Do projeto à realidade.
+            </h2>
+
+        </div>
+
+
+        <div class="process-grid">
+
+
+            <div class="process-item">
+
+                <span>
+                    01
+                </span>
+
+
+                <h3 data-i18n="process.1.title">
+                    Você envia
+                </h3>
+
+
+                <p data-i18n="process.1.description">
+                    Envie seu modelo 3D ou explique o que você precisa.
+                </p>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>
+                    02
+                </span>
+
+
+                <h3 data-i18n="process.2.title">
+                    Analisamos
+                </h3>
+
+
+                <p data-i18n="process.2.description">
+                    Avaliamos o projeto, material, tamanho e quantidade.
+                </p>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>
+                    03
+                </span>
+
+
+                <h3 data-i18n="process.3.title">
+                    Produzimos
+                </h3>
+
+
+                <p data-i18n="process.3.description">
+                    Após a aprovação, sua peça entra em produção.
+                </p>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>
+                    04
+                </span>
+
+
+                <h3 data-i18n="process.4.title">
+                    Você recebe
+                </h3>
+
+
+                <p data-i18n="process.4.description">
+                    Sua peça pronta, produzida especialmente para você.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROJETOS
+===================================================== -->
+
+<section
+    class="section"
+    id="projetos"
+>
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <span
+                class="tag"
+                data-i18n="projects.tag"
+            >
+                PROJETOS
+            </span>
+
+
+            <h2 data-i18n="projects.title">
+                Feito para sair da tela.
+            </h2>
+
+
+            <p data-i18n="projects.description">
+                Em breve, alguns dos projetos produzidos pela GYAMAX estarão aqui.
+            </p>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+
+            <div class="project-card">
+
+                <div
+                    class="project-placeholder"
+                    data-i18n="projects.project1"
+                >
+                    PROJETO 01
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <div
+                    class="project-placeholder"
+                    data-i18n="projects.project2"
+                >
+                    PROJETO 02
+                </div>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <div
+                    class="project-placeholder"
+                    data-i18n="projects.project3"
+                >
+                    PROJETO 03
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SOBRE
+===================================================== -->
+
+<section
+    class="section about-section"
+    id="sobre"
+>
+
+    <div class="container about">
+
+
+        <div class="about-image">
+
+            <div class="about-placeholder">
+
+                <img
+                    class="about-logo"
+                    src="img/GYAMAX.png"
+                    alt="GYAMAX"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="about-text">
+
+            <span
+                class="tag"
+                data-i18n="about.tag"
+            >
+                SOBRE A GYAMAX
+            </span>
+
+
+            <h2 data-i18n="about.title">
+                Tecnologia para transformar ideias.
+            </h2>
+
+
+            <p data-i18n="about.text1">
+                A GYAMAX nasceu com o objetivo de transformar projetos digitais em soluções físicas.
+            </p>
+
+
+            <p data-i18n="about.text2">
+                Trabalhamos com impressão 3D e fabricação personalizada para criar peças funcionais, protótipos e produtos sob medida.
+            </p>
+
+
+            <!-- =================================================
+                 BOTÃO DO CHAT
+            ================================================== -->
+
+            <button
+                type="button"
+                class="btn"
+                id="gyamaxAboutChatButton"
+            >
+                Fale com a GYAMAX
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ORÇAMENTO
+===================================================== -->
+
+<section
+    class="quote-section"
+    id="orcamento"
+>
+
+    <div class="container quote">
+
+        <div>
+
+            <span
+                class="tag"
+                data-i18n="quote.tag"
+            >
+                VAMOS CRIAR?
+            </span>
+
+
+            <h2>
+
+                <span data-i18n="quote.title">
+                    Tem uma ideia?
+                </span>
+
+
+                <span data-i18n="quote.titleSpan">
+                    Vamos tirar do papel.
+                </span>
+
+            </h2>
+
+
+            <p data-i18n="quote.description">
+                Entre em contato com a GYAMAX e solicite seu orçamento.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             ORÇAMENTO POR E-MAIL
+        ================================================== -->
+
+        <a
+            href="mailto:gyamax3d@gmail.com"
+            class="btn btn-light"
+            data-i18n="quote.request"
+        >
+            Solicitar orçamento
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container footer-content">
+
+
+        <div>
+
+            <div class="footer-logo">
+                GYAMAX
+            </div>
+
+
+            <p data-i18n="footer.description">
+                Impressão 3D & Fabricação
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+
+            <a
+                href="#inicio"
+                data-i18n="nav.home"
+            >
+                Início
+            </a>
+
+
+            <a
+                href="#servicos"
+                data-i18n="nav.services"
+            >
+                Serviços
+            </a>
+
+
+            <a
+                href="/loja.html"
+                data-i18n="nav.store"
+            >
+                Loja
+            </a>
+
+
+            <a
+                href="#projetos"
+                data-i18n="nav.projects"
+            >
+                Projetos
+            </a>
+
+
+            <a
+                href="#sobre"
+                data-i18n="nav.about"
+            >
+                Sobre
+            </a>
+
+
+            <a
+                href="avaliacao.html"
+                data-i18n="nav.review"
+            >
+                Avaliação
+            </a>
+
+
+            <a
+                href="acompanhar-pedido.html"
+            >
+                Acompanhar pedido
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container copyright">
+
+        © 2026 GYAMAX.
+
+
+        <span data-i18n="footer.rights">
+            Todos os direitos reservados.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     CHAT GYAMAX
+===================================================== -->
+
+<div
+    id="gyamaxChatWidget"
+    class="gyamax-chat-widget"
+>
+
+    <div
+        id="gyamaxChatWindow"
+        class="gyamax-chat-window"
+    >
+
+        <div class="gyamax-chat-header">
+
+            <div>
+
+                <strong>
+                    Fale com a GYAMAX
+                </strong>
+
+                <span>
+                    Estamos aqui para ajudar.
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="gyamaxChatClose"
+                class="gyamax-chat-close"
+                aria-label="Fechar chat"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            id="gyamaxChatMessages"
+            class="gyamax-chat-messages"
+        >
+
+            <div class="gyamax-chat-loading">
+                Carregando conversa...
+            </div>
+
+        </div>
+
+
+        <form
+            id="gyamaxChatForm"
+            class="gyamax-chat-form"
+        >
+
+            <input
+                type="text"
+                id="gyamaxChatInput"
+                placeholder="Digite sua mensagem..."
+                maxlength="2000"
+                autocomplete="off"
+                required
+            >
+
+
+            <button
+                type="submit"
+            >
+                Enviar
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SCRIPT PRINCIPAL
+===================================================== -->
+
+<script src="script.js"></script>
+
+
+<!-- =====================================================
+     CONTROLE DO CHAT
+===================================================== -->
+
+<script>
+
+"use strict";
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const botao =
+            document.getElementById(
+                "gyamaxChatButton"
+            );
+
+
+        const janela =
+            document.getElementById(
+                "gyamaxChatWindow"
+            );
+
+
+        const fechar =
+            document.getElementById(
+                "gyamaxChatClose"
+            );
+
+
+        const formulario =
+            document.getElementById(
+                "gyamaxChatForm"
+            );
+
+
+        const input =
+            document.getElementById(
+                "gyamaxChatInput"
+            );
+
+
+        const mensagens =
+            document.getElementById(
+                "gyamaxChatMessages"
+            );
+
+
+        const aboutButton =
+            document.getElementById(
+                "gyamaxAboutChatButton"
+            );
+
+
+        if (
+            !botao ||
+            !janela ||
+            !mensagens
+        ) {
+
+            console.error(
+                "GYAMAX Chat: elementos não encontrados."
+            );
+
+            return;
+
+        }
+
+
+        /* =================================================
+           ABRIR CHAT
+        ================================================= */
+
+        function abrirChat() {
+
+            janela.classList.add(
+                "active"
+            );
+
+
+            carregarConversa();
+
+
+            if (input) {
+
+                setTimeout(
+                    function () {
+
+                        input.focus();
+
+                    },
+                    100
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           FECHAR CHAT
+        ================================================= */
+
+        function fecharChat() {
+
+            janela.classList.remove(
+                "active"
+            );
+
+        }
+
+
+        /* =================================================
+           BOTÃO DO CABEÇALHO
+        ================================================= */
+
+        botao.addEventListener(
+            "click",
+            function (evento) {
+
+                evento.preventDefault();
+
+
+                if (
+                    janela.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    fecharChat();
+
+                } else {
+
+                    abrirChat();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           BOTÃO FECHAR
+        ================================================= */
+
+        if (fechar) {
+
+            fechar.addEventListener(
+                "click",
+                function (evento) {
+
+                    evento.preventDefault();
+
+                    fecharChat();
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           FALE COM A GYAMAX
+        ================================================= */
+
+        if (aboutButton) {
+
+            aboutButton.addEventListener(
+                "click",
+                function (evento) {
+
+                    evento.preventDefault();
+
+                    abrirChat();
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           TECLA ESC
+        ================================================= */
+
+        document.addEventListener(
+            "keydown",
+            function (evento) {
+
+                if (
+                    evento.key ===
+                    "Escape"
+                ) {
+
+                    fecharChat();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           CARREGAR CONVERSA
+        ================================================= */
+
+        async function carregarConversa() {
+
+            mensagens.innerHTML = `
+
+                <div class="gyamax-chat-loading">
+                    Carregando conversa...
+                </div>
+
+            `;
+
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/chat/conversa",
+                        {
+
+                            method:
+                                "GET",
+
+                            credentials:
+                                "same-origin",
+
+                            cache:
+                                "no-store",
+
+                            headers: {
+
+                                "Accept":
+                                    "application/json"
+
+                            }
+
+                        }
+                    );
+
+
+                const dados =
+                    await resposta.json();
+
+
+                if (
+                    resposta.status ===
+                    401
+                ) {
+
+                    mensagens.innerHTML = `
+
+                        <div class="gyamax-chat-empty">
+
+                            <strong>
+                                Entre na sua conta
+                            </strong>
+
+                            <p>
+                                Faça login para conversar com a GYAMAX.
+                            </p>
+
+                            <a
+                                href="/login.html"
+                                class="btn"
+                            >
+                                Entrar
+                            </a>
+
+                        </div>
+
+                    `;
+
+
+                    return;
+
+                }
+
+
+                if (
+                    !resposta.ok ||
+                    !dados.sucesso
+                ) {
+
+                    throw new Error(
+                        dados.mensagem ||
+                        "Não foi possível carregar a conversa."
+                    );
+
+                }
+
+
+                const lista =
+                    Array.isArray(
+                        dados.mensagens
+                    )
+                        ? dados.mensagens
+                        : [];
+
+
+                if (
+                    !lista.length
+                ) {
+
+                    mensagens.innerHTML = `
+
+                        <div class="gyamax-chat-empty">
+
+                            <strong>
+                                Olá!
+                            </strong>
+
+                            <p>
+                                Envie uma mensagem para falar com a GYAMAX.
+                            </p>
+
+                        </div>
+
+                    `;
+
+
+                    return;
+
+                }
+
+
+                mensagens.innerHTML =
+                    lista
+                        .map(
+                            item => {
+
+                                const classe =
+                                    item.remetenteTipo ===
+                                    "cliente"
+                                        ? "cliente"
+                                        : "admin";
+
+
+                                const data =
+                                    new Date(
+                                        item.criadaEm
+                                    );
+
+
+                                const horario =
+                                    Number.isNaN(
+                                        data.getTime()
+                                    )
+                                        ? ""
+                                        : data.toLocaleTimeString(
+                                            "pt-BR",
+                                            {
+                                                hour:
+                                                    "2-digit",
+
+                                                minute:
+                                                    "2-digit"
+                                            }
+                                        );
+
+
+                                return `
+
+                                    <div
+                                        class="
+                                            gyamax-chat-message
+                                            ${classe}
+                                        "
+                                    >
+
+                                        ${escaparChat(
+                                            item.mensagem
+                                        )}
+
+                                        <span
+                                            class="gyamax-chat-time"
+                                        >
+                                            ${escaparChat(
+                                                horario
+                                            )}
+                                        </span>
+
+                                    </div>
+
+                                `;
+
+                            }
+                        )
+                        .join("");
+
+
+                mensagens.scrollTop =
+                    mensagens.scrollHeight;
+
+            } catch (erro) {
+
+                console.error(
+                    "GYAMAX Chat:",
+                    erro
+                );
+
+
+                mensagens.innerHTML = `
+
+                    <div class="gyamax-chat-empty">
+
+                        Não foi possível carregar o chat.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =================================================
+           ENVIAR MENSAGEM
+        ================================================= */
+
+        if (formulario) {
+
+            formulario.addEventListener(
+                "submit",
+                async function (evento) {
+
+                    evento.preventDefault();
+
+
+                    if (!input) {
+
+                        return;
+
+                    }
+
+
+                    const texto =
+                        String(
+                            input.value ||
+                            ""
+                        ).trim();
+
+
+                    if (!texto) {
+
+                        return;
+
+                    }
+
+
+                    const botaoEnviar =
+                        formulario.querySelector(
+                            'button[type="submit"]'
+                        );
+
+
+                    input.disabled =
+                        true;
+
+
+                    if (botaoEnviar) {
+
+                        botaoEnviar.disabled =
+                            true;
+
+                    }
+
+
+                    try {
+
+                        const resposta =
+                            await fetch(
+                                "/api/chat/conversa/mensagem",
+                                {
+
+                                    method:
+                                        "POST",
+
+                                    credentials:
+                                        "same-origin",
+
+                                    headers: {
+
+                                        "Content-Type":
+                                            "application/json",
+
+                                        "Accept":
+                                            "application/json"
+
+                                    },
+
+                                    body:
+                                        JSON.stringify({
+                                            mensagem:
+                                                texto
+                                        })
+
+                                }
+                            );
+
+
+                        const dados =
+                            await resposta.json();
+
+
+                        if (
+                            resposta.status ===
+                            401
+                        ) {
+
+                            window.location.href =
+                                "/login.html";
+
+                            return;
+
+                        }
+
+
+                        if (
+                            !resposta.ok ||
+                            !dados.sucesso
+                        ) {
+
+                            throw new Error(
+                                dados.mensagem ||
+                                "Não foi possível enviar a mensagem."
+                            );
+
+                        }
+
+
+                        input.value =
+                            "";
+
+
+                        await carregarConversa();
+
+                    } catch (erro) {
+
+                        console.error(
+                            "Erro ao enviar mensagem:",
+                            erro
+                        );
+
+
+                        alert(
+                            erro.message ||
+                            "Não foi possível enviar a mensagem."
+                        );
+
+                    } finally {
+
+                        input.disabled =
+                            false;
+
+
+                        if (botaoEnviar) {
+
+                            botaoEnviar.disabled =
+                                false;
+
+                        }
+
+
+                        input.focus();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           ESCAPAR HTML
+        ================================================= */
+
+        function escaparChat(
+            valor
+        ) {
+
+            return String(
+                valor ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =================================================
+           ATUALIZAÇÃO AUTOMÁTICA
+        ================================================= */
+
+        setInterval(
+            function () {
+
+                if (
+                    janela.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    carregarConversa();
+
+                }
+
+            },
+            5000
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
+

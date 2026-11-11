@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Minha conta | GYAMAX</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+</head>
+
+<body class="config-body">
+
+<main class="config-page">
+
+    <!-- =====================================================
+         VOLTAR
+    ====================================================== -->
+
+    <a
+        href="/"
+        class="config-voltar"
+    >
+        <span data-i18n="config.back">
+            Voltar
+        </span>
+    </a>
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <div class="config-header">
+
+        <span
+            class="tag"
+            data-i18n="config.tag"
+        >
+            MINHA CONTA
+        </span>
+
+        <h1 data-i18n="config.title">
+            Configurações
+        </h1>
+
+        <p data-i18n="config.description">
+            Gerencie os dados e as preferências
+            da sua conta GYAMAX.
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         MENSAGEM
+    ====================================================== -->
+
+    <div
+        id="mensagemSucesso"
+        class="mensagem-sucesso"
+        style="display:none;"
+    >
+
+        <span class="check">
+            ✓
+        </span>
+
+        <span data-i18n="config.saved">
+            Alterações salvas com sucesso.
+        </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         FORMULÁRIO
+    ====================================================== -->
+
+    <form
+        method="POST"
+        action="/configuracoes"
+        id="formConfiguracoes"
+    >
+
+
+        <!-- =================================================
+             DADOS DA CONTA
+        ================================================== -->
+
+        <section class="config-card">
+
+            <h2 data-i18n="config.accountData">
+                Dados da conta
+            </h2>
+
+
+            <div class="campo">
+
+                <label
+                    for="nome"
+                    data-i18n="config.name"
+                >
+                    Nome
+                </label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    value="__NOME__"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label
+                    for="email"
+                    data-i18n="config.email"
+                >
+                    E-mail
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="__EMAIL__"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEGURANÇA
+        ================================================== -->
+
+        <section class="config-card">
+
+            <h2 data-i18n="config.security">
+                Segurança
+            </h2>
+
+
+            <div class="campo">
+
+                <label
+                    for="senha"
+                    data-i18n="config.newPassword"
+                >
+                    Nova senha
+                </label>
+
+                <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    autocomplete="new-password"
+                    placeholder="Deixe vazio para não alterar"
+                    data-i18n-placeholder="config.passwordPlaceholder"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label
+                    for="confirmarSenha"
+                    data-i18n="config.confirmPassword"
+                >
+                    Confirmar nova senha
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmarSenha"
+                    name="confirmarSenha"
+                    autocomplete="new-password"
+                    placeholder="Repita a nova senha"
+                    data-i18n-placeholder="config.confirmPasswordPlaceholder"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PREFERÊNCIAS
+        ================================================== -->
+
+        <section class="config-card">
+
+            <h2 data-i18n="config.preferences">
+                Preferências
+            </h2>
+
+
+            <!-- =================================================
+                 IDIOMA
+            ================================================== -->
+
+            <div class="preferencia">
+
+                <div class="preferencia-info">
+
+                    <h3 data-i18n="config.language">
+                        Idioma
+                    </h3>
+
+                    <p data-i18n="config.languageDescription">
+                        Escolha o idioma utilizado no site.
+                    </p>
+
+                </div>
+
+
+                <select
+                    class="preferencia-select"
+                    id="idioma"
+                    name="idioma"
+                >
+
+                    <option
+                        value="pt-BR"
+                        data-i18n="language.portuguese"
+                        __IDIOMA_PT__
+                    >
+                        Português
+                    </option>
+
+
+                    <option
+                        value="en"
+                        data-i18n="language.english"
+                        __IDIOMA_EN__
+                    >
+                        English
+                    </option>
+
+
+                    <option
+                        value="es"
+                        data-i18n="language.spanish"
+                        __IDIOMA_ES__
+                    >
+                        Español
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 NOTIFICAÇÕES
+            ================================================== -->
+
+            <div class="preferencia">
+
+                <div class="preferencia-info">
+
+                    <h3 data-i18n="config.notifications">
+                        Notificações
+                    </h3>
+
+                    <p data-i18n="config.notificationsDescription">
+                        Receba avisos e novidades da GYAMAX.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        id="notificacoes"
+                        name="notificacoes"
+                        value="on"
+                        __NOTIFICACOES__
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- =================================================
+                 APARÊNCIA
+            ================================================== -->
+
+            <div class="preferencia">
+
+                <div class="preferencia-info">
+
+                    <h3 data-i18n="config.appearance">
+                        Aparência
+                    </h3>
+
+                    <p data-i18n="config.appearanceDescription">
+                        Escolha como o site deve aparecer para você.
+                    </p>
+
+                </div>
+
+
+                <select
+                    class="preferencia-select"
+                    id="aparencia"
+                    name="aparencia"
+                >
+
+                    <option
+                        value="escuro"
+                        data-i18n="appearance.dark"
+                    >
+                        Escuro
+                    </option>
+
+
+                    <option
+                        value="claro"
+                        data-i18n="appearance.light"
+                    >
+                        Claro
+                    </option>
+
+
+                    <option
+                        value="automatico"
+                        data-i18n="appearance.auto"
+                    >
+                        Automático
+                    </option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AÇÕES
+        ================================================== -->
+
+        <div class="config-acoes">
+
+            <button
+                type="submit"
+                class="btn"
+                data-i18n="config.save"
+            >
+                Salvar alterações
+            </button>
+
+
+            <a
+                href="/logout"
+                class="botao-sair"
+                id="botaoSair"
+                data-i18n="config.logout"
+            >
+                Sair da conta
+            </a>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<script src="/script.js"></script>
+
+</body>
+
+</html>
